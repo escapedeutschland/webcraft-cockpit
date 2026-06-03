@@ -1,0 +1,318 @@
+{
+ "updated": "2026-06-03 08:38",
+ "progress": {
+  "percent": 70,
+  "done_count": 15,
+  "in_arbeit_count": 4,
+  "total_count": 25,
+  "done_weight": 58.0,
+  "total_weight": 83.0
+ },
+ "members": [
+  {
+   "key": "maxime",
+   "name": "Maxime",
+   "area": "Website-Fabrik · Generator, Cinematic, Auto-System, Deployment",
+   "color": "#f0a72c",
+   "current": "Dashboard v3: Aufgaben-Filter (Mitglied) + Sortierung (Impact/Status), Meilenstein-Beben (Flash+Shake+Partikel+Toast), Tag/Nacht-Stimmung nach Uhrzeit, Klick auf Icon/Karte = Kamera-Fokus + Aufgaben gefiltert, Sound an/aus (Ambient-Hum + Ding bei Fertigstellung). Live deployed.",
+   "since": "2026-06-03 07:42",
+   "active": true,
+   "done": 15,
+   "open": 1
+  },
+  {
+   "key": "jean-pierre",
+   "name": "Jean-Pierre",
+   "area": "Instagram-Service · Cinematic-Clip-Frames",
+   "color": "#38bdf8",
+   "current": "Gegenrichtung bestaetigt — Maximes Nachricht empfangen. Gehirn funktioniert in beide Richtungen.",
+   "since": "2026-06-03 05:37",
+   "active": true,
+   "done": 0,
+   "open": 2
+  },
+  {
+   "key": "jerome",
+   "name": "Jerome",
+   "area": "Bewertungs-Service · Reviews automatisieren",
+   "color": "#a78bfa",
+   "current": "@Maxime: Bewertungs-Modul ist FERTIG gebaut+getestet, warte nur aufs Andocken. Sobald du mich in den Tresor einladest, brauche ich daraus 4 Werte fuer shared/config_local.py: GOOGLE_PLACES_KEY, NETLIFY_KEY, STRIPE_KEY, STRIPE_PRICE_BEWERTUNG. Bitte ausserdem CRM mit meinem Google-Konto teilen + Kunden mit bewertung=ja und place_id pflegen (crm_bridge schaltet dann automatisch von Testdaten auf crm). Stripe: Bewertungs-Abo (Vorschlag 49 EUR/mo) anlegen -> Price-ID. Monitor-Job ist als run_monitor.ps1 fertig; schtasks-Befehl + ganze Checkliste in ANDOCK_MAXIME.md. Auf dem Dauerlaeufer registrieren, sobald GOOGLE_PLACES_KEY drin ist.",
+   "since": "2026-06-03 08:19",
+   "active": true,
+   "done": 0,
+   "open": 2
+  }
+ ],
+ "tasks": [
+  {
+   "id": "R01",
+   "titel": "Website-Generator (17+ Branchen, branchengenau)",
+   "kind": "feature",
+   "owner": "maxime",
+   "status": "fertig",
+   "weight": 5.0,
+   "note": "website_generator.py"
+  },
+  {
+   "id": "R02",
+   "titel": "Branchen-Templates Schneider & Blumen",
+   "kind": "feature",
+   "owner": "maxime",
+   "status": "fertig",
+   "weight": 3.0,
+   "note": ""
+  },
+  {
+   "id": "R03",
+   "titel": "Stufe-3 branchenspezifische Content-Sektionen",
+   "kind": "feature",
+   "owner": "maxime",
+   "status": "fertig",
+   "weight": 3.0,
+   "note": "branch_services()"
+  },
+  {
+   "id": "R04",
+   "titel": "Cinematic Hero (Scroll-Scrubbing, KFZ)",
+   "kind": "feature",
+   "owner": "maxime",
+   "status": "fertig",
+   "weight": 5.0,
+   "note": "cinematic.py"
+  },
+  {
+   "id": "R05",
+   "titel": "Mobile-scharfe Cinematic-Frames",
+   "kind": "feature",
+   "owner": "maxime",
+   "status": "fertig",
+   "weight": 2.0,
+   "note": "1280px frame set"
+  },
+  {
+   "id": "R06",
+   "titel": "Individualisierung Cinematic (Farben/Bilder/Text pro Kunde)",
+   "kind": "feature",
+   "owner": "maxime",
+   "status": "fertig",
+   "weight": 3.0,
+   "note": ""
+  },
+  {
+   "id": "R07",
+   "titel": "Auto-System Intake-Pipeline (Google -> Website)",
+   "kind": "feature",
+   "owner": "maxime",
+   "status": "fertig",
+   "weight": 5.0,
+   "note": "intake.py"
+  },
+  {
+   "id": "R08",
+   "titel": "Conversion-optimierte Vorschau-Mail",
+   "kind": "feature",
+   "owner": "maxime",
+   "status": "fertig",
+   "weight": 3.0,
+   "note": "send_preview()"
+  },
+  {
+   "id": "R09",
+   "titel": "Agentur-Website (Angebot, Hosting, SEO)",
+   "kind": "feature",
+   "owner": "maxime",
+   "status": "fertig",
+   "weight": 4.0,
+   "note": "webcraft-agentur"
+  },
+  {
+   "id": "R10",
+   "titel": "Gemeinsames Gehirn (brain.py + Sheet, 3 User)",
+   "kind": "feature",
+   "owner": "maxime",
+   "status": "fertig",
+   "weight": 4.0,
+   "note": "Auto-Sync"
+  },
+  {
+   "id": "R11",
+   "titel": "Lead-Priorisierung (864 Hoch / 1122 Mittel)",
+   "kind": "feature",
+   "owner": "maxime",
+   "status": "fertig",
+   "weight": 2.0,
+   "note": "lead_priority.py"
+  },
+  {
+   "id": "R12",
+   "titel": "Stripe Zahlung + Instagram-Abo-Link",
+   "kind": "feature",
+   "owner": "maxime",
+   "status": "fertig",
+   "weight": 3.0,
+   "note": "payment_links"
+  },
+  {
+   "id": "R13",
+   "titel": "Netlify Auto-Deploy",
+   "kind": "automatisierung",
+   "owner": "maxime",
+   "status": "fertig",
+   "weight": 3.0,
+   "note": "deploy.py"
+  },
+  {
+   "id": "R14",
+   "titel": "Auto-Auslieferung ZIP bei Zahlung (Reply-Monitor)",
+   "kind": "automatisierung",
+   "owner": "maxime",
+   "status": "fertig",
+   "weight": 4.0,
+   "note": "reply_monitor.py"
+  },
+  {
+   "id": "R15",
+   "titel": "Team-Dashboard Auto-Build (Cron)",
+   "kind": "automatisierung",
+   "owner": "maxime",
+   "status": "fertig",
+   "weight": 3.0,
+   "note": "dashboard_build.py"
+  },
+  {
+   "id": "R16",
+   "titel": "Batch-Versand Vorschau-Mails aus Lead-Liste",
+   "kind": "automatisierung",
+   "owner": "maxime",
+   "status": "in_arbeit",
+   "weight": 4.0,
+   "note": "Skalierungs-Hebel"
+  },
+  {
+   "id": "R17",
+   "titel": "Bewertungs-Service Automatik (QR -> Mail -> Sheet)",
+   "kind": "automatisierung",
+   "owner": "jerome",
+   "status": "offen",
+   "weight": 4.0,
+   "note": ""
+  },
+  {
+   "id": "R18",
+   "titel": "Instagram-Service Aufbau",
+   "kind": "feature",
+   "owner": "jean-pierre",
+   "status": "in_arbeit",
+   "weight": 4.0,
+   "note": ""
+  },
+  {
+   "id": "R19",
+   "titel": "Cinematic-Clips weitere Branchen (Start/Stop-Frames)",
+   "kind": "feature",
+   "owner": "jean-pierre",
+   "status": "in_arbeit",
+   "weight": 3.0,
+   "note": "JP liefert Frames"
+  },
+  {
+   "id": "R20",
+   "titel": "Bewertungs-Service (review_link.py)",
+   "kind": "feature",
+   "owner": "jerome",
+   "status": "in_arbeit",
+   "weight": 4.0,
+   "note": ""
+  },
+  {
+   "id": "R21",
+   "titel": "Mehr Clip-Varianten pro Branche",
+   "kind": "feature",
+   "owner": "frei",
+   "status": "offen",
+   "weight": 3.0,
+   "note": ""
+  },
+  {
+   "id": "R22",
+   "titel": "Dedizierte Themes (Garten, Schlosserei)",
+   "kind": "feature",
+   "owner": "frei",
+   "status": "offen",
+   "weight": 2.0,
+   "note": "unter-versorgte Branchen"
+  },
+  {
+   "id": "R23",
+   "titel": "Wartungs-Abo Prozess definieren",
+   "kind": "feature",
+   "owner": "frei",
+   "status": "offen",
+   "weight": 2.0,
+   "note": "Was genau, wie abgewickelt"
+  },
+  {
+   "id": "R24",
+   "titel": "sipgate Telefonnummer einrichten",
+   "kind": "feature",
+   "owner": "frei",
+   "status": "offen",
+   "weight": 2.0,
+   "note": "Go-Live"
+  },
+  {
+   "id": "R25",
+   "titel": "Rechtsform / Impressum / AGB / DSGVO",
+   "kind": "feature",
+   "owner": "frei",
+   "status": "offen",
+   "weight": 3.0,
+   "note": "Anwalt"
+  },
+  {
+   "id": "R26",
+   "titel": "Conversion-Validierung: ~200 Cold Calls vor Skalierung",
+   "kind": "empfehlung",
+   "owner": "frei",
+   "status": "offen",
+   "weight": 0.0,
+   "note": "wichtigster Test"
+  },
+  {
+   "id": "R27",
+   "titel": "Eigene Cinematic-Video-Sequenz fuer Agentur-Website",
+   "kind": "empfehlung",
+   "owner": "frei",
+   "status": "offen",
+   "weight": 0.0,
+   "note": ""
+  },
+  {
+   "id": "R28",
+   "titel": "A/B-Test Betreffzeilen Vorschau-Mail",
+   "kind": "empfehlung",
+   "owner": "frei",
+   "status": "offen",
+   "weight": 0.0,
+   "note": ""
+  },
+  {
+   "id": "R29",
+   "titel": "Google-Business-Profile-Anleitung als Mehrwert/Upsell",
+   "kind": "empfehlung",
+   "owner": "frei",
+   "status": "offen",
+   "weight": 0.0,
+   "note": ""
+  },
+  {
+   "id": "R30",
+   "titel": "Automatisches Kunden-Onboarding-PDF",
+   "kind": "empfehlung",
+   "owner": "frei",
+   "status": "offen",
+   "weight": 0.0,
+   "note": ""
+  }
+ ]
+}
