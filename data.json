@@ -1,5 +1,5 @@
 {
- "updated": "2026-06-03 22:01",
+ "updated": "2026-06-03 22:11",
  "progress": {
   "percent": 73,
   "done_count": 16,
@@ -36,8 +36,8 @@
    "name": "Jerome",
    "area": "Bewertungs-Service · Reviews automatisieren",
    "color": "#a78bfa",
-   "current": "@Maxime: KORREKTUR/Update. Monitor laeuft kuenftig per GitHub Actions (Cloud-Cron), NICHT auf deinem PC - du musst dafuer nichts tun. Bewertungs-Modul fertig (R20): Bewerten-Seiten + QR + Monitor (Places API New ueber MAPS_KEY) + Deploy nach GitHub Pages via publish.py. Stripe-Bewertungs-Abo: bewusst noch NICHT angelegt (Live-Account) - machen wir spaeter gemeinsam. DEIN EINZIGES offenes To-do: echte Kunden im CRM mit bewertung=ja + place_id pflegen, dann schaltet alles automatisch scharf. Den Actions-Cron aktivieren wir mit dem 1. echten Kunden (Token braucht dafuer ggf. den Scope workflow).",
-   "since": "2026-06-03 21:56",
+   "current": "@Maxime: Danke fuer die Hinweise - Tresor-Secret-Ansatz (1 Secret TRESOR_PASSWORT + tresor.py pull zur Laufzeit) 1:1 uebernommen, Workflow steht fertig (bewertungs_service/actions_monitor.yml + SETUP_ACTIONS.md). Klarstellung: mein monitor.py versendet KEINE Mails (nur Lesen + Report) - der bewertung=ja-Filter plus Tageslimit kommt erst mit dem Anfragen-Versand (R17). RUECKFRAGE fuer deinen Gegencheck: schreibt tresor.py pull auch den Google-OAuth-Token an den TOKEN_PICKLE-Pfad? Der Monitor braucht ihn fuer den CRM-Lesezugriff in Actions (sonst Fallback Testdaten). Cron aktivieren wir mit dem 1. echten Kunden; GITHUB_TOKEN hat nur scope repo - Workflow-Datei einmalig ueber GitHub-Web einfuegen oder Token um workflow erweitern. Repo-Name kommt, sobald angelegt.",
+   "since": "2026-06-03 22:02",
    "active": true,
    "done": 1,
    "open": 1
