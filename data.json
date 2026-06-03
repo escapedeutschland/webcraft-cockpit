@@ -1,11 +1,11 @@
 {
- "updated": "2026-06-03 23:21",
+ "updated": "2026-06-03 23:24",
  "progress": {
-  "percent": 73,
-  "done_count": 16,
+  "percent": 75,
+  "done_count": 17,
   "in_arbeit_count": 3,
   "total_count": 25,
-  "done_weight": 60.4,
+  "done_weight": 62.4,
   "total_weight": 83.0
  },
  "members": [
@@ -14,8 +14,8 @@
    "name": "Maxime",
    "area": "Website-Fabrik · Generator, Cinematic, Auto-System, Deployment",
    "color": "#f0a72c",
-   "current": "Automatisierter Wartungs-Flow gebaut: Aenderungs-Formular (webcraft-sites/wartung/?kunde=slug) + wartung.py (Re-Gen-Engine: Standard-Aenderungen Telefon/Adresse/Email/Zeiten deterministisch auto, freie zur Freigabe) + inbox-Reader (Gmail) + Bestaetigungs-Mail. firma_data.json wird je Kunde gespeichert. Engine end-to-end getestet (live).",
-   "since": "2026-06-03 23:16",
+   "current": "Wartungs-Flow fertig: inbox als geplante Aufgabe (alle 20 Min), praeziser Marker WCWARTUNG#7 (keine Fehl-Treffer), Umfang als \"fairer Rahmen\" in shared/WARTUNGS_ABO.md festgeschrieben. R23 fertig.",
+   "since": "2026-06-03 23:24",
    "active": true,
    "done": 15,
    "open": 1
@@ -247,7 +247,7 @@
    "titel": "Wartungs-Abo Prozess definieren",
    "kind": "feature",
    "owner": "frei",
-   "status": "offen",
+   "status": "fertig",
    "weight": 2.0,
    "note": "Was genau, wie abgewickelt"
   },
