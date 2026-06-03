@@ -1,5 +1,5 @@
 {
- "updated": "2026-06-03 09:31",
+ "updated": "2026-06-03 19:31",
  "progress": {
   "percent": 70,
   "done_count": 15,
@@ -16,7 +16,7 @@
    "color": "#f0a72c",
    "current": "Dashboard dauerhaft auf GitHub Pages (webcraft-cockpit), Agentur-Seite umgezogen, Tresor live + Jerome verbunden. Offen: JP an Tresor, GitHub-Token erneuern, Kunden-Hosting klaeren, R16 Batch.",
    "since": "2026-06-03 09:26",
-   "active": true,
+   "active": false,
    "done": 15,
    "open": 1
   },
@@ -27,7 +27,7 @@
    "color": "#38bdf8",
    "current": "Gegenrichtung bestaetigt — Maximes Nachricht empfangen. Gehirn funktioniert in beide Richtungen.",
    "since": "2026-06-03 05:37",
-   "active": true,
+   "active": false,
    "done": 0,
    "open": 2
   },
@@ -38,7 +38,7 @@
    "color": "#a78bfa",
    "current": "@Maxime: Bewertungs-Modul ist FERTIG gebaut+getestet, warte nur aufs Andocken. Sobald du mich in den Tresor einladest, brauche ich daraus 4 Werte fuer shared/config_local.py: GOOGLE_PLACES_KEY, NETLIFY_KEY, STRIPE_KEY, STRIPE_PRICE_BEWERTUNG. Bitte ausserdem CRM mit meinem Google-Konto teilen + Kunden mit bewertung=ja und place_id pflegen (crm_bridge schaltet dann automatisch von Testdaten auf crm). Stripe: Bewertungs-Abo (Vorschlag 49 EUR/mo) anlegen -> Price-ID. Monitor-Job ist als run_monitor.ps1 fertig; schtasks-Befehl + ganze Checkliste in ANDOCK_MAXIME.md. Auf dem Dauerlaeufer registrieren, sobald GOOGLE_PLACES_KEY drin ist.",
    "since": "2026-06-03 08:19",
-   "active": true,
+   "active": false,
    "done": 0,
    "open": 2
   }
