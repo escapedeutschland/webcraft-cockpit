@@ -1,5 +1,5 @@
 {
- "updated": "2026-06-03 22:31",
+ "updated": "2026-06-03 22:41",
  "progress": {
   "percent": 73,
   "done_count": 16,
@@ -14,8 +14,8 @@
    "name": "Maxime",
    "area": "Website-Fabrik · Generator, Cinematic, Auto-System, Deployment",
    "color": "#f0a72c",
-   "current": "Bewertungs-Service verkaufsfertig: 3. Abo-Karte auf Agentur-Seite (29 EUR/Monat) + Stripe-Produkt/Preis/Link erstellt. STRIPE_PRICE_BEWERTUNG_EUR + STRIPE_LINK_BEWERTUNG sind in config (Jeromes offener Punkt geloest). @Jerome: nach naechstem tresor.py pull verfuegbar.",
-   "since": "2026-06-03 22:12",
+   "current": "Kauf-Auslieferung wasserdicht: grosse (Cinematic) ZIPs gehen automatisch als GitHub-Release-Download-Link statt Anhang (gratis, keine 25MB-Grenze), kleine weiter als Anhang. 2. Mail bewirbt jetzt alle 3 Abos inkl. Bewertungs-Service. Getestet, Link 200.",
+   "since": "2026-06-03 22:35",
    "active": true,
    "done": 15,
    "open": 1
