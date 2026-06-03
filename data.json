@@ -1,5 +1,5 @@
 {
- "updated": "2026-06-03 23:51",
+ "updated": "2026-06-04 00:01",
  "progress": {
   "percent": 77,
   "done_count": 17,
@@ -14,8 +14,8 @@
    "name": "Maxime",
    "area": "Website-Fabrik · Generator, Cinematic, Auto-System, Deployment",
    "color": "#f0a72c",
-   "current": "Wartungs-Flow fertig: inbox als geplante Aufgabe (alle 20 Min), praeziser Marker WCWARTUNG#7 (keine Fehl-Treffer), Umfang als \"fairer Rahmen\" in shared/WARTUNGS_ABO.md festgeschrieben. R23 fertig.",
-   "since": "2026-06-03 23:24",
+   "current": "Wartung #1 Abo-Pruefung fertig+getestet: vor Umsetzung Stripe-Check auf aktives Pflege-Abo (per Kunden-Mail); kein Abo -> Ablehnung+Mail, keine Aenderung. Dedup ueber is:unread. Offen: #3 Auto-Entwurf fuer mittlere/freie Wuensche, #2 Foto-Upload.",
+   "since": "2026-06-03 23:51",
    "active": true,
    "done": 15,
    "open": 1
