@@ -1,11 +1,11 @@
 {
- "updated": "2026-06-04 00:01",
+ "updated": "2026-06-04 00:11",
  "progress": {
-  "percent": 77,
-  "done_count": 17,
-  "in_arbeit_count": 4,
+  "percent": 80,
+  "done_count": 18,
+  "in_arbeit_count": 3,
   "total_count": 25,
-  "done_weight": 64.0,
+  "done_weight": 66.4,
   "total_weight": 83.0
  },
  "members": [
@@ -14,8 +14,8 @@
    "name": "Maxime",
    "area": "Website-Fabrik · Generator, Cinematic, Auto-System, Deployment",
    "color": "#f0a72c",
-   "current": "Wartung #1 Abo-Pruefung fertig+getestet: vor Umsetzung Stripe-Check auf aktives Pflege-Abo (per Kunden-Mail); kein Abo -> Ablehnung+Mail, keine Aenderung. Dedup ueber is:unread. Offen: #3 Auto-Entwurf fuer mittlere/freie Wuensche, #2 Foto-Upload.",
-   "since": "2026-06-03 23:51",
+   "current": "Wartungs-Abo Monatswert gebaut+geplant: Auto-Frische der Google-Bewertungen + Monats-Status-Mail (1. jedes Monats, nur aktive Abo-Kunden). mailutil jetzt shared (Jerome). Agentur-Karte bewirbt den Monatswert. Offen Wartung: #3 Auto-Entwurf, #2 Foto-Upload.",
+   "since": "2026-06-04 00:01",
    "active": true,
    "done": 15,
    "open": 1
@@ -36,11 +36,11 @@
    "name": "Jerome",
    "area": "Bewertungs-Service · Reviews automatisieren",
    "color": "#a78bfa",
-   "current": "R17 Anfragen-Versand: Engine fertig + getestet (versand.py). Guardrails: nur bewertung=ja, Tageslimit 40, Mindestabstand 30 Tage (Dedup), lokales Protokoll (kein CRM-Schreiben). Outbox-Modus schreibt versandfertige Mails nach output/outbox - getestet, sauber. Echter Versand (Gmail-SMTP) ist implementiert aber INAKTIV. @Maxime: welcher Mail-Weg fuers Versenden? Option A: Gmail App-Passwort in den Tresor (COMPANY_EMAIL ist da, GMAIL_APP_PASSWORD fehlt). Option B: dein bestehender send-Helper - dann docke ich versand.py daran an. Bis dahin laeuft alles sicher im Outbox-Modus.",
-   "since": "2026-06-03 23:45",
+   "current": "R17 live-faehig: versand.py --email nutzt jetzt shared/mailutil.py (Gmail-API). Lesetest ok (Konto maximechristalle@gmail.com), nichts gesendet. Guardrails aktiv (bewertung=ja, Tageslimit 40, Mindestabstand 30 Tage, lokales Log). @Maxime WICHTIG: update.py zieht mailutil.py noch NICHT (feste Dateiliste) - bitte mailutil.py in die update.py-Liste aufnehmen, sonst bekommen JP und ich den Helfer nicht automatisch. Ich habe ihn vorerst manuell ins lokale shared/ geladen.",
+   "since": "2026-06-04 00:08",
    "active": true,
-   "done": 2,
-   "open": 1
+   "done": 3,
+   "open": 0
   }
  ],
  "tasks": [
@@ -193,7 +193,7 @@
    "titel": "Bewertungs-Service Automatik (QR -> Mail -> Sheet)",
    "kind": "automatisierung",
    "owner": "jerome",
-   "status": "in_arbeit",
+   "status": "fertig",
    "weight": 4.0,
    "note": ""
   },
