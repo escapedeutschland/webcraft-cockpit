@@ -181,6 +181,8 @@
   .frg-badge{font-size:10px;font-weight:700;padding:3px 9px;border-radius:999px;flex:none;margin-top:1px}
   .frg-badge.abo{background:rgba(52,211,153,.15);color:#34d399;border:1px solid rgba(52,211,153,.35)}
   .frg-badge.noabo{background:rgba(251,113,133,.14);color:#fb7185;border:1px solid rgba(251,113,133,.35)}
+  .frg-badge.auto{background:rgba(78,168,255,.14);color:#4ea8ff;border:1px solid rgba(78,168,255,.35)}
+  .frg-badge.review{background:rgba(255,180,84,.14);color:#ffb454;border:1px solid rgba(255,180,84,.35)}
   .frg-art{font-size:10.5px;letter-spacing:.5px;text-transform:uppercase;color:var(--mut);margin-top:3px}
   @media(max-width:820px){.members{grid-template-columns:1fr}.cols{grid-template-columns:1fr}.hero{height:78vh;min-height:560px}.gauge{display:none}.gauge-lbl{display:none}}
 </style>
@@ -591,6 +593,7 @@ function render(){
   frgs.forEach(f=>{
     let age=''; if(f.age_min!=null) age = f.age_min<60 ? ('vor '+f.age_min+' Min') : ('vor '+Math.round(f.age_min/60)+' Std');
     fh+=`<div class="frg-item"><span class="frg-badge ${f.abo?'abo':'noabo'}">${f.abo?'Abo':'kein Abo'}</span>`
+      +`<span class="frg-badge ${f.trusted?'auto':'review'}">${f.trusted?'Auto-Freigabe':'Freigabe nötig'}</span>`
       +`<div class="grow"><div class="ttl">${esc(f.slug)} ${f.photo?'· 📷 Foto':''}</div>`
       +`<div class="tnote">${esc(f.details)}</div>`
       +`<div class="frg-art">${esc(f.art)} · ${esc(f.kunde_mail)} ${age?'· '+age:''}</div></div></div>`;
