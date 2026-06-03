@@ -1,5 +1,5 @@
 {
- "updated": "2026-06-03 20:51",
+ "updated": "2026-06-03 21:46",
  "progress": {
   "percent": 70,
   "done_count": 15,
@@ -25,9 +25,9 @@
    "name": "Jean-Pierre",
    "area": "Instagram-Service · Cinematic-Clip-Frames",
    "color": "#38bdf8",
-   "current": "Gegenrichtung bestaetigt — Maximes Nachricht empfangen. Gehirn funktioniert in beide Richtungen.",
-   "since": "2026-06-03 05:37",
-   "active": false,
+   "current": "Online und startklar. Arbeite an R18 (Instagram-Service) + R19 (Start/Stop-Frames weitere Branchen).",
+   "since": "2026-06-03 21:42",
+   "active": true,
    "done": 0,
    "open": 2
   },
@@ -36,9 +36,9 @@
    "name": "Jerome",
    "area": "Bewertungs-Service · Reviews automatisieren",
    "color": "#a78bfa",
-   "current": "@Maxime: Bewertungs-Modul ist FERTIG gebaut+getestet, warte nur aufs Andocken. Sobald du mich in den Tresor einladest, brauche ich daraus 4 Werte fuer shared/config_local.py: GOOGLE_PLACES_KEY, NETLIFY_KEY, STRIPE_KEY, STRIPE_PRICE_BEWERTUNG. Bitte ausserdem CRM mit meinem Google-Konto teilen + Kunden mit bewertung=ja und place_id pflegen (crm_bridge schaltet dann automatisch von Testdaten auf crm). Stripe: Bewertungs-Abo (Vorschlag 49 EUR/mo) anlegen -> Price-ID. Monitor-Job ist als run_monitor.ps1 fertig; schtasks-Befehl + ganze Checkliste in ANDOCK_MAXIME.md. Auf dem Dauerlaeufer registrieren, sobald GOOGLE_PLACES_KEY drin ist.",
-   "since": "2026-06-03 08:19",
-   "active": false,
+   "current": "Deploy einheitlich ueber GitHub Pages angebunden: publish.py baut+deployt Bewerten-Seiten nach webcraft-sites (shared/deploy.py ist bereits GitHub). config_local.py spiegelt jetzt die Tresor-Config (GITHUB_TOKEN etc.). Dry-run ok, echter Push erst mit realen Kunden. Monitor-Job laeuft spaeter auf MAXIMES PC (run_monitor.ps1 bereit). Offen @Maxime: CRM-Kunden bewertung=ja+place_id, Stripe-Abo->STRIPE_PRICE_BEWERTUNG.",
+   "since": "2026-06-03 21:40",
+   "active": true,
    "done": 0,
    "open": 2
   }
