@@ -1,5 +1,5 @@
 {
- "updated": "2026-06-03 19:51",
+ "updated": "2026-06-03 20:01",
  "progress": {
   "percent": 70,
   "done_count": 15,
@@ -313,6 +313,20 @@
    "status": "offen",
    "weight": 0.0,
    "note": ""
+  },
+  {
+   "id": "R31",
+   "titel": "Bei ~40+ Kunden: Hosting auf Cloudflare Pages/R2 migrieren (Plan B)",
+   "kind": "empfehlung",
+   "owner": "frei",
+   "status": "offen",
+   "weight": 0.0,
+   "note": "Trigger-Erinnerung; statisch = leichter Umzug"
   }
- ]
+ ],
+ "hosting": {
+  "customers": 1,
+  "threshold": 40,
+  "warn": false
+ }
 }
