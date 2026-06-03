@@ -1,5 +1,5 @@
 {
- "updated": "2026-06-04 00:51",
+ "updated": "2026-06-04 00:59",
  "progress": {
   "percent": 80,
   "done_count": 18,
@@ -14,8 +14,8 @@
    "name": "Maxime",
    "area": "Website-Fabrik · Generator, Cinematic, Auto-System, Deployment",
    "color": "#f0a72c",
-   "current": "Wartungs-Mails auf einheitliches HTML-Design (Bestaetigung/Ablehnung/Monatsstatus, mit Agentur-/Kunden-Link, WhatsApp). #3 Auto-Entwurf gebaut+demonstriert: wartung.py pending/publish/finish - Claude bearbeitet freie Wuensche an der Seite, 1-Klick Freigabe->live+Bestaetigung. Offen: #2 Foto-Upload.",
-   "since": "2026-06-04 00:14",
+   "current": "Wartung komplett: #2 Foto-Upload via Cloudinary (Kunde ohne Account, Bild->Cloudinary->wir laden runter->GitHub, transient=kein Limit). Plus: HTML-Mail-Design, Maxime-Benachrichtigung bei freien Wuenschen, #3 Auto-Entwurf (pending/publish/finish). Wartungs-Abo damit voll automatisiert.",
+   "since": "2026-06-04 00:53",
    "active": true,
    "done": 15,
    "open": 1
@@ -328,5 +328,6 @@
   "customers": 1,
   "threshold": 40,
   "warn": false
- }
+ },
+ "freigaben": []
 }
