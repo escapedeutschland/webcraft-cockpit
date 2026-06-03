@@ -1,0 +1,796 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>WebCraft · Team-Cockpit</title>
+<style>
+  :root{
+    --bg:#060912; --bg2:#0c1120; --card:rgba(255,255,255,.04); --line:rgba(255,255,255,.09);
+    --txt:#e8edf7; --mut:#8a93a6; --amber:#f0a72c; --cyan:#38bdf8; --violet:#a78bfa;
+    --green:#34d399; --red:#fb7185; --blue:#4ea8ff;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html,body{background:var(--bg);color:var(--txt);font-family:'Segoe UI',system-ui,Arial,sans-serif;-webkit-font-smoothing:antialiased}
+  body{min-height:100vh;overflow-x:hidden}
+  a{color:inherit}
+  .wrap{max-width:1280px;margin:0 auto;padding:0 22px 80px}
+
+  /* ---------- HERO / 3D (zentrales Element) ---------- */
+  .hero{position:relative;height:90vh;min-height:660px;width:100%;overflow:hidden;
+        background:radial-gradient(900px 700px at 50% 38%,#0e1730 0%,#080c18 55%,var(--bg) 100%);
+        border-bottom:1px solid var(--line)}
+  #scene{position:absolute;inset:0;width:100%;height:100%;display:block;cursor:grab}
+  #scene:active{cursor:grabbing}
+  .hud{position:absolute;inset:0;pointer-events:none;padding:24px 30px;display:flex;flex-direction:column}
+  .top{display:flex;justify-content:space-between;align-items:flex-start;gap:20px;flex-wrap:wrap}
+  .brand{display:flex;align-items:center;gap:12px;font-weight:800;letter-spacing:.5px;font-size:19px}
+  .brand .dot{width:11px;height:11px;border-radius:50%;background:var(--blue);box-shadow:0 0 16px var(--blue)}
+  .live{display:flex;align-items:center;gap:8px;font-size:12px;color:var(--mut);background:rgba(255,255,255,.04);
+        border:1px solid var(--line);padding:6px 12px;border-radius:999px}
+  .live .pulse{width:8px;height:8px;border-radius:50%;background:var(--green);box-shadow:0 0 10px var(--green);animation:bp 1.6s infinite}
+  @keyframes bp{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.35;transform:scale(.7)}}
+
+  /* Fortschritt links unten als großer Wert + vertikaler Gauge rechts */
+  .readout{position:absolute;left:34px;bottom:30px}
+  .pct{font-size:clamp(56px,9vw,116px);font-weight:800;line-height:.86;
+       background:linear-gradient(120deg,#cfe7ff,var(--blue) 70%,#1e6fd6);-webkit-background-clip:text;background-clip:text;color:transparent;
+       filter:drop-shadow(0 6px 26px rgba(78,168,255,.35))}
+  .pct small{font-size:.30em;-webkit-text-fill-color:var(--mut);color:var(--mut);font-weight:700;margin-left:4px}
+  .sub{color:#aab6cc;font-size:14px;margin-top:4px;letter-spacing:.3px}
+  .sub2{color:var(--mut);font-size:12.5px;margin-top:2px}
+
+  .gauge{position:absolute;right:36px;top:50%;transform:translateY(-50%);width:8px;height:46%;border-radius:99px;
+         background:rgba(255,255,255,.06);border:1px solid var(--line);overflow:hidden}
+  .gauge .fill{position:absolute;left:0;bottom:0;width:100%;border-radius:99px;
+        background:linear-gradient(180deg,#7cc2ff,#1e6fd6);box-shadow:0 0 18px rgba(78,168,255,.6);transition:height 1.2s cubic-bezier(.4,0,.2,1)}
+  .gauge-lbl{position:absolute;right:30px;top:50%;transform:translateY(-50%) rotate(180deg);writing-mode:vertical-rl;
+        font-size:10px;letter-spacing:3px;text-transform:uppercase;color:var(--mut)}
+
+  .bottom{margin-top:auto;display:flex;justify-content:center;gap:26px;flex-wrap:wrap}
+  .legend{display:flex;align-items:center;gap:8px;font-size:12.5px;color:var(--mut)}
+  .legend i{width:11px;height:11px;border-radius:3px;display:inline-block}
+  .legend i.wire{background:transparent;border:1px solid #3a5a8c}
+
+  /* ---------- SECTIONS ---------- */
+  .sec-head{display:flex;align-items:baseline;gap:12px;margin:46px 0 18px}
+  .sec-head h2{font-size:15px;letter-spacing:2.5px;text-transform:uppercase;color:var(--mut);font-weight:700}
+  .sec-head .ln{flex:1;height:1px;background:var(--line)}
+
+  .members{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+  .mcard{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:20px;position:relative;overflow:hidden;transition:transform .25s}
+  .mcard:hover{transform:translateY(-3px)}
+  .mcard .glow{position:absolute;top:-40px;right:-40px;width:140px;height:140px;border-radius:50%;filter:blur(46px);opacity:.5}
+  .mhead{display:flex;align-items:center;gap:13px;position:relative}
+  .ava{width:46px;height:46px;border-radius:14px;display:grid;place-items:center;font-weight:800;font-size:19px;color:#08101f;flex:none}
+  .mname{font-size:17px;font-weight:700;line-height:1.1}
+  .mstate{font-size:11.5px;color:var(--mut);display:flex;align-items:center;gap:6px;margin-top:3px}
+  .mstate .ind{width:7px;height:7px;border-radius:50%;background:var(--mut)}
+  .mstate.on .ind{background:var(--green);box-shadow:0 0 9px var(--green);animation:bp 1.6s infinite}
+  .marea{color:var(--mut);font-size:12.5px;margin:14px 0 12px;line-height:1.5}
+  .mcur{background:rgba(0,0,0,.25);border:1px solid var(--line);border-radius:12px;padding:12px 13px;font-size:13.5px;line-height:1.5;min-height:62px}
+  .mcur .lbl{font-size:10px;letter-spacing:1.5px;text-transform:uppercase;color:var(--mut);display:block;margin-bottom:5px}
+  .mcur .focus{display:inline-block;font-size:10px;font-weight:700;letter-spacing:.5px;color:var(--blue);
+        background:rgba(78,168,255,.12);border:1px solid rgba(78,168,255,.3);border-radius:6px;padding:1px 7px;margin-bottom:6px}
+  .curtext{display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;color:#cdd6e6}
+  .mmeta{display:flex;gap:16px;margin-top:13px;font-size:12px;color:var(--mut);align-items:center}
+  .mmeta b{color:var(--txt)}
+  .working{margin-left:auto;display:flex;align-items:center;gap:6px;font-size:11px;font-weight:600;color:var(--green)}
+  .working .dots{display:inline-flex;gap:3px}
+  .working .dots i{width:5px;height:5px;border-radius:50%;background:var(--green);animation:wd 1s infinite}
+  .working .dots i:nth-child(2){animation-delay:.16s} .working .dots i:nth-child(3){animation-delay:.32s}
+  @keyframes wd{0%,65%,100%{opacity:.25;transform:translateY(0)}30%{opacity:1;transform:translateY(-3px)}}
+  .mcard .shimmer{position:absolute;left:0;right:0;bottom:0;height:2px;overflow:hidden}
+  .mcard .shimmer::after{content:"";position:absolute;top:0;left:-45%;width:45%;height:100%;
+        background:linear-gradient(90deg,transparent,#4ea8ff,transparent);animation:sh 1.9s linear infinite}
+  @keyframes sh{to{left:145%}}
+
+  /* Live-Ticker */
+  .ticker{display:flex;align-items:center;gap:14px;margin:30px 0 0;background:var(--card);border:1px solid var(--line);
+          border-radius:14px;padding:12px 16px;overflow:hidden}
+  .tk-live{display:flex;align-items:center;gap:7px;font-size:11px;font-weight:800;letter-spacing:1.5px;color:#ff6b81;flex:none}
+  .tk-live i{width:8px;height:8px;border-radius:50%;background:#ff6b81;box-shadow:0 0 10px #ff6b81;animation:bp 1.2s infinite}
+  .tk-feed{position:relative;flex:1;height:21px}
+  .tk-line{position:absolute;inset:0;display:flex;align-items:center;gap:9px;font-size:13px;color:#cdd6e6;
+           opacity:0;transform:translateY(9px);transition:opacity .5s,transform .5s}
+  .tk-line.show{opacity:1;transform:none}
+  .tk-line .who{font-weight:700} .tk-line .tdot{width:6px;height:6px;border-radius:50%;flex:none}
+
+  /* Top-Right Controls */
+  .topright{display:flex;align-items:center;gap:10px;pointer-events:auto}
+  .chip2{font-size:12px;color:#cdd6e6;background:rgba(255,255,255,.04);border:1px solid var(--line);padding:6px 11px;border-radius:999px;white-space:nowrap}
+  .iconbtn{font-size:15px;line-height:1;background:rgba(255,255,255,.04);border:1px solid var(--line);color:var(--txt);
+           width:34px;height:34px;border-radius:10px;cursor:pointer;transition:.2s;display:grid;place-items:center}
+  .iconbtn:hover{border-color:var(--blue)} .iconbtn.on{border-color:var(--green);color:var(--green);box-shadow:0 0 12px rgba(52,211,153,.3)}
+
+  /* Toolbar (Filter/Sortierung) */
+  .toolbar{display:flex;flex-wrap:wrap;gap:18px 26px;align-items:center;margin:0 0 18px}
+  .tb-group{display:flex;align-items:center;gap:7px;flex-wrap:wrap}
+  .tb-lbl{font-size:10px;letter-spacing:1.5px;text-transform:uppercase;color:var(--mut);margin-right:2px}
+  .chip{font-size:12px;font-weight:600;color:#cdd6e6;background:rgba(255,255,255,.04);border:1px solid var(--line);
+        padding:6px 12px;border-radius:999px;cursor:pointer;transition:.18s}
+  .chip:hover{border-color:var(--blue)}
+  .chip.on{background:rgba(78,168,255,.16);border-color:var(--blue);color:#dbecff}
+  .fnote{font-size:12px;color:var(--mut);margin:-6px 0 16px}
+
+  /* Toast (Meilenstein) */
+  .toasts{position:fixed;left:50%;bottom:26px;transform:translateX(-50%);z-index:60;display:flex;flex-direction:column;gap:10px;align-items:center;pointer-events:none}
+  .toast{background:linear-gradient(120deg,#0e2a20,#103a2a);border:1px solid rgba(52,211,153,.5);color:#d6ffe9;
+         padding:13px 20px;border-radius:14px;font-size:14px;font-weight:600;box-shadow:0 10px 40px rgba(52,211,153,.25);
+         opacity:0;transform:translateY(16px) scale(.96);transition:.45s cubic-bezier(.2,.9,.3,1)}
+  .toast.show{opacity:1;transform:none}
+  .toast .big{font-size:16px;font-weight:800;margin-right:6px}
+
+  /* Fokus-Highlight Member-Karte */
+  .mcard.focused{border-color:var(--blue);box-shadow:0 0 0 1px var(--blue),0 14px 50px rgba(78,168,255,.22);transform:translateY(-3px)}
+  .focusbar{display:none;align-items:center;gap:10px;background:rgba(78,168,255,.1);border:1px solid rgba(78,168,255,.35);
+            border-radius:12px;padding:9px 14px;margin:0 0 16px;font-size:13px;color:#dbecff}
+  .focusbar.on{display:flex}
+  .focusbar button{margin-left:auto;background:transparent;border:1px solid var(--line);color:#cdd6e6;border-radius:8px;padding:4px 10px;cursor:pointer;font-size:12px}
+  .focusbar button:hover{border-color:var(--blue)}
+
+  .cols{display:grid;grid-template-columns:repeat(2,1fr);gap:18px}
+  .col{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:18px 18px 8px}
+  .col h3{font-size:13px;letter-spacing:.5px;margin-bottom:14px;display:flex;align-items:center;gap:9px}
+  .col h3 .cnt{margin-left:auto;font-size:11px;color:var(--mut);background:rgba(255,255,255,.05);border:1px solid var(--line);padding:2px 9px;border-radius:999px}
+  .tag{width:9px;height:9px;border-radius:3px;display:inline-block}
+  .task{display:flex;align-items:flex-start;gap:11px;padding:11px 4px;border-top:1px solid var(--line)}
+  .task:first-of-type{border-top:none}
+  .task .ic{width:18px;height:18px;border-radius:6px;flex:none;margin-top:1px;border:1px solid var(--line);display:grid;place-items:center;font-size:11px;color:var(--mut)}
+  .task .ic.done{background:rgba(52,211,153,.15);border-color:rgba(52,211,153,.4);color:var(--green)}
+  .task .ic.prog{background:rgba(78,168,255,.13);border-color:rgba(78,168,255,.4);color:var(--blue)}
+  .ttl{font-size:13.5px;line-height:1.45}
+  .tnote{font-size:11.5px;color:var(--mut);margin-top:2px}
+  .towner{font-size:10.5px;letter-spacing:.5px;text-transform:uppercase;color:var(--mut);margin-top:3px}
+  .grow{flex:1}
+  .btn{flex:none;border:1px solid var(--line);background:rgba(255,255,255,.05);color:var(--txt);font-size:11.5px;font-weight:600;
+       padding:6px 12px;border-radius:9px;cursor:pointer;transition:.2s;pointer-events:auto}
+  .btn:hover{border-color:var(--blue);color:var(--blue)}
+  .done-wrap{margin-top:14px}
+  details summary{cursor:pointer;color:var(--mut);font-size:12.5px;list-style:none;padding:10px 0}
+  details summary::-webkit-details-marker{display:none}
+  details summary:hover{color:var(--txt)}
+  .done-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:8px 18px;padding:6px 2px 14px}
+  .done-grid div{font-size:12.5px;color:var(--mut);display:flex;gap:8px;align-items:center}
+  .done-grid div::before{content:"✓";color:var(--green);font-weight:800}
+
+  .modal{position:fixed;inset:0;background:rgba(4,7,14,.78);backdrop-filter:blur(6px);display:none;align-items:center;justify-content:center;z-index:50;padding:20px}
+  .modal.on{display:flex}
+  .sheet{background:#0e1424;border:1px solid var(--line);border-radius:20px;max-width:520px;width:100%;padding:26px}
+  .sheet h4{font-size:18px;margin-bottom:6px}
+  .sheet p{color:var(--mut);font-size:13.5px;line-height:1.55;margin-bottom:16px}
+  .who{display:flex;gap:10px;margin-bottom:18px;flex-wrap:wrap}
+  .who button{flex:1;min-width:120px;border:1px solid var(--line);background:rgba(255,255,255,.04);color:var(--txt);padding:12px;border-radius:12px;cursor:pointer;font-weight:600;transition:.2s}
+  .who button:hover{border-color:var(--blue)}
+  .cmd{background:#05080f;border:1px solid var(--line);border-radius:12px;padding:13px;font-family:Consolas,monospace;font-size:12px;color:#9fe7c4;white-space:pre-wrap;word-break:break-all;display:none;margin-bottom:12px}
+  .cmd.show{display:block}
+  .hint{font-size:12.5px;color:var(--mut);display:none}
+  .hint.show{display:block}
+  .x{float:right;cursor:pointer;color:var(--mut);font-size:22px;line-height:1;margin-top:-4px}
+  .copy{margin-top:10px;font-size:12px}
+  .foot{text-align:center;color:var(--mut);font-size:12px;margin-top:50px}
+  @media(max-width:820px){.members{grid-template-columns:1fr}.cols{grid-template-columns:1fr}.hero{height:78vh;min-height:560px}.gauge{display:none}.gauge-lbl{display:none}}
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <canvas id="scene"></canvas>
+  <div class="hud">
+    <div class="top">
+      <div class="brand"><span class="dot"></span> WebCraft · Team-Cockpit</div>
+      <div class="topright">
+        <span class="chip2" id="daynight">—</span>
+        <button class="iconbtn" id="soundBtn" title="Sound an/aus">🔈</button>
+        <div class="live"><span class="pulse"></span><span id="updated">lädt …</span></div>
+      </div>
+    </div>
+    <div class="bottom">
+      <span class="legend"><i style="background:#7cc2ff"></i> gebaut &amp; aktiv</span>
+      <span class="legend"><i class="wire"></i> noch in Konstruktion</span>
+      <span class="legend"><i style="background:var(--blue)"></i> Energie-Kabel = Teammitglied speist das Projekt</span>
+    </div>
+  </div>
+  <div class="readout">
+    <div class="pct"><span id="pctNum">0</span><small>%</small></div>
+    <div class="sub" id="subline">Projekt wird live konstruiert …</div>
+    <div class="sub2" id="modline"></div>
+  </div>
+  <div class="gauge"><div class="fill" id="gfill" style="height:0%"></div></div>
+  <div class="gauge-lbl">Fertigstellung</div>
+</div>
+
+<div class="wrap">
+  <div class="ticker"><span class="tk-live"><i></i>LIVE</span><div class="tk-feed" id="ticker"></div></div>
+
+  <div class="sec-head"><h2>Das Team</h2><span class="ln"></span></div>
+  <div class="members" id="members"></div>
+
+  <div class="sec-head"><h2>Aktueller Fokus &amp; freie Aufgaben</h2><span class="ln"></span></div>
+
+  <div class="focusbar" id="focusbar"><span id="focusbar-txt"></span><button onclick="clearFocus()">Fokus aufheben ✕</button></div>
+
+  <div class="toolbar">
+    <div class="tb-group" id="tb-member">
+      <span class="tb-lbl">Mitglied</span>
+      <button class="chip on" data-m="all">Alle</button>
+      <button class="chip" data-m="maxime">Maxime</button>
+      <button class="chip" data-m="jean-pierre">Jean-Pierre</button>
+      <button class="chip" data-m="jerome">Jerome</button>
+      <button class="chip" data-m="frei">Frei</button>
+    </div>
+    <div class="tb-group" id="tb-sort">
+      <span class="tb-lbl">Sortierung</span>
+      <button class="chip on" data-s="impact">Impact ↓</button>
+      <button class="chip" data-s="status">Status</button>
+      <button class="chip" data-s="default">Standard</button>
+    </div>
+  </div>
+
+  <div class="cols">
+    <div class="col"><h3><span class="tag" style="background:var(--blue)"></span> In Arbeit <span class="cnt" id="cnt-prog">0</span></h3><div id="list-prog"></div></div>
+    <div class="col"><h3><span class="tag" style="background:var(--amber)"></span> Frei – zum Übernehmen <span class="cnt" id="cnt-free">0</span></h3><div id="list-free"></div></div>
+  </div>
+
+  <div class="sec-head"><h2>Empfehlungen &amp; Automatisierung</h2><span class="ln"></span></div>
+  <div class="cols">
+    <div class="col"><h3><span class="tag" style="background:var(--violet)"></span> Empfehlung von Claude <span class="cnt" id="cnt-emp">0</span></h3><div id="list-emp"></div></div>
+    <div class="col"><h3><span class="tag" style="background:#5eead4"></span> Noch zu automatisieren <span class="cnt" id="cnt-auto">0</span></h3><div id="list-auto"></div></div>
+  </div>
+
+  <div class="done-wrap">
+    <details><summary id="done-sum">▸ Bereits fertig &amp; im System (0)</summary>
+      <div class="done-grid" id="list-done"></div>
+    </details>
+  </div>
+  <div class="foot">Live aus dem gemeinsamen Gehirn · aktualisiert sich automatisch · WebCraft</div>
+</div>
+
+<div class="toasts" id="toasts"></div>
+
+<div class="modal" id="modal">
+  <div class="sheet">
+    <span class="x" onclick="closeModal()">✕</span>
+    <h4 id="m-title">Aufgabe übernehmen</h4>
+    <p>Wer übernimmt diese Aufgabe? Sie wird im gemeinsamen Gehirn auf <b>„in Arbeit"</b> gesetzt und der jeweilige Claude nimmt sie beim nächsten Start automatisch in seinen Bereich auf.</p>
+    <div class="who">
+      <button onclick="pick('maxime')">Maxime</button>
+      <button onclick="pick('jean-pierre')">Jean-Pierre</button>
+      <button onclick="pick('jerome')">Jerome</button>
+    </div>
+    <div class="cmd" id="cmd"></div>
+    <div class="hint" id="hint">Diesen Befehl im eigenen Claude-Code-Terminal ausführen – oder einfach deinem Claude sagen: <b id="say"></b></div>
+    <button class="btn copy hint" id="copyBtn" onclick="copyCmd()">Befehl kopieren</button>
+  </div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script>
+/* ============ STATE ============ */
+let DATA=null, targetPct=0, shownPct=0;
+let memberActivity={maxime:0,'jean-pierre':0,jerome:0};
+const MCOLOR={maxime:0xf0a72c,'jean-pierre':0x38bdf8,jerome:0xa78bfa};
+
+/* ============ SCENE ============ */
+const canvas=document.getElementById('scene');
+const renderer=new THREE.WebGLRenderer({canvas,antialias:true,alpha:true});
+renderer.setPixelRatio(Math.min(devicePixelRatio,2));
+const scene=new THREE.Scene();
+scene.fog=new THREE.FogExp2(0x070b16,0.0075);
+const camera=new THREE.PerspectiveCamera(46,1,0.1,500);
+camera.position.set(0,3,72);
+
+const world=new THREE.Group(); scene.add(world);   // dreht langsam: Turm + Kabel + Icons
+
+// Interaktion / Effekte
+let focusKey=null, shake=0, flash=0;
+let prevDoneIds=null;
+let FILTER={member:'all',sort:'impact'};
+const bursts=[];
+const wp=new THREE.Vector3(), curLook=new THREE.Vector3(0,0,0), tmpLook=new THREE.Vector3();
+const raycaster=new THREE.Raycaster(), pointerNDC=new THREE.Vector2();
+
+/* lights */
+const ambient=new THREE.AmbientLight(0x44557a,0.85); scene.add(ambient);
+const keyL=new THREE.DirectionalLight(0x8fbaff,0.9); keyL.position.set(24,30,28); scene.add(keyL);
+const rimL=new THREE.DirectionalLight(0x2a6cff,0.6); rimL.position.set(-30,-10,-20); scene.add(rimL);
+const coreL=new THREE.PointLight(0x6fb3ff,1.6,120); world.add(coreL);
+
+/* starfield */
+(function(){const g=new THREE.BufferGeometry(),n=520,p=new Float32Array(n*3);
+  for(let i=0;i<n;i++){const r=140+Math.random()*150,t=Math.random()*6.28,ph=Math.acos(2*Math.random()-1);
+    p[i*3]=r*Math.sin(ph)*Math.cos(t);p[i*3+1]=r*Math.sin(ph)*Math.sin(t);p[i*3+2]=r*Math.cos(ph);}
+  g.setAttribute('position',new THREE.BufferAttribute(p,3));
+  scene.add(new THREE.Points(g,new THREE.PointsMaterial({color:0x3a4f8c,size:.8,transparent:true,opacity:.55})));})();
+
+/* ---------- DAS WEBCRAFT-MONUMENT (Turm aus gestapelten Website-Modulen) ---------- */
+const FLOORS=15, FH=2.0, GAP=0.42;
+const STACK_H=FLOORS*(FH+GAP);
+const baseY=-STACK_H/2 + FH/2;
+const floors=[];
+
+function floorWidth(f){return 11 - f*0.24;}   // breiter unten -> verjüngt nach oben (Monument)
+function floorDepth(f){return 7.4 - f*0.16;}
+
+const winGeo=new THREE.BoxGeometry(0.62,0.46,0.12);
+for(let f=0;f<FLOORS;f++){
+  const y=baseY+f*(FH+GAP);
+  const w=floorWidth(f), d=floorDepth(f), twist=f*0.10;
+  const grp=new THREE.Group(); grp.position.y=y; grp.rotation.y=twist; world.add(grp);
+
+  // solide Glas-Etage (gebaut)
+  const slab=new THREE.Mesh(new THREE.BoxGeometry(w,FH,d),
+    new THREE.MeshStandardMaterial({color:0xa9d4ff,emissive:0x1f5fbf,emissiveIntensity:.35,
+      metalness:.55,roughness:.18,transparent:true,opacity:.46}));
+  // helle Kanten
+  const edges=new THREE.LineSegments(new THREE.EdgesGeometry(new THREE.BoxGeometry(w,FH,d)),
+    new THREE.LineBasicMaterial({color:0x9fd0ff,transparent:true,opacity:.9}));
+  // Drahtgitter-Gerüst (noch nicht gebaut)
+  const ghost=new THREE.LineSegments(new THREE.EdgesGeometry(new THREE.BoxGeometry(w,FH,d)),
+    new THREE.LineBasicMaterial({color:0x2f4f86,transparent:true,opacity:.32}));
+
+  // leuchtende "Content-Fenster" auf der Front (wirkt wie Website-Inhalt)
+  const wins=new THREE.Group();
+  const cols=Math.max(4,Math.round(w/1.5));
+  for(let c=0;c<cols;c++){
+    const wm=new THREE.Mesh(winGeo,new THREE.MeshBasicMaterial({color:0xbfe4ff,transparent:true,opacity:.95}));
+    wm.position.set(-w/2+0.9+c*((w-1.8)/(cols-1||1)), 0, d/2+0.02);
+    wins.add(wm);
+    const wm2=wm.clone(); wm2.position.z=-d/2-0.02; wm2.rotation.y=Math.PI; wins.add(wm2);
+  }
+
+  grp.add(slab); grp.add(edges); grp.add(ghost); grp.add(wins);
+  floors.push({grp,slab,edges,ghost,wins,built:false,anim:0,y,w,d,twist,
+               port:new THREE.Vector3()});  // Anschlusspunkt (wird je Kabel gesetzt)
+}
+
+/* Sockel-Plattform */
+const base=new THREE.Mesh(new THREE.CylinderGeometry(8.5,9.4,0.7,48),
+  new THREE.MeshStandardMaterial({color:0x16223e,emissive:0x123, metalness:.6,roughness:.4}));
+base.position.y=baseY-FH/2-1.0; world.add(base);
+const baseRing=new THREE.Mesh(new THREE.TorusGeometry(9.0,0.12,12,60),
+  new THREE.MeshBasicMaterial({color:0x4ea8ff,transparent:true,opacity:.7}));
+baseRing.rotation.x=Math.PI/2; baseRing.position.y=base.position.y+0.36; world.add(baseRing);
+
+/* ---------- ENERGIE-KABEL + BRUDER-ICONS ---------- */
+function avatarTex(name,hex){
+  const S=220, R=86, c=document.createElement('canvas');c.width=c.height=S;const x=c.getContext('2d');
+  x.fillStyle='#0b1322';x.beginPath();x.arc(S/2,S/2,R,0,6.28);x.fill();
+  x.lineWidth=9;x.strokeStyle=hex;x.shadowColor=hex;x.shadowBlur=26;x.beginPath();x.arc(S/2,S/2,R,0,6.28);x.stroke();
+  x.shadowBlur=0;x.fillStyle=hex;x.textAlign='center';x.textBaseline='middle';
+  // Namen mit Bindestrich auf zwei Zeilen umbrechen (z. B. Jean-Pierre)
+  const parts = name.includes('-') ? name.split('-') : [name];
+  const lines = parts.length>1 ? [parts[0]+'-', parts.slice(1).join('-')] : parts;
+  const maxW = R*1.5;
+  let fs = 60;
+  const measure = ()=>{x.font='bold '+fs+'px Segoe UI,Arial';return Math.max(...lines.map(l=>x.measureText(l).width));};
+  while(measure()>maxW && fs>16){fs-=2;}
+  x.font='bold '+fs+'px Segoe UI,Arial';
+  const lh=fs*1.04, startY=S/2-(lines.length-1)*lh/2;
+  lines.forEach((l,i)=>x.fillText(l, S/2, startY+i*lh+2));
+  return new THREE.CanvasTexture(c);
+}
+function glowTex(rgba1,rgba2){const c=document.createElement('canvas');c.width=c.height=128;const x=c.getContext('2d');
+  const g=x.createRadialGradient(64,64,0,64,64,64);g.addColorStop(0,rgba1);g.addColorStop(.45,rgba2);g.addColorStop(1,'rgba(0,0,0,0)');
+  x.fillStyle=g;x.fillRect(0,0,128,128);return new THREE.CanvasTexture(c);}
+const PULSE_TEX=glowTex('rgba(190,230,255,1)','rgba(78,168,255,.5)');
+
+const NODES=[
+  {key:'maxime',     name:'Maxime',      ang:-Math.PI/2,   rad:30, y: 9, portFloor:12},
+  {key:'jean-pierre',name:'Jean-Pierre', ang: Math.PI/6,   rad:31, y:-6, portFloor:5},
+  {key:'jerome',     name:'Jerome',      ang: Math.PI*5/6, rad:30, y: 1, portFloor:8},
+];
+const cables=[];
+NODES.forEach(nd=>{
+  const iconCenter=new THREE.Vector3(Math.cos(nd.ang)*nd.rad, nd.y, Math.sin(nd.ang)*nd.rad);
+  const outDir=new THREE.Vector3(Math.cos(nd.ang),0,Math.sin(nd.ang)).normalize();
+  // Kabel beginnt am RAND des Icons (nicht in der Mitte) -> Name bleibt frei
+  const cableStart=iconCenter.clone().add(outDir.clone().multiplyScalar(-3.7));
+  // Anschlusspunkt am Turm (auf Höhe portFloor, an der Außenseite Richtung Icon)
+  const fl=floors[nd.portFloor];
+  const port=new THREE.Vector3(outDir.x*(fl.w*0.5+0.3), fl.y, outDir.z*(fl.d*0.5+0.3));
+  // gebogene Kabelkurve (leichter Durchhang nach unten)
+  const mid=cableStart.clone().add(port).multiplyScalar(0.5).add(outDir.clone().multiplyScalar(4)).add(new THREE.Vector3(0,-3,0));
+  const curve=new THREE.CatmullRomCurve3([cableStart, mid, port]);
+
+  // Kabel-Tube (blau, leicht leuchtend) + weicher Halo-Tube
+  const tube=new THREE.Mesh(new THREE.TubeGeometry(curve,60,0.14,8,false),
+     new THREE.MeshBasicMaterial({color:0x2f7fe0,transparent:true,opacity:.5}));
+  const halo=new THREE.Mesh(new THREE.TubeGeometry(curve,60,0.34,8,false),
+     new THREE.MeshBasicMaterial({color:0x2a6cff,transparent:true,opacity:.13,blending:THREE.AdditiveBlending,depthWrite:false}));
+  world.add(tube); world.add(halo);
+
+  // Anschluss-Sockel am Turm
+  const socket=new THREE.Mesh(new THREE.TorusGeometry(0.55,0.10,10,24),
+     new THREE.MeshBasicMaterial({color:0x7cc2ff,transparent:true,opacity:.85}));
+  socket.position.copy(port); socket.lookAt(port.clone().add(outDir)); world.add(socket);
+
+  // Stecker am Icon-Rand
+  const plug=new THREE.Mesh(new THREE.SphereGeometry(0.34,12,12),
+     new THREE.MeshBasicMaterial({color:0x9fd0ff,transparent:true,opacity:.9}));
+  plug.position.copy(cableStart); world.add(plug);
+
+  // Icon (schwebt) – immer VOR den Kabeln (depthTest:false), damit der Name lesbar bleibt
+  const hex='#'+MCOLOR[nd.key].toString(16).padStart(6,'0');
+  const spr=new THREE.Sprite(new THREE.SpriteMaterial({map:avatarTex(nd.name,hex),transparent:true,depthWrite:false,depthTest:false}));
+  spr.scale.setScalar(7.6); spr.position.copy(iconCenter); spr.renderOrder=20; world.add(spr);
+
+  // langsame, smoothe Licht-Pulse die INS Element laufen
+  const pulses=[];
+  const P=4;
+  for(let i=0;i<P;i++){
+    const s=new THREE.Sprite(new THREE.SpriteMaterial({map:PULSE_TEX,color:0xbfe4ff,transparent:true,
+        blending:THREE.AdditiveBlending,depthWrite:false,opacity:.0}));
+    s.scale.setScalar(2.2); world.add(s);
+    pulses.push({spr:s,t:i/P});
+  }
+  cables.push({key:nd.key,curve,tube,halo,socket,plug,spr,iconCenter,pulses,baseY:nd.y});
+});
+
+/* resize + maus-parallax */
+let mx=0,my=0;
+canvas.addEventListener('pointermove',e=>{const r=canvas.getBoundingClientRect();
+  mx=((e.clientX-r.left)/r.width-0.5); my=((e.clientY-r.top)/r.height-0.5);});
+function resize(){const w=canvas.clientWidth,h=canvas.clientHeight;
+  if(canvas.width!==Math.floor(w*devicePixelRatio)||canvas.height!==Math.floor(h*devicePixelRatio)){
+    renderer.setSize(w,h,false);camera.aspect=w/h;camera.updateProjectionMatrix();}}
+
+/* animate */
+let clock=0;
+function tick(){
+  requestAnimationFrame(tick); resize(); clock+=0.016;
+  shownPct += (targetPct-shownPct)*0.045;
+  document.getElementById('pctNum').textContent=Math.round(shownPct);
+
+  // wie viele Etagen sind gebaut (von unten nach oben)
+  const builtF = FLOORS*shownPct/100;
+
+  if(!focusKey) world.rotation.y += 0.0018;   // bei Fokus eingefroren
+  // Kamera-Ziel: Standard-Schweben ODER auf ein Mitglied fokussiert
+  let cpx,cpy,cpz;
+  if(focusKey){
+    const cb=cables.find(c=>c.key===focusKey);
+    cb.spr.getWorldPosition(wp);
+    tmpLook.copy(wp).multiplyScalar(0.62);                 // Blick zwischen Icon und Turmmitte
+    const out=wp.clone().setY(0).normalize();
+    cpx=wp.x+out.x*18; cpz=wp.z+out.z*18; cpy=wp.y+7;
+  } else {
+    tmpLook.set(0,0,0);
+    cpx=mx*10; cpy=3 - my*8; cpz=72;
+  }
+  camera.position.x += (cpx - camera.position.x)*0.05;
+  camera.position.y += (cpy - camera.position.y)*0.05;
+  camera.position.z += (cpz - camera.position.z)*0.05;
+  if(shake>0.002){camera.position.x+=(Math.random()-0.5)*shake; camera.position.y+=(Math.random()-0.5)*shake; shake*=0.86;}
+  curLook.lerp(tmpLook,0.08); camera.lookAt(curLook);
+  flash*=0.92;
+  // Meilenstein-Bursts
+  for(let i=bursts.length-1;i>=0;i--){const b=bursts[i]; b.life-=0.012;
+    const pa=b.pts.geometry.attributes.position.array;
+    for(let k=0;k<b.vel.length;k++){pa[k*3]+=b.vel[k].x; pa[k*3+1]+=b.vel[k].y-0.01; pa[k*3+2]+=b.vel[k].z; b.vel[k].multiplyScalar(0.97);}
+    b.pts.geometry.attributes.position.needsUpdate=true; b.pts.material.opacity=Math.max(0,b.life);
+    if(b.life<=0){world.remove(b.pts); b.pts.geometry.dispose(); b.pts.material.dispose(); bursts.splice(i,1);}}
+
+  for(let f=0;f<FLOORS;f++){
+    const fl=floors[f];
+    const want = f < Math.floor(builtF);
+    const partial = (f===Math.floor(builtF)) ? (builtF-Math.floor(builtF)) : (want?1:0);
+    const targetAnim = want?1:partial;
+    fl.anim += (targetAnim-fl.anim)*0.06;
+    const a=fl.anim;
+    // solide Teile fade-in
+    fl.slab.material.opacity = 0.46*a;
+    fl.slab.visible = a>0.02;
+    fl.edges.material.opacity = 0.9*a;
+    fl.edges.visible = a>0.02;
+    fl.ghost.material.opacity = 0.30*(1-a) + 0.06;   // Gerüst bleibt schwach sichtbar
+    fl.wins.visible = a>0.4;
+    const wpul=0.55+Math.sin(clock*2.2+f*0.5)*0.35;
+    fl.wins.children.forEach(w=>{w.material.opacity=(0.3+wpul*0.7)*a + flash*0.5; w.scale.y=0.7+wpul*0.5;});
+    fl.slab.material.emissiveIntensity = 0.35 + flash*1.8;   // Meilenstein-Aufleuchten
+    // sanftes "Einrasten" Scale
+    const s=0.86+0.14*a; fl.slab.scale.set(1,s,1);
+  }
+
+  // Sockel-Glow je nach Aktivität (+ Meilenstein-Flash)
+  const avgAct=(memberActivity.maxime+memberActivity['jean-pierre']+memberActivity.jerome)/3;
+  coreL.position.set(0, baseY+builtF*(FH+GAP)*0+2, 0);
+  coreL.intensity=1.3+avgAct*1.2+Math.sin(clock*2)*0.15 + flash*2.6;
+  baseRing.material.opacity=0.5+0.3*Math.sin(clock*2) + flash*0.5;
+
+  // Kabel + Pulse
+  cables.forEach(cb=>{
+    let act=memberActivity[cb.key]||0;
+    if(focusKey) act = (cb.key===focusKey)?1:0.05;   // Fokus: nur dieses Kabel leuchtet
+    // Icon schwebt sanft um seine feste Position
+    cb.spr.position.y = cb.baseY + Math.sin(clock*0.9+cb.baseY)*0.7;
+    cb.plug.material.opacity=0.6+(act?0.35:0.1)*(0.6+0.4*Math.sin(clock*2.5));
+    cb.spr.scale.setScalar(7.6*(act?1+0.05*Math.sin(clock*3):1));
+    // Kabel-Helligkeit
+    cb.tube.material.opacity = 0.4 + (act?0.35:0.12);
+    cb.halo.material.opacity = (act?0.20:0.08) + Math.sin(clock*2)*0.03;
+    cb.socket.material.opacity = 0.6 + (act?0.35:0.1)*(0.6+0.4*Math.sin(clock*3));
+    // sehr langsame, smoothe Pulse RICHTUNG Turm (t: 0 Icon -> 1 Port)
+    const speed = 0.0009 + act*0.0008;
+    cb.pulses.forEach(pl=>{
+      pl.t += speed; if(pl.t>1) pl.t-=1;
+      const pos=cb.curve.getPoint(pl.t);
+      pl.spr.position.copy(pos);
+      // hell in der Mitte des Wegs, sanft an den Enden
+      const fade=Math.sin(pl.t*Math.PI);
+      pl.spr.material.opacity=(act?0.95:0.5)*fade;
+      pl.spr.scale.setScalar(1.6+1.2*fade);
+    });
+  });
+
+  renderer.render(scene,camera);
+}
+tick();
+
+/* ============ DATA / UI ============ */
+const KIND_LABEL={feature:'Feature',automatisierung:'Automatisierung',empfehlung:'Empfehlung'};
+function esc(s){return (s||'').replace(/[&<>]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;'}[c]));}
+function escAttr(s){return esc(s).replace(/"/g,'&quot;');}
+// Aus einem (evtl. langen) Status einen knappen, praktischen Fokus + Kurztext machen
+function tidyCurrent(s){
+  s=(s||'').trim(); if(!s||s==='—') return {focus:'bereit',text:'Keine aktive Aufgabe gemeldet.'};
+  // Fokus = erstes "Stichwort" (vor : ( — · ), Bindestriche in Wörtern bleiben erhalten)
+  let focus=s.split(/[:(—–·]/)[0].trim();
+  if(focus.length>34) focus=focus.slice(0,32).trim()+'…';
+  // Kurztext = der Rest oder der ganze Satz, auf ~150 Zeichen begrenzt
+  let text=s; if(text.length>150) text=text.slice(0,148).trim()+'…';
+  return {focus,text};
+}
+// "gerade aktiv" = letzter Status-Push innerhalb der letzten 30 Minuten (live im Browser)
+const ACTIVE_MS=30*60*1000;
+function parseSince(s){ if(!s)return NaN; const t=Date.parse(String(s).trim().replace(' ','T')); return t; }
+function isActive(since){ const t=parseSince(since); return !isNaN(t) && (Date.now()-t)<ACTIVE_MS; }
+function relTime(since){ const t=parseSince(since); if(isNaN(t)) return '—';
+  let d=Math.max(0,Date.now()-t), m=Math.round(d/60000);
+  if(m<1) return 'gerade eben'; if(m<60) return 'vor '+m+' Min';
+  const h=Math.round(m/60); if(h<24) return 'vor '+h+' Std';
+  const days=Math.round(h/24); return 'vor '+days+' Tag'+(days>1?'en':'');
+}
+
+function render(){
+  if(!DATA)return;
+  targetPct=DATA.progress.percent;
+  const offen=DATA.progress.total_count-DATA.progress.done_count-DATA.progress.in_arbeit_count;
+  document.getElementById('updated').textContent='Live · Stand '+DATA.updated;
+  document.getElementById('subline').textContent=DATA.progress.done_count+' Module fertig · '+DATA.progress.in_arbeit_count+' in Arbeit · '+offen+' fehlen';
+  document.getElementById('modline').textContent='Gewicht '+DATA.progress.done_weight+' / '+DATA.progress.total_weight;
+  document.getElementById('gfill').style.height=DATA.progress.percent+'%';
+
+  memberActivity={maxime:0,'jean-pierre':0,jerome:0};
+  const mc=document.getElementById('members'); mc.innerHTML='';
+  DATA.members.forEach(m=>{
+    const act=isActive(m.since);              // LIVE im Browser berechnet (30-Min-Fenster)
+    memberActivity[m.key]=act?1:0;
+    const el=document.createElement('div'); el.className='mcard'+(focusKey===m.key?' focused':'');
+    el.style.cursor='pointer'; el.title='Klicken, um auf '+m.name+' zu fokussieren';
+    el.onclick=()=>focusMember(m.key);
+    const cur=tidyCurrent(m.current);
+    el.innerHTML=`<div class="glow" style="background:${m.color}"></div>
+      <div class="mhead"><div class="ava" style="background:${m.color}">${m.key==='jean-pierre'?'JP':m.name[0]}</div>
+        <div><div class="mname">${esc(m.name)}</div>
+          <div class="mstate ${act?'on':''}"><span class="ind"></span>${act?'gerade aktiv':'zuletzt aktiv '+relTime(m.since)}</div></div></div>
+      <div class="marea">${esc(m.area)}</div>
+      <div class="mcur"><span class="lbl">Arbeitet aktuell an</span><span class="focus">${esc(cur.focus)}</span>
+        <span class="curtext" title="${escAttr(m.current)}">${esc(cur.text)}</span></div>
+      <div class="mmeta"><span><b>${m.done}</b> fertig</span><span><b>${m.open}</b> offen</span>
+        ${act?'<span class="working">arbeitet gerade<span class="dots"><i></i><i></i><i></i></span></span>':''}</div>
+      ${act?'<div class="shimmer"></div>':''}`;
+    mc.appendChild(el);
+  });
+
+  // Meilenstein: neu fertig gewordene Aufgaben feiern (nicht beim allerersten Laden)
+  const doneNow=new Set(DATA.tasks.filter(x=>x.status==='fertig').map(x=>x.id));
+  if(prevDoneIds){ DATA.tasks.forEach(x=>{ if(x.status==='fertig' && !prevDoneIds.has(x.id)) celebrate(x); }); }
+  prevDoneIds=doneNow;
+
+  renderTasks();
+  buildTicker(DATA.tasks,DATA.members);
+  applyDayNight();
+}
+
+function applyFilterSort(arr){
+  let a=arr.slice();
+  if(FILTER.member!=='all') a=a.filter(x=>x.owner===FILTER.member);
+  if(FILTER.sort==='impact') a.sort((p,q)=>q.weight-p.weight);
+  else if(FILTER.sort==='status'){const o={in_arbeit:0,offen:1,fertig:2};a.sort((p,q)=>(o[p.status]??9)-(o[q.status]??9));}
+  return a;
+}
+function renderTasks(){
+  if(!DATA)return;
+  const t=DATA.tasks;
+  const prog=applyFilterSort(t.filter(x=>x.status==='in_arbeit'));
+  const free=applyFilterSort(t.filter(x=>x.status!=='fertig'&&x.owner==='frei'&&x.kind!=='empfehlung'));
+  const emp=applyFilterSort(t.filter(x=>x.kind==='empfehlung'&&x.status!=='fertig'));
+  const auto=applyFilterSort(t.filter(x=>x.kind==='automatisierung'&&x.status!=='fertig'));
+  const done=applyFilterSort(t.filter(x=>x.status==='fertig'));
+  fillList('list-prog',prog,'prog'); document.getElementById('cnt-prog').textContent=prog.length;
+  fillList('list-free',free,'free'); document.getElementById('cnt-free').textContent=free.length;
+  fillList('list-emp',emp,'plain'); document.getElementById('cnt-emp').textContent=emp.length;
+  fillList('list-auto',auto,'plain'); document.getElementById('cnt-auto').textContent=auto.length;
+  document.getElementById('list-done').innerHTML=done.map(x=>`<div>${esc(x.titel)}</div>`).join('');
+  document.getElementById('done-sum').textContent='▸ Bereits fertig & im System ('+done.length+')';
+}
+
+/* ---- Live-Aktivitäts-Ticker (anschaulich; nicht exakt-echtzeit) ---- */
+const MCOL={maxime:'#f0a72c','jean-pierre':'#38bdf8',jerome:'#a78bfa'};
+let tickerEvents=[], tickerIdx=0, tickerStarted=false;
+function buildTicker(tasks, members){
+  const ev=[];
+  members.forEach(m=>{
+    const cur=tidyCurrent(m.current);
+    if(isActive(m.since)) ev.push({c:m.color,t:`${m.name} arbeitet an „${cur.focus}"`});
+    else ev.push({c:m.color,t:`${m.name} zuletzt aktiv ${relTime(m.since)}: ${cur.focus}`});
+  });
+  tasks.filter(x=>x.status==='in_arbeit').forEach(x=>ev.push({c:'#4ea8ff',t:`In Arbeit: ${x.titel}`}));
+  tasks.filter(x=>x.status==='fertig').slice(-4).forEach(x=>ev.push({c:'#34d399',t:`✓ Abgeschlossen: ${x.titel}`}));
+  ev.push({c:'#4ea8ff',t:'Netlify-Deploy abgeschlossen · Seiten live'});
+  ev.push({c:'#5eead4',t:'Roadmap mit dem gemeinsamen Gehirn synchronisiert'});
+  ev.push({c:'#f0a72c',t:'Lead-Score aktualisiert · 864 Hoch · 1.122 Mittel'});
+  ev.push({c:'#4ea8ff',t:'Vorschau-Pipeline bereit für den nächsten Lead'});
+  tickerEvents=ev; tickerIdx=0;
+  if(!tickerStarted){tickerStarted=true; showTick(); setInterval(showTick,3400);}
+}
+function showTick(){
+  const box=document.getElementById('ticker'); if(!box||!tickerEvents.length)return;
+  const e=tickerEvents[tickerIdx%tickerEvents.length]; tickerIdx++;
+  const line=document.createElement('div'); line.className='tk-line';
+  line.innerHTML=`<span class="tdot" style="background:${e.c};box-shadow:0 0 8px ${e.c}"></span><span>${esc(e.t)}</span>`;
+  box.innerHTML=''; box.appendChild(line);
+  requestAnimationFrame(()=>requestAnimationFrame(()=>line.classList.add('show')));
+}
+
+function fillList(id,arr,mode){
+  const c=document.getElementById(id); c.innerHTML='';
+  if(!arr.length){c.innerHTML='<div class="task"><div class="grow"><div class="tnote">Nichts offen – stark. 🎉</div></div></div>';return;}
+  arr.forEach(x=>{
+    const el=document.createElement('div'); el.className='task';
+    const ic=x.status==='fertig'?'<div class="ic done">✓</div>':x.status==='in_arbeit'?'<div class="ic prog">●</div>':'<div class="ic">○</div>';
+    const owner=x.owner==='frei'?'<span class="towner">frei · '+KIND_LABEL[x.kind]+'</span>':'<span class="towner">'+esc(x.owner)+' · '+KIND_LABEL[x.kind]+'</span>';
+    let btn=''; if(mode==='free'){btn=`<button class="btn" onclick="openModal('${x.id}','${esc(x.titel).replace(/'/g,'')}')">Übernehmen</button>`;}
+    el.innerHTML=`${ic}<div class="grow"><div class="ttl">${esc(x.titel)}</div>${x.note?'<div class="tnote">'+esc(x.note)+'</div>':''}${owner}</div>${btn}`;
+    c.appendChild(el);
+  });
+}
+let claimId=null;
+function openModal(id,title){claimId=id;
+  document.getElementById('m-title').textContent='Aufgabe übernehmen: '+title;
+  document.getElementById('cmd').classList.remove('show');
+  document.querySelectorAll('.hint').forEach(h=>h.classList.remove('show'));
+  document.getElementById('modal').classList.add('on');}
+function closeModal(){document.getElementById('modal').classList.remove('on');}
+function pick(name){
+  const cmd=`python -c "import sys;sys.path.insert(0,'shared');sys.path.insert(0,'auto_system');import config,roadmap;roadmap.claim('${name}','${claimId}',config.CRM_SHEET_ID,config.TOKEN_PICKLE)"`;
+  const el=document.getElementById('cmd'); el.textContent=cmd; el.classList.add('show');
+  document.getElementById('say').textContent='»Ich nehme Aufgabe '+claimId+'«';
+  document.querySelectorAll('.hint').forEach(h=>h.classList.add('show'));}
+function copyCmd(){navigator.clipboard.writeText(document.getElementById('cmd').textContent);
+  document.getElementById('copyBtn').textContent='✓ kopiert';setTimeout(()=>document.getElementById('copyBtn').textContent='Befehl kopieren',1500);}
+document.getElementById('modal').addEventListener('click',e=>{if(e.target.id==='modal')closeModal();});
+
+/* ---- Fokus auf ein Mitglied (Klick aufs Icon oder die Karte) ---- */
+const NAMES={maxime:'Maxime','jean-pierre':'Jean-Pierre',jerome:'Jerome'};
+function setChips(group,attr,val){document.querySelectorAll('#'+group+' .chip').forEach(c=>c.classList.toggle('on',c.dataset[attr]===val));}
+function focusMember(key){
+  if(focusKey===key){clearFocus();return;}            // Toggle
+  focusKey=key; blip(); FILTER.member=key; setChips('tb-member','m',key);
+  document.getElementById('focusbar').classList.add('on');
+  document.getElementById('focusbar-txt').innerHTML='🔭 Fokus auf <b>'+NAMES[key]+'</b> – Kamera & Aufgaben gefiltert';
+  render();
+}
+function clearFocus(){
+  focusKey=null; FILTER.member='all'; setChips('tb-member','m','all');
+  document.getElementById('focusbar').classList.remove('on'); render();
+}
+canvas.addEventListener('click',e=>{
+  const r=canvas.getBoundingClientRect();
+  pointerNDC.x=((e.clientX-r.left)/r.width)*2-1; pointerNDC.y=-((e.clientY-r.top)/r.height)*2+1;
+  raycaster.setFromCamera(pointerNDC,camera);
+  const hits=raycaster.intersectObjects(cables.map(c=>c.spr),false);
+  if(hits.length){const cb=cables.find(c=>c.spr===hits[0].object); if(cb)focusMember(cb.key);}
+  else if(focusKey) clearFocus();
+});
+
+/* ---- Filter / Sortierung ---- */
+document.querySelectorAll('#tb-member .chip').forEach(b=>b.onclick=()=>{
+  focusKey=null; document.getElementById('focusbar').classList.remove('on');
+  FILTER.member=b.dataset.m; setChips('tb-member','m',b.dataset.m); render();
+});
+document.querySelectorAll('#tb-sort .chip').forEach(b=>b.onclick=()=>{
+  FILTER.sort=b.dataset.s; setChips('tb-sort','s',b.dataset.s); renderTasks();
+});
+
+/* ---- Meilenstein-Beben (Flash + Shake + Partikel + Toast + Sound) ---- */
+function spawnBurst(){
+  const N=64,g=new THREE.BufferGeometry(),pos=new Float32Array(N*3),vel=[];
+  const cy=baseY+(FLOORS*shownPct/100)*(FH+GAP);
+  for(let i=0;i<N;i++){pos[i*3]=0;pos[i*3+1]=cy;pos[i*3+2]=0;
+    const th=Math.random()*6.28,ph=Math.acos(2*Math.random()-1),sp=(8+Math.random()*12)*0.016;
+    vel.push(new THREE.Vector3(Math.sin(ph)*Math.cos(th),Math.abs(Math.cos(ph))*0.7+0.3,Math.sin(ph)*Math.sin(th)).multiplyScalar(sp));}
+  g.setAttribute('position',new THREE.BufferAttribute(pos,3));
+  const m=new THREE.PointsMaterial({color:0x9fe7c4,size:1.5,transparent:true,opacity:1,blending:THREE.AdditiveBlending,depthWrite:false});
+  const pts=new THREE.Points(g,m); world.add(pts); bursts.push({pts,vel,life:1});
+}
+function celebrate(task){ flash=1; shake=2.4; spawnBurst(); showToast(task.titel); ding(); }
+function showToast(titel){
+  const box=document.getElementById('toasts'); const el=document.createElement('div'); el.className='toast';
+  el.innerHTML='<span class="big">🎉</span> Fertig: '+esc(titel);
+  box.appendChild(el);
+  requestAnimationFrame(()=>requestAnimationFrame(()=>el.classList.add('show')));
+  setTimeout(()=>{el.classList.remove('show'); setTimeout(()=>el.remove(),500);},4500);
+}
+
+/* ---- Tag/Nacht-Stimmung (nach Uhrzeit) ---- */
+function applyDayNight(){
+  const h=new Date().getHours(); let p;
+  if(h>=6&&h<11)      p={n:'Morgen',ic:'🌅',b1:'#0e1a30',b2:'#0a1322',fog:0x0a1426,amb:0x46587f};
+  else if(h>=11&&h<17)p={n:'Tag',   ic:'☀️',b1:'#13213c',b2:'#0b1426',fog:0x0d1830,amb:0x57689c};
+  else if(h>=17&&h<21)p={n:'Abend', ic:'🌇',b1:'#2a1734',b2:'#0e0c1c',fog:0x140a1e,amb:0x6a4f7a};
+  else                p={n:'Nacht', ic:'🌙',b1:'#070b18',b2:'#04060e',fog:0x05080f,amb:0x33406a};
+  document.querySelector('.hero').style.background='radial-gradient(900px 700px at 50% 38%,'+p.b1+' 0%,'+p.b2+' 55%,#060912 100%)';
+  scene.fog.color.setHex(p.fog); ambient.color.setHex(p.amb);
+  const dn=document.getElementById('daynight'); if(dn)dn.textContent=p.ic+' '+p.n;
+}
+applyDayNight(); setInterval(applyDayNight,300000);
+
+/* ---- Sound (WebAudio; startet erst nach Klick wegen Autoplay-Regeln) ---- */
+let audioOn=false, actx=null, humGain=null, master=null;
+function ensureCtx(){
+  if(!actx){ actx=new (window.AudioContext||window.webkitAudioContext)();
+    master=actx.createGain(); master.gain.value=0.9; master.connect(actx.destination); }
+}
+function startHum(){
+  ensureCtx();
+  humGain=actx.createGain(); humGain.gain.value=0; humGain.connect(master);
+  // hörbarer, warmer Pad-Klang (höher als zuvor, damit es auf Laptop/Handy klingt)
+  const freqs=[110,164.81,220], gains=[0.6,0.4,0.25];
+  freqs.forEach((f,i)=>{
+    const o=actx.createOscillator(); o.type='sine'; o.frequency.value=f;
+    const g=actx.createGain(); g.gain.value=gains[i]; o.connect(g); g.connect(humGain);
+    if(i===0){const lfo=actx.createOscillator(); lfo.frequency.value=0.14; const lg=actx.createGain(); lg.gain.value=3; lfo.connect(lg); lg.connect(o.frequency); lfo.start();}
+    o.start();
+  });
+}
+function setAudio(on){
+  audioOn=on; const b=document.getElementById('soundBtn');
+  ensureCtx();
+  if(on){
+    if(actx.state==='suspended' && actx.resume){ actx.resume(); }
+    if(!humGain)startHum();
+    humGain.gain.cancelScheduledValues(actx.currentTime);
+    humGain.gain.setValueAtTime(Math.max(0.0001,humGain.gain.value), actx.currentTime);
+    humGain.gain.linearRampToValueAtTime(0.10, actx.currentTime+1.0);
+    b.textContent='🔊'; b.classList.add('on'); b.title='Sound aus';
+    chime();   // sofort hörbare Bestätigung
+  } else {
+    if(humGain){ humGain.gain.cancelScheduledValues(actx.currentTime);
+      humGain.gain.setValueAtTime(humGain.gain.value, actx.currentTime);
+      humGain.gain.linearRampToValueAtTime(0, actx.currentTime+0.4); }
+    b.textContent='🔈'; b.classList.remove('on'); b.title='Sound an';
+  }
+  try{localStorage.setItem('wc_sound',on?'1':'0');}catch(e){}
+}
+function tone(freq,dur,vol,type,slideTo){ if(!actx)return; const t=actx.currentTime;
+  const o=actx.createOscillator(),g=actx.createGain(); o.type=type||'triangle'; o.frequency.setValueAtTime(freq,t);
+  if(slideTo)o.frequency.exponentialRampToValueAtTime(slideTo,t+dur*0.8);
+  g.gain.setValueAtTime(0.0001,t); g.gain.exponentialRampToValueAtTime(vol,t+0.02); g.gain.exponentialRampToValueAtTime(0.0001,t+dur);
+  o.connect(g); g.connect(master||actx.destination); o.start(t); o.stop(t+dur+0.05); }
+function chime(){ if(!actx)return; const t0=actx.currentTime; [523.25,659.25,783.99].forEach((f,i)=>{
+  const o=actx.createOscillator(),g=actx.createGain(); o.type='triangle'; o.frequency.value=f; const s=t0+i*0.10;
+  g.gain.setValueAtTime(0.0001,s); g.gain.exponentialRampToValueAtTime(0.30,s+0.03); g.gain.exponentialRampToValueAtTime(0.0001,s+0.55);
+  o.connect(g); g.connect(master||actx.destination); o.start(s); o.stop(s+0.6); }); }
+function ding(){ if(!audioOn||!actx)return; tone(740,0.6,0.32,'triangle',1320); setTimeout(()=>tone(988,0.5,0.22,'triangle'),90); }
+function blip(){ if(!audioOn||!actx)return; tone(560,0.18,0.20,'sine'); }
+document.getElementById('soundBtn').onclick=()=>setAudio(!audioOn);
+
+async function load(){try{const r=await fetch('data.json?t='+Date.now());DATA=await r.json();render();}
+  catch(e){document.getElementById('updated').textContent='Daten konnten nicht geladen werden';}}
+load(); setInterval(load,20000);
+</script>
+</body>
+</html>
