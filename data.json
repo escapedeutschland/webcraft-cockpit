@@ -1,5 +1,5 @@
 {
- "updated": "2026-06-04 00:11",
+ "updated": "2026-06-04 00:21",
  "progress": {
   "percent": 80,
   "done_count": 18,
@@ -14,8 +14,8 @@
    "name": "Maxime",
    "area": "Website-Fabrik · Generator, Cinematic, Auto-System, Deployment",
    "color": "#f0a72c",
-   "current": "Wartungs-Abo Monatswert gebaut+geplant: Auto-Frische der Google-Bewertungen + Monats-Status-Mail (1. jedes Monats, nur aktive Abo-Kunden). mailutil jetzt shared (Jerome). Agentur-Karte bewirbt den Monatswert. Offen Wartung: #3 Auto-Entwurf, #2 Foto-Upload.",
-   "since": "2026-06-04 00:01",
+   "current": "Wartungs-Mails auf einheitliches HTML-Design (Bestaetigung/Ablehnung/Monatsstatus, mit Agentur-/Kunden-Link, WhatsApp). #3 Auto-Entwurf gebaut+demonstriert: wartung.py pending/publish/finish - Claude bearbeitet freie Wuensche an der Seite, 1-Klick Freigabe->live+Bestaetigung. Offen: #2 Foto-Upload.",
+   "since": "2026-06-04 00:14",
    "active": true,
    "done": 15,
    "open": 1
