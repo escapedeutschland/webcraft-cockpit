@@ -63,14 +63,20 @@ def lock():
     print(f"\nTresor gespeichert: {ENC}")
     print("Weitergabe: Datei teilen + Passwort SEPARAT (Anruf/Signal), nie im selben Kanal.")
 
-def unlock():
+def unlock(pw=None):
     if not ENC.exists():
         print(f"Keine tresor.enc gefunden: {ENC}\nLege sie ins shared/-Verzeichnis und starte erneut."); return
     raw = ENC.read_bytes()
     if raw[:len(MAGIC)] != MAGIC:
         print("Ungueltige Tresor-Datei."); return
     salt = raw[len(MAGIC):len(MAGIC)+16]; token = raw[len(MAGIC)+16:]
-    pw = getpass.getpass("Tresor-Passwort: ")
+    if not pw:
+        try:
+            pw = getpass.getpass("Tresor-Passwort: ")
+        except Exception:
+            pw = input("Tresor-Passwort: ")
+    if not pw:
+        print("Kein Passwort eingegeben. Aufruf mit Passwort: py shared\\tresor.py pull \"DEINPASSWORT\""); return
     try:
         data = Fernet(_derive(pw, salt)).decrypt(token)
     except InvalidToken:
@@ -83,9 +89,9 @@ def unlock():
     print("\nFertig. Alle Keys + Google-Token sind lokal eingerichtet.")
     print("Test:  python -c \"import sys;sys.path.insert(0,'auto_system');import config;print('OK', config.CRM_SHEET_ID[:6])\"")
 
-def pull(url=None):
+def pull(url=None, pw=None):
     """Laedt die verschluesselte tresor.enc von einer URL und entsperrt sie sofort.
-    URL kann als Argument oder ueber config.TRESOR_URL kommen."""
+    URL kann als Argument oder ueber config.TRESOR_URL kommen. pw = Passwort (optional direkt)."""
     import urllib.request
     if not url:
         try:
@@ -104,7 +110,7 @@ def pull(url=None):
         print("Heruntergeladene Datei ist kein gueltiger Tresor."); return
     ENC.write_bytes(data)
     print("Heruntergeladen ->", ENC)
-    unlock()
+    unlock(pw)
 
 def info():
     if not ENC.exists():
@@ -117,7 +123,11 @@ def info():
 
 if __name__ == '__main__':
     cmd = sys.argv[1] if len(sys.argv) > 1 else ''
+    rest = sys.argv[2:]
+    url = next((a for a in rest if a.startswith('http')), None)
+    pw  = next((a for a in rest if not a.startswith('http')), None)
     if   cmd == 'lock':   lock()
-    elif cmd == 'unlock': unlock()
+    elif cmd == 'unlock': unlock(pw)
+    elif cmd == 'pull':   pull(url, pw)
     elif cmd == 'info':   info()
-    else: print("Aufruf: python shared/tresor.py [lock|unlock|info]")
+    else: print("Aufruf: py shared\\tresor.py pull \"DEINPASSWORT\"   (oder lock|unlock|info)")
