@@ -1,5 +1,5 @@
 {
- "updated": "2026-06-03 22:11",
+ "updated": "2026-06-03 22:21",
  "progress": {
   "percent": 73,
   "done_count": 16,
@@ -14,8 +14,8 @@
    "name": "Maxime",
    "area": "Website-Fabrik · Generator, Cinematic, Auto-System, Deployment",
    "color": "#f0a72c",
-   "current": "Kunden-Hosting komplett von Netlify auf GitHub Pages migriert: intake.deploy -> webcraft-sites (1 Repo, Unterordner/Kunde), Frames -> webcraft-assets, cinematic/reply_monitor/e2e URLs umgestellt. E2E-Probebuild (KFZ) live + Frames laden. Plan B (Cloudflare) als R31 + Auto-Warnung im Dashboard ab 40 Kunden.",
-   "since": "2026-06-03 20:01",
+   "current": "Bewertungs-Service verkaufsfertig: 3. Abo-Karte auf Agentur-Seite (29 EUR/Monat) + Stripe-Produkt/Preis/Link erstellt. STRIPE_PRICE_BEWERTUNG_EUR + STRIPE_LINK_BEWERTUNG sind in config (Jeromes offener Punkt geloest). @Jerome: nach naechstem tresor.py pull verfuegbar.",
+   "since": "2026-06-03 22:12",
    "active": true,
    "done": 15,
    "open": 1
