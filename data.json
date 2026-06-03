@@ -1,5 +1,5 @@
 {
- "updated": "2026-06-03 20:01",
+ "updated": "2026-06-03 20:11",
  "progress": {
   "percent": 70,
   "done_count": 15,
@@ -14,9 +14,9 @@
    "name": "Maxime",
    "area": "Website-Fabrik · Generator, Cinematic, Auto-System, Deployment",
    "color": "#f0a72c",
-   "current": "Dashboard dauerhaft auf GitHub Pages (webcraft-cockpit), Agentur-Seite umgezogen, Tresor live + Jerome verbunden. Offen: JP an Tresor, GitHub-Token erneuern, Kunden-Hosting klaeren, R16 Batch.",
-   "since": "2026-06-03 09:26",
-   "active": false,
+   "current": "Kunden-Hosting komplett von Netlify auf GitHub Pages migriert: intake.deploy -> webcraft-sites (1 Repo, Unterordner/Kunde), Frames -> webcraft-assets, cinematic/reply_monitor/e2e URLs umgestellt. E2E-Probebuild (KFZ) live + Frames laden. Plan B (Cloudflare) als R31 + Auto-Warnung im Dashboard ab 40 Kunden.",
+   "since": "2026-06-03 20:01",
+   "active": true,
    "done": 15,
    "open": 1
   },
