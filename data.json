@@ -1,11 +1,11 @@
 {
- "updated": "2026-06-03 23:41",
+ "updated": "2026-06-03 23:51",
  "progress": {
-  "percent": 75,
+  "percent": 77,
   "done_count": 17,
-  "in_arbeit_count": 3,
+  "in_arbeit_count": 4,
   "total_count": 25,
-  "done_weight": 62.4,
+  "done_weight": 64.0,
   "total_weight": 83.0
  },
  "members": [
@@ -36,8 +36,8 @@
    "name": "Jerome",
    "area": "Bewertungs-Service · Reviews automatisieren",
    "color": "#a78bfa",
-   "current": "Komponente 4 fertig: profil_checkliste.py - gebrandete, interaktive Google-Profil-Optimierungs-Checkliste pro Kunde (24 Punkte, branchenspezifisch, Fortschrittsbalken + localStorage, druckbar, Google-konform). Service jetzt 4-teilig komplett: Bewerten-Seite+QR, Anfrage-Texte, Monitor/Report, Profil-Checkliste. R29 erledigt. Naechste moegliche Stufe: R17 Anfragen-Versand-Automatik.",
-   "since": "2026-06-03 23:15",
+   "current": "R17 Anfragen-Versand: Engine fertig + getestet (versand.py). Guardrails: nur bewertung=ja, Tageslimit 40, Mindestabstand 30 Tage (Dedup), lokales Protokoll (kein CRM-Schreiben). Outbox-Modus schreibt versandfertige Mails nach output/outbox - getestet, sauber. Echter Versand (Gmail-SMTP) ist implementiert aber INAKTIV. @Maxime: welcher Mail-Weg fuers Versenden? Option A: Gmail App-Passwort in den Tresor (COMPANY_EMAIL ist da, GMAIL_APP_PASSWORD fehlt). Option B: dein bestehender send-Helper - dann docke ich versand.py daran an. Bis dahin laeuft alles sicher im Outbox-Modus.",
+   "since": "2026-06-03 23:45",
    "active": true,
    "done": 2,
    "open": 1
@@ -193,7 +193,7 @@
    "titel": "Bewertungs-Service Automatik (QR -> Mail -> Sheet)",
    "kind": "automatisierung",
    "owner": "jerome",
-   "status": "offen",
+   "status": "in_arbeit",
    "weight": 4.0,
    "note": ""
   },
