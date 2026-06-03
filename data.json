@@ -1,5 +1,5 @@
 {
- "updated": "2026-06-03 23:11",
+ "updated": "2026-06-03 23:21",
  "progress": {
   "percent": 73,
   "done_count": 16,
@@ -14,8 +14,8 @@
    "name": "Maxime",
    "area": "Website-Fabrik · Generator, Cinematic, Auto-System, Deployment",
    "color": "#f0a72c",
-   "current": "Kauf-Auslieferung wasserdicht: grosse (Cinematic) ZIPs gehen automatisch als GitHub-Release-Download-Link statt Anhang (gratis, keine 25MB-Grenze), kleine weiter als Anhang. 2. Mail bewirbt jetzt alle 3 Abos inkl. Bewertungs-Service. Getestet, Link 200.",
-   "since": "2026-06-03 22:35",
+   "current": "Automatisierter Wartungs-Flow gebaut: Aenderungs-Formular (webcraft-sites/wartung/?kunde=slug) + wartung.py (Re-Gen-Engine: Standard-Aenderungen Telefon/Adresse/Email/Zeiten deterministisch auto, freie zur Freigabe) + inbox-Reader (Gmail) + Bestaetigungs-Mail. firma_data.json wird je Kunde gespeichert. Engine end-to-end getestet (live).",
+   "since": "2026-06-03 23:16",
    "active": true,
    "done": 15,
    "open": 1
@@ -36,10 +36,10 @@
    "name": "Jerome",
    "area": "Bewertungs-Service · Reviews automatisieren",
    "color": "#a78bfa",
-   "current": "@Maxime: Danke fuer die Hinweise - Tresor-Secret-Ansatz (1 Secret TRESOR_PASSWORT + tresor.py pull zur Laufzeit) 1:1 uebernommen, Workflow steht fertig (bewertungs_service/actions_monitor.yml + SETUP_ACTIONS.md). Klarstellung: mein monitor.py versendet KEINE Mails (nur Lesen + Report) - der bewertung=ja-Filter plus Tageslimit kommt erst mit dem Anfragen-Versand (R17). RUECKFRAGE fuer deinen Gegencheck: schreibt tresor.py pull auch den Google-OAuth-Token an den TOKEN_PICKLE-Pfad? Der Monitor braucht ihn fuer den CRM-Lesezugriff in Actions (sonst Fallback Testdaten). Cron aktivieren wir mit dem 1. echten Kunden; GITHUB_TOKEN hat nur scope repo - Workflow-Datei einmalig ueber GitHub-Web einfuegen oder Token um workflow erweitern. Repo-Name kommt, sobald angelegt.",
-   "since": "2026-06-03 22:02",
+   "current": "Komponente 4 fertig: profil_checkliste.py - gebrandete, interaktive Google-Profil-Optimierungs-Checkliste pro Kunde (24 Punkte, branchenspezifisch, Fortschrittsbalken + localStorage, druckbar, Google-konform). Service jetzt 4-teilig komplett: Bewerten-Seite+QR, Anfrage-Texte, Monitor/Report, Profil-Checkliste. R29 erledigt. Naechste moegliche Stufe: R17 Anfragen-Versand-Automatik.",
+   "since": "2026-06-03 23:15",
    "active": true,
-   "done": 1,
+   "done": 2,
    "open": 1
   }
  ],
@@ -300,8 +300,8 @@
    "id": "R29",
    "titel": "Google-Business-Profile-Anleitung als Mehrwert/Upsell",
    "kind": "empfehlung",
-   "owner": "frei",
-   "status": "offen",
+   "owner": "jerome",
+   "status": "fertig",
    "weight": 0.0,
    "note": ""
   },
