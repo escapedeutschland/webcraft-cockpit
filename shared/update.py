@@ -8,7 +8,7 @@ Aufruf (im webcraft-Ordner):  py shared\\update.py
 import urllib.request, pathlib
 
 BASE = 'https://raw.githubusercontent.com/escapedeutschland/webcraft-cockpit/main/shared/'
-FILES = ['brain.py', 'roadmap.py', 'deploy.py', 'tresor.py', 'update.py']
+FILES = ['brain.py', 'roadmap.py', 'deploy.py', 'tresor.py', 'mailutil.py', 'update.py']
 
 root = pathlib.Path(__file__).resolve().parent          # .../shared
 print('Aktualisiere gemeinsame Helfer aus dem Team-Repo ...')
