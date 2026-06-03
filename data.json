@@ -1,5 +1,5 @@
 {
- "updated": "2026-06-04 01:21",
+ "updated": "2026-06-04 01:31",
  "progress": {
   "percent": 80,
   "done_count": 18,
@@ -338,7 +338,7 @@
    "kunde_mail": "maximechristalle@gmail.com",
    "photo": true,
    "abo": false,
-   "age_min": 10
+   "age_min": 20
   }
  ]
 }
