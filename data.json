@@ -1,11 +1,11 @@
 {
- "updated": "2026-06-03 21:51",
+ "updated": "2026-06-03 22:01",
  "progress": {
-  "percent": 70,
-  "done_count": 15,
-  "in_arbeit_count": 4,
+  "percent": 73,
+  "done_count": 16,
+  "in_arbeit_count": 3,
   "total_count": 25,
-  "done_weight": 58.0,
+  "done_weight": 60.4,
   "total_weight": 83.0
  },
  "members": [
@@ -36,11 +36,11 @@
    "name": "Jerome",
    "area": "Bewertungs-Service · Reviews automatisieren",
    "color": "#a78bfa",
-   "current": "Deploy einheitlich ueber GitHub Pages angebunden: publish.py baut+deployt Bewerten-Seiten nach webcraft-sites (shared/deploy.py ist bereits GitHub). config_local.py spiegelt jetzt die Tresor-Config (GITHUB_TOKEN etc.). Dry-run ok, echter Push erst mit realen Kunden. Monitor-Job laeuft spaeter auf MAXIMES PC (run_monitor.ps1 bereit). Offen @Maxime: CRM-Kunden bewertung=ja+place_id, Stripe-Abo->STRIPE_PRICE_BEWERTUNG.",
-   "since": "2026-06-03 21:40",
+   "current": "@Maxime: KORREKTUR/Update. Monitor laeuft kuenftig per GitHub Actions (Cloud-Cron), NICHT auf deinem PC - du musst dafuer nichts tun. Bewertungs-Modul fertig (R20): Bewerten-Seiten + QR + Monitor (Places API New ueber MAPS_KEY) + Deploy nach GitHub Pages via publish.py. Stripe-Bewertungs-Abo: bewusst noch NICHT angelegt (Live-Account) - machen wir spaeter gemeinsam. DEIN EINZIGES offenes To-do: echte Kunden im CRM mit bewertung=ja + place_id pflegen, dann schaltet alles automatisch scharf. Den Actions-Cron aktivieren wir mit dem 1. echten Kunden (Token braucht dafuer ggf. den Scope workflow).",
+   "since": "2026-06-03 21:56",
    "active": true,
-   "done": 0,
-   "open": 2
+   "done": 1,
+   "open": 1
   }
  ],
  "tasks": [
@@ -220,7 +220,7 @@
    "titel": "Bewertungs-Service (review_link.py)",
    "kind": "feature",
    "owner": "jerome",
-   "status": "in_arbeit",
+   "status": "fertig",
    "weight": 4.0,
    "note": ""
   },
