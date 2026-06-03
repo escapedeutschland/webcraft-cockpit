@@ -1,5 +1,5 @@
 {
- "updated": "2026-06-04 01:31",
+ "updated": "2026-06-04 01:34",
  "progress": {
   "percent": 80,
   "done_count": 18,
@@ -329,16 +329,5 @@
   "threshold": 40,
   "warn": false
  },
- "freigaben": [
-  {
-   "id": "19e8fc1541a182da",
-   "slug": "kfz-meisterbetrieb-palatin",
-   "art": "telefon",
-   "details": "das design soll statt rot grün sein. das hochgeladene bild ist der chef des unternehmens es soll irgendwo passend eingepflegt werden.",
-   "kunde_mail": "maximechristalle@gmail.com",
-   "photo": true,
-   "abo": false,
-   "age_min": 20
-  }
- ]
+ "freigaben": []
 }
