@@ -1,5 +1,5 @@
 {
- "updated": "2026-06-04 01:01",
+ "updated": "2026-06-04 01:11",
  "progress": {
   "percent": 80,
   "done_count": 18,
@@ -14,8 +14,8 @@
    "name": "Maxime",
    "area": "Website-Fabrik · Generator, Cinematic, Auto-System, Deployment",
    "color": "#f0a72c",
-   "current": "Wartung komplett: #2 Foto-Upload via Cloudinary (Kunde ohne Account, Bild->Cloudinary->wir laden runter->GitHub, transient=kein Limit). Plus: HTML-Mail-Design, Maxime-Benachrichtigung bei freien Wuenschen, #3 Auto-Entwurf (pending/publish/finish). Wartungs-Abo damit voll automatisiert.",
-   "since": "2026-06-04 00:53",
+   "current": "Cockpit erweitert: Panel Freigaben & offene Anfragen - listet offene Wartungs-Wuensche live mit Zaehler, Abo-Badge, Foto-Hinweis, Alter. Daten aus wartung.pending_list (Gmail, ungelesen), im 10-Min-Build. Alle Team-Member sehen, wie viele Anfragen zu pruefen/freigeben sind.",
+   "since": "2026-06-04 01:02",
    "active": true,
    "done": 15,
    "open": 1
