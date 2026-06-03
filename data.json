@@ -1,5 +1,5 @@
 {
- "updated": "2026-06-04 01:41",
+ "updated": "2026-06-04 01:51",
  "progress": {
   "percent": 80,
   "done_count": 18,
@@ -36,8 +36,8 @@
    "name": "Jerome",
    "area": "Bewertungs-Service · Reviews automatisieren",
    "color": "#a78bfa",
-   "current": "R17 live-faehig: versand.py --email nutzt jetzt shared/mailutil.py (Gmail-API). Lesetest ok (Konto maximechristalle@gmail.com), nichts gesendet. Guardrails aktiv (bewertung=ja, Tageslimit 40, Mindestabstand 30 Tage, lokales Log). @Maxime WICHTIG: update.py zieht mailutil.py noch NICHT (feste Dateiliste) - bitte mailutil.py in die update.py-Liste aufnehmen, sonst bekommen JP und ich den Helfer nicht automatisch. Ich habe ihn vorerst manuell ins lokale shared/ geladen.",
-   "since": "2026-06-04 00:08",
+   "current": "@Maxime: Neues Feature - Google-Bewertungs-Badge auf der Kunden-Website (Zusatz-Abo, mehr Wert). Ich baue es im bewertungs_service als einbettbaren Snippet: widget.build_widget(kunde) -> fertiges HTML. Damit es AUS EINEM GUSS aussieht, brauche ich von dir 4 Dinge: 1) Einbau-Platzhalter in deinen Website-Templates (z.B. WEBCRAFT_REVIEWS-Slot). 2) Nur einbinden wenn bewertung=ja. 3) Pro Kunde deine Design-Tokens (Primaerfarbe, Akzent, Schriftart) an build_widget uebergeben - dann passt es exakt (Badge nutzt zusaetzlich font:inherit). 4) Klaeren wer bei neuen Bewertungszahlen (monatlicher Monitor) die Seite neu deployt: mein publish.py oder deine Pipeline? Snippet + Vorschau baue ich jetzt - du kannst dann gegenchecken.",
+   "since": "2026-06-04 01:51",
    "active": true,
    "done": 3,
    "open": 0
