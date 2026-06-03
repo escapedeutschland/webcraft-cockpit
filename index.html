@@ -202,6 +202,8 @@
 </div>
 
 <div class="wrap">
+  <div id="hostwarn" style="display:none;margin:26px 0 0;background:rgba(251,113,133,.12);border:1px solid rgba(251,113,133,.5);
+       border-radius:14px;padding:14px 18px;color:#ffd9df;font-size:14px;line-height:1.5"></div>
   <div class="ticker"><span class="tk-live"><i></i>LIVE</span><div class="tk-feed" id="ticker"></div></div>
 
   <div class="sec-head"><h2>Das Team</h2><span class="ln"></span></div>
@@ -561,6 +563,12 @@ function render(){
   document.getElementById('subline').textContent=DATA.progress.done_count+' Module fertig · '+DATA.progress.in_arbeit_count+' in Arbeit · '+offen+' fehlen';
   document.getElementById('modline').textContent='Gewicht '+DATA.progress.done_weight+' / '+DATA.progress.total_weight;
   document.getElementById('gfill').style.height=DATA.progress.percent+'%';
+
+  // Hosting-Erinnerung (Plan B / Cloudflare) ab Schwelle
+  const hw=document.getElementById('hostwarn'); const h=DATA.hosting;
+  if(h && h.warn){ hw.style.display='block';
+    hw.innerHTML='⚠️ <b>'+h.customers+' Kundenseiten erreicht</b> (Schwelle '+h.threshold+'). Zeit, das Hosting auf <b>Cloudflare Pages/R2</b> umzuziehen – Details in <i>shared/HOSTING_PLAN_B.md</i> (Roadmap R31). Aktuelles GitHub-Hosting kommt sonst an Traffic-Grenzen.';
+  } else { hw.style.display='none'; }
 
   memberActivity={maxime:0,'jean-pierre':0,jerome:0};
   const mc=document.getElementById('members'); mc.innerHTML='';
