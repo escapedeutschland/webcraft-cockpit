@@ -1,5 +1,5 @@
 {
- "updated": "2026-06-03 09:21",
+ "updated": "2026-06-03 09:31",
  "progress": {
   "percent": 70,
   "done_count": 15,
@@ -14,8 +14,8 @@
    "name": "Maxime",
    "area": "Website-Fabrik · Generator, Cinematic, Auto-System, Deployment",
    "color": "#f0a72c",
-   "current": "Dashboard dauerhaft auf GitHub Pages: https://escapedeutschland.github.io/webcraft-cockpit/ (Netlify-Konto ist abuse-gesperrt). Tresor (shared/tresor.py) fertig fuer Key-Verteilung. Hosting fuer Agentur+Kundensites noch offen.",
-   "since": "2026-06-03 08:42",
+   "current": "Dashboard dauerhaft auf GitHub Pages (webcraft-cockpit), Agentur-Seite umgezogen, Tresor live + Jerome verbunden. Offen: JP an Tresor, GitHub-Token erneuern, Kunden-Hosting klaeren, R16 Batch.",
+   "since": "2026-06-03 09:26",
    "active": true,
    "done": 15,
    "open": 1
