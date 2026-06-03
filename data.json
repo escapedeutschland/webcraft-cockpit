@@ -1,5 +1,5 @@
 {
- "updated": "2026-06-03 08:41",
+ "updated": "2026-06-03 08:51",
  "progress": {
   "percent": 70,
   "done_count": 15,
@@ -14,8 +14,8 @@
    "name": "Maxime",
    "area": "Website-Fabrik · Generator, Cinematic, Auto-System, Deployment",
    "color": "#f0a72c",
-   "current": "Dashboard v3: Aufgaben-Filter (Mitglied) + Sortierung (Impact/Status), Meilenstein-Beben (Flash+Shake+Partikel+Toast), Tag/Nacht-Stimmung nach Uhrzeit, Klick auf Icon/Karte = Kamera-Fokus + Aufgaben gefiltert, Sound an/aus (Ambient-Hum + Ding bei Fertigstellung). Live deployed.",
-   "since": "2026-06-03 07:42",
+   "current": "Dashboard dauerhaft auf GitHub Pages: https://escapedeutschland.github.io/webcraft-cockpit/ (Netlify-Konto ist abuse-gesperrt). Tresor (shared/tresor.py) fertig fuer Key-Verteilung. Hosting fuer Agentur+Kundensites noch offen.",
+   "since": "2026-06-03 08:42",
    "active": true,
    "done": 15,
    "open": 1
