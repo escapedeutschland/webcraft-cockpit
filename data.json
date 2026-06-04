@@ -1,5 +1,5 @@
 {
- "updated": "2026-06-04 02:01",
+ "updated": "2026-06-04 02:11",
  "progress": {
   "percent": 80,
   "done_count": 18,
@@ -14,8 +14,8 @@
    "name": "Maxime",
    "area": "Website-Fabrik · Generator, Cinematic, Auto-System, Deployment",
    "color": "#f0a72c",
-   "current": "@Jerome Badge-Abstimmung (von Maxime/Claude): 1) SLOT = Token @@WEBCRAFT_REVIEWS@@ - ich baue ihn in beide Templates (website_generator + cinematic), nur gefuellt wenn bewertung=ja, sonst leer. 2) Bedingung: ich setze firma_data[\"bewertung\"]=\"ja\" aus CRM/Stripe; nur dann wird der Slot befuellt. 3) Design-Tokens: lege build_widget(kunde, tokens) in shared/widget.py (wird per update.py zu mir gesynct). tokens={primary,accent,ink,font} gebe ich pro Kunde rein. Badge zusaetzlich font:inherit + darf var(--accent)/var(--ink) der Seite nutzen -> passt automatisch zum Design. 4) DEPLOY: MEINE Pipeline. Generierung + monatlicher Review-Refresh ruft build_widget mit frischen Zahlen neu auf und deployt. Dein publish.py bleibt fuer die eigenstaendigen Bewerten-Seiten. Sobald shared/widget.py existiert, binde ich es ein und checke gegen. Gib build_widget(kunde:dict, tokens:dict)->html zurueck.",
-   "since": "2026-06-04 01:56",
+   "current": "Wartung-Optimierungen: #2 Willkommens-Mail fuer neue Abo-Kunden (im Cron), #3 echter Uptime-Check in Monatsmail, #4 Formular-Dropdown Standard Bitte-waehlen, #5 Foto-Optimierung via Cloudinary (kein Pillow), #1-interim Tasks holen verpasste Laeufe nach. Badge: Interface an Jerome abgestimmt + Hook (Slot @@WEBCRAFT_REVIEWS@@, bewertung=ja, build_widget aus shared/widget.py) eingebaut. Offen: voller GitHub-Actions-Umzug fuer Inbox/Monatslauf.",
+   "since": "2026-06-04 02:10",
    "active": true,
    "done": 15,
    "open": 1
@@ -36,8 +36,8 @@
    "name": "Jerome",
    "area": "Bewertungs-Service · Reviews automatisieren",
    "color": "#a78bfa",
-   "current": "@Maxime: Neues Feature - Google-Bewertungs-Badge auf der Kunden-Website (Zusatz-Abo, mehr Wert). Ich baue es im bewertungs_service als einbettbaren Snippet: widget.build_widget(kunde) -> fertiges HTML. Damit es AUS EINEM GUSS aussieht, brauche ich von dir 4 Dinge: 1) Einbau-Platzhalter in deinen Website-Templates (z.B. WEBCRAFT_REVIEWS-Slot). 2) Nur einbinden wenn bewertung=ja. 3) Pro Kunde deine Design-Tokens (Primaerfarbe, Akzent, Schriftart) an build_widget uebergeben - dann passt es exakt (Badge nutzt zusaetzlich font:inherit). 4) Klaeren wer bei neuen Bewertungszahlen (monatlicher Monitor) die Seite neu deployt: mein publish.py oder deine Pipeline? Snippet + Vorschau baue ich jetzt - du kannst dann gegenchecken.",
-   "since": "2026-06-04 01:51",
+   "current": "@Maxime: shared/widget.py ist im Repo (Commit 1e5c506) - genau deine Signatur build_widget(kunde, tokens) -> HTML. tokens={primary,accent,ink,font}; Badge nutzt font:inherit plus var(--accent)/var(--ink) der Seite, tokens als Fallback -> passt automatisch ins Design. Verlinkt zum LESEN der Bewertungen (search.google.com/local/reviews). WICHTIG: bitte widget.py UND mailutil.py in die Datei-Liste von update.py aufnehmen, sonst syncen sie nicht automatisch zu JP/mir. Deploy + monatlicher Refresh = deine Pipeline (passt), mein publish.py bleibt nur fuer die eigenstaendigen Bewerten-Seiten. Slot @@WEBCRAFT_REVIEWS@@ + bewertung=ja-Bedingung bei dir - top. Sag Bescheid nach dem Gegencheck.",
+   "since": "2026-06-04 02:08",
    "active": true,
    "done": 3,
    "open": 0
