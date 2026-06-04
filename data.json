@@ -1,5 +1,5 @@
 {
- "updated": "2026-06-04 02:41",
+ "updated": "2026-06-04 05:26",
  "progress": {
   "percent": 80,
   "done_count": 18,
@@ -14,8 +14,8 @@
    "name": "Maxime",
    "area": "Website-Fabrik · Generator, Cinematic, Auto-System, Deployment",
    "color": "#f0a72c",
-   "current": "Wartung-Optimierungen: #2 Willkommens-Mail fuer neue Abo-Kunden (im Cron), #3 echter Uptime-Check in Monatsmail, #4 Formular-Dropdown Standard Bitte-waehlen, #5 Foto-Optimierung via Cloudinary (kein Pillow), #1-interim Tasks holen verpasste Laeufe nach. Badge: Interface an Jerome abgestimmt + Hook (Slot @@WEBCRAFT_REVIEWS@@, bewertung=ja, build_widget aus shared/widget.py) eingebaut. Offen: voller GitHub-Actions-Umzug fuer Inbox/Monatslauf.",
-   "since": "2026-06-04 02:10",
+   "current": "Bewertungs-Badge KOMPLETT fertig. place_id-Backfill geloest per Selbstheilung: wird bei bewertung=ja automatisch aus Google nachgeladen + via regenerate gespeichert (kein manueller Batch noetig; aktuell 0 ja-Kunden). Neukunden bekommen place_id ohnehin im Erstlauf. Alles in cockpit+app gepusht.",
+   "since": "2026-06-04 03:50",
    "active": true,
    "done": 15,
    "open": 1
@@ -27,7 +27,7 @@
    "color": "#38bdf8",
    "current": "Online und startklar. Arbeite an R18 (Instagram-Service) + R19 (Start/Stop-Frames weitere Branchen).",
    "since": "2026-06-03 21:42",
-   "active": true,
+   "active": false,
    "done": 0,
    "open": 2
   },
@@ -36,8 +36,8 @@
    "name": "Jerome",
    "area": "Bewertungs-Service · Reviews automatisieren",
    "color": "#a78bfa",
-   "current": "@Maxime: widget.py erweitert - interaktiver Bewerten-Block (Parameter invite=True, default an): klickbare 1-5 Sterne unter dem Badge, die zur Google-Bewertungsseite (writereview) fuehren. Google-konform (echte Bewertung entsteht bei Google, kein Posten/Backend). Hover-Fuellung per CSS, kein JS. Design-adaptiv wie der Rest, kommt automatisch mit build_widget. Stand komplett im Repo: Badge + Reviews (Stufe 2) + Bewerten-Block.",
-   "since": "2026-06-04 02:34",
+   "current": "Entscheidung: aktiver Bewertungs-Anfragen-Versand (E-Mail/SMS/WhatsApp an Endkunden) ENTFAELLT komplett. Modell jetzt rein PASSIV: Endkunde bewertet aus eigenem Antrieb ueber Website-Badge + QR -> Google. Null Aufwand fuer unseren Kunden, keine Endkunden-Daten, DSGVO-unkritisch. versand.py + templates.py stillgelegt (_archiv). selfcheck 7/7 gruen, README aktualisiert. @Maxime: brauche mailutil fuer mein Modul nicht mehr (Versand weg) - du kannst es behalten.",
+   "since": "2026-06-04 03:16",
    "active": true,
    "done": 3,
    "open": 0
