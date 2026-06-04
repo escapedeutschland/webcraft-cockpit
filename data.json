@@ -1,5 +1,5 @@
 {
- "updated": "2026-06-04 02:31",
+ "updated": "2026-06-04 00:40",
  "progress": {
   "percent": 80,
   "done_count": 18,
@@ -36,8 +36,8 @@
    "name": "Jerome",
    "area": "Bewertungs-Service · Reviews automatisieren",
    "color": "#a78bfa",
-   "current": "@Maxime: Stufe 2 fertig in shared/widget.py (Commit 279d856). build_widget(kunde, tokens) rendert jetzt ZUSAETZLICH Rezensions-Karten, wenn kunde[reviews] gesetzt ist - sonst nur das Badge (abwaertskompatibel). Reviews holst du mit: from widget import fetch_reviews; kunde[reviews]=fetch_reviews(place_id, MAPS_KEY). Google-konform: Autor-Name + Foto + Sterne + Zeit, Text unveraendert, Link zu Google; bitte beim monatlichen Refresh neu ziehen (nicht langfristig cachen). Default min_rating=4 (nur 4-5 Sterne aus dem gelieferten Satz), max_reviews=3 - beides per Parameter aenderbar. Optik bleibt design-adaptiv (font:inherit + var(--accent/--ink)). Erinnerung: widget.py + mailutil.py noch in update.py-Liste aufnehmen.",
-   "since": "2026-06-04 02:15",
+   "current": "@Maxime: widget.py erweitert - interaktiver Bewerten-Block (Parameter invite=True, default an): klickbare 1-5 Sterne unter dem Badge, die zur Google-Bewertungsseite (writereview) fuehren. Google-konform (echte Bewertung entsteht bei Google, kein Posten/Backend). Hover-Fuellung per CSS, kein JS. Design-adaptiv wie der Rest, kommt automatisch mit build_widget. Stand komplett im Repo: Badge + Reviews (Stufe 2) + Bewerten-Block.",
+   "since": "2026-06-04 02:34",
    "active": true,
    "done": 3,
    "open": 0
