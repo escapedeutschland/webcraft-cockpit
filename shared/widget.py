@@ -2,19 +2,24 @@
 """
 widget.py - WebCraft Google-Bewertungs-Badge fuer die KUNDEN-WEBSITE.
 
-Gemeinsamer Helfer (shared/), wird von Maximes Website-Pipeline aufgerufen und
-in den Template-Slot @@WEBCRAFT_REVIEWS@@ eingesetzt (nur wenn bewertung == "ja").
+Gemeinsamer Helfer (shared/), aufgerufen von Maximes Website-Pipeline und in den
+Template-Slot @@WEBCRAFT_REVIEWS@@ eingesetzt (nur wenn bewertung == "ja").
 
-    from widget import build_widget
+    from widget import build_widget, fetch_reviews
+    kunde["reviews"] = fetch_reviews(place_id, MAPS_KEY)      # optional (Stufe 2)
     html = build_widget(kunde, tokens)
 
-  kunde  : {"firma", "place_id", "rating", "review_count"}        (Daten)
-  tokens : {"primary", "accent", "ink", "font"}                    (Design pro Kunde)
+  kunde  : {"firma","place_id","rating","review_count","reviews"(optional)}
+  tokens : {"primary","accent","ink","font"}
 
-"Aus einem Guss": das Badge nutzt font:inherit und die CSS-Variablen der Seite
-(var(--accent), var(--ink)); die uebergebenen tokens dienen als Fallback.
+"Aus einem Guss": font:inherit + var(--accent)/var(--ink) der Seite, tokens als Fallback.
 Self-contained (nur Standardbibliothek), eigener CSS-Namespace .wcrev -> keine Konflikte.
+
+Google-Konformitaet (Stufe 2 / Reviews):
+  * Reviews unveraendert anzeigen, mit Autor-Name + Foto und Link zu Google (Attribution).
+  * Regelmaessig auffrischen (Maximes Pipeline, monatlich) statt langfristig cachen.
 """
+import html as _html
 
 _STAR = ('<svg class="st" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 .587l3.668 7.431 '
          '8.2 1.192-5.934 5.787 1.401 8.169L12 18.896l-7.335 3.86 1.401-8.169L.132 9.21l8.2-1.192z"/></svg>')
@@ -32,7 +37,6 @@ _GOOGLE_G = (
 
 
 def _view_link(place_id: str) -> str:
-    """Link zum LESEN der Google-Bewertungen (fuer Website-Besucher)."""
     return f"https://search.google.com/local/reviews?placeid={place_id}" if place_id else "#"
 
 
@@ -46,10 +50,78 @@ def _stars(rating) -> str:
     return '<span class="s-wrap">' + base + fill + "</span>"
 
 
-def build_widget(kunde: dict, tokens: dict = None) -> str:
-    """Gibt das design-adaptive Bewertungs-Badge als HTML-Snippet (style + markup) zurueck."""
+# ── Reviews holen (Places API New) ───────────────────────────────────────────
+
+def fetch_reviews(place_id: str, api_key: str, language: str = "de", limit: int = 5) -> list:
+    """Holt bis zu `limit` Google-Reviews und normalisiert sie:
+    [{author, photo, uri, rating, time, text}]. Braucht den Maps/Places-Key."""
+    import json
+    import urllib.request
+    url = f"https://places.googleapis.com/v1/places/{place_id}?languageCode={language}"
+    req = urllib.request.Request(url, headers={
+        "X-Goog-Api-Key": api_key,
+        "X-Goog-FieldMask": ("reviews.rating,reviews.text,reviews.originalText,"
+                             "reviews.relativePublishTimeDescription,reviews.authorAttribution"),
+    })
+    with urllib.request.urlopen(req, timeout=12) as r:
+        data = json.loads(r.read().decode("utf-8"))
+    out = []
+    for rv in (data.get("reviews") or [])[:limit]:
+        aa = rv.get("authorAttribution") or {}
+        txt = (rv.get("text") or rv.get("originalText") or {}).get("text", "")
+        out.append({
+            "author": aa.get("displayName", ""),
+            "photo": aa.get("photoUri", ""),
+            "uri": aa.get("uri", ""),
+            "rating": rv.get("rating"),
+            "time": rv.get("relativePublishTimeDescription", ""),
+            "text": txt,
+        })
+    return out
+
+
+def _truncate(t: str, n: int = 200) -> str:
+    t = " ".join((t or "").split())
+    return t if len(t) <= n else t[:n].rstrip() + "…"
+
+
+def _review_cards(reviews: list, max_reviews: int, min_rating) -> str:
+    sel = reviews
+    if min_rating:
+        sel = [r for r in reviews if (r.get("rating") or 0) >= min_rating]
+    sel = sel[:max_reviews]
+    if not sel:
+        return ""
+    cards = ""
+    for r in sel:
+        photo = r.get("photo") or ""
+        if photo:
+            av = (f'<img class="rev-av" src="{_html.escape(photo, True)}" alt="" '
+                  f'loading="lazy" referrerpolicy="no-referrer">')
+        else:
+            av = '<span class="rev-av rev-av--ph"></span>'
+        name = _html.escape(r.get("author") or "Google-Nutzer")
+        time = _html.escape(r.get("time") or "")
+        txt = _html.escape(_truncate(r.get("text") or ""))
+        cards += (
+            f'<div class="rev"><div class="rev-h">{av}<div class="rev-id">'
+            f'<span class="rev-name">{name}</span>'
+            f'<span class="rev-meta">{_stars(r.get("rating"))}<span class="rev-time">{time}</span></span>'
+            f'</div></div><div class="rev-txt">{txt}</div></div>'
+        )
+    return '<div class="wcrev-revs">' + cards + "</div>"
+
+
+# ── Badge bauen ──────────────────────────────────────────────────────────────
+
+def build_widget(kunde: dict, tokens: dict = None,
+                 max_reviews: int = 3, min_rating=4) -> str:
+    """Design-adaptives Bewertungs-Badge (+ optional Rezensions-Karten) als HTML-Snippet.
+
+    Zeigt Rezensionen, wenn kunde['reviews'] gesetzt ist (siehe fetch_reviews).
+    min_rating=4 -> nur 4-5-Sterne aus dem gelieferten Satz; None -> alle.
+    """
     tokens = tokens or {}
-    primary = tokens.get("primary", "#0f172a")
     accent = tokens.get("accent", "#3b82f6")
     ink = tokens.get("ink", "#1f2430")
 
@@ -62,51 +134,71 @@ def build_widget(kunde: dict, tokens: dict = None) -> str:
     count_txt = f"{count} Google-Bewertungen" if count else "Google-Bewertungen"
     link = _view_link(place_id)
 
+    cards = _review_cards(kunde.get("reviews") or [], max_reviews, min_rating)
+    foot = (f'<div class="wcrev-foot"><a href="{link}" target="_blank" rel="noopener noreferrer">'
+            f'Alle Bewertungen auf Google ansehen ›</a></div>') if cards else ""
+
     gold_defs = ('<svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>'
                  '<linearGradient id="wcrevgold" x1="0" y1="0" x2="0" y2="1">'
                  '<stop offset="0" stop-color="#ffd86b"/><stop offset="0.55" stop-color="#f3b71e"/>'
                  '<stop offset="1" stop-color="#dd9b0c"/></linearGradient></defs></svg>')
 
-    # var(--accent/--ink) der Seite nutzen, tokens als Fallback
     css = (
-        ".wcrev{font-family:inherit;display:inline-flex;align-items:center;gap:14px;"
+        ".wcrev-wrap{font-family:inherit;display:inline-block;max-width:430px;width:100%}"
+        ".wcrev-wrap *{box-sizing:border-box}"
+        ".wcrev{display:inline-flex;align-items:center;gap:14px;"
         "background:#fff;border:1px solid rgba(17,24,39,.08);border-radius:16px;padding:14px 20px;"
         "box-shadow:0 1px 2px rgba(17,24,39,.04),0 10px 30px rgba(17,24,39,.08);"
         f"text-decoration:none;color:var(--ink,{ink});line-height:1.2;"
         "transition:transform .15s,box-shadow .15s}"
         ".wcrev:hover{transform:translateY(-1px);box-shadow:0 2px 4px rgba(17,24,39,.05),0 16px 40px rgba(17,24,39,.12)}"
-        ".wcrev *{box-sizing:border-box}"
         ".wcrev .g{width:30px;height:30px;flex:none}"
         ".wcrev .body{display:flex;flex-direction:column;gap:3px}"
         ".wcrev .row1{display:flex;align-items:center;gap:9px}"
         f".wcrev .score{{font-size:24px;font-weight:800;letter-spacing:-.5px;color:var(--ink,{ink})}}"
-        ".wcrev .s-wrap{position:relative;display:inline-flex;line-height:0}"
-        ".wcrev .s-base,.wcrev .s-fill{display:inline-flex;gap:2px}"
-        ".wcrev .s-fill{position:absolute;top:0;left:0;overflow:hidden;white-space:nowrap;"
+        ".s-wrap{position:relative;display:inline-flex;line-height:0}"
+        ".s-base,.s-fill{display:inline-flex;gap:2px}"
+        ".s-fill{position:absolute;top:0;left:0;overflow:hidden;white-space:nowrap;"
         "filter:drop-shadow(0 1px 1px rgba(0,0,0,.15))}"
         ".wcrev .st{width:17px;height:17px;display:block}"
-        ".wcrev .s-base .st path{fill:#e4e7ec}"
-        ".wcrev .s-fill .st path{fill:url(#wcrevgold)}"
+        ".s-base .st path{fill:#e4e7ec}"
+        ".s-fill .st path{fill:url(#wcrevgold)}"
         ".wcrev .row2{font-size:12.5px;color:#6b7280;display:flex;align-items:center;gap:6px}"
         f".wcrev .more{{color:var(--accent,{accent});font-weight:600;white-space:nowrap}}"
+        # Reviews
+        ".wcrev-revs{margin-top:14px;display:flex;flex-direction:column;gap:10px}"
+        ".rev{background:#fff;border:1px solid rgba(17,24,39,.08);border-radius:14px;padding:14px 16px;"
+        "box-shadow:0 1px 2px rgba(17,24,39,.04)}"
+        ".rev-h{display:flex;align-items:center;gap:10px;margin-bottom:9px}"
+        ".rev-av{width:36px;height:36px;border-radius:50%;flex:none;object-fit:cover;background:#eef0f2}"
+        ".rev-id{display:flex;flex-direction:column;gap:3px}"
+        f".rev-name{{font-weight:700;font-size:13.5px;color:var(--ink,{ink})}}"
+        ".rev-meta{display:flex;align-items:center;gap:7px}"
+        ".rev-meta .st{width:12px;height:12px}"
+        ".rev-time{font-size:11.5px;color:#9aa1ab}"
+        ".rev-txt{font-size:13px;line-height:1.55;color:#4b5563}"
+        ".wcrev-foot{margin-top:11px;text-align:right}"
+        f".wcrev-foot a{{font-size:12px;font-weight:600;text-decoration:none;color:var(--accent,{accent})}}"
     )
-    # primary aktuell nicht direkt genutzt (ink fuehrt die Typo); bleibt fuer kuenftige Varianten verfuegbar
-    _ = primary
 
-    return (
-        f"<style>{css}</style>{gold_defs}"
+    badge = (
         f'<a class="wcrev" href="{link}" target="_blank" rel="noopener noreferrer" '
         f'aria-label="Google-Bewertungen von {firma} ansehen">'
         f'{_GOOGLE_G}'
         f'<span class="body">'
         f'<span class="row1"><span class="score">{rating_de}</span>{_stars(rating)}</span>'
-        f'<span class="row2">{count_txt} <span class="more">ansehen &rsaquo;</span></span>'
+        f'<span class="row2">{count_txt} <span class="more">ansehen ›</span></span>'
         f'</span></a>'
     )
+
+    return (f"<style>{css}</style>{gold_defs}"
+            f'<div class="wcrev-wrap">{badge}{cards}{foot}</div>')
 
 
 if __name__ == "__main__":
     demo_k = {"firma": "KFZ Meisterbetrieb DM Auto", "place_id": "ChIJN1t_tDeuEmsRUsoyG83frY4",
-              "rating": "4.8", "review_count": "127"}
+              "rating": "4.8", "review_count": "127",
+              "reviews": [{"author": "Max M.", "photo": "", "uri": "", "rating": 5,
+                           "time": "vor 2 Wochen", "text": "Top Service, schnell und freundlich."}]}
     demo_t = {"primary": "#0d1b2a", "accent": "#e63946", "ink": "#1f2430", "font": "Inter"}
-    print(build_widget(demo_k, demo_t))
+    print(build_widget(demo_k, demo_t)[:300], "...")
