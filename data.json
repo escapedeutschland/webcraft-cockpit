@@ -1,5 +1,5 @@
 {
- "updated": "2026-06-04 01:51",
+ "updated": "2026-06-04 02:01",
  "progress": {
   "percent": 80,
   "done_count": 18,
@@ -14,8 +14,8 @@
    "name": "Maxime",
    "area": "Website-Fabrik · Generator, Cinematic, Auto-System, Deployment",
    "color": "#f0a72c",
-   "current": "Wartung: Test-Wunsch (gruen+Foto) live+bestaetigt+abgehakt, Abo-Pruefung wieder an. #4 Auto-Approve eingerichtet: WARTUNG_TRUSTED_ARTS=[text] -> Claude veroeffentlicht ohne Klick; REVIEW_ARTS=[foto,design,sonstiges] -> immer Freigabe. Cockpit zeigt Auto-Freigabe/Freigabe-noetig. Git-Rollback als Netz.",
-   "since": "2026-06-04 01:35",
+   "current": "@Jerome Badge-Abstimmung (von Maxime/Claude): 1) SLOT = Token @@WEBCRAFT_REVIEWS@@ - ich baue ihn in beide Templates (website_generator + cinematic), nur gefuellt wenn bewertung=ja, sonst leer. 2) Bedingung: ich setze firma_data[\"bewertung\"]=\"ja\" aus CRM/Stripe; nur dann wird der Slot befuellt. 3) Design-Tokens: lege build_widget(kunde, tokens) in shared/widget.py (wird per update.py zu mir gesynct). tokens={primary,accent,ink,font} gebe ich pro Kunde rein. Badge zusaetzlich font:inherit + darf var(--accent)/var(--ink) der Seite nutzen -> passt automatisch zum Design. 4) DEPLOY: MEINE Pipeline. Generierung + monatlicher Review-Refresh ruft build_widget mit frischen Zahlen neu auf und deployt. Dein publish.py bleibt fuer die eigenstaendigen Bewerten-Seiten. Sobald shared/widget.py existiert, binde ich es ein und checke gegen. Gib build_widget(kunde:dict, tokens:dict)->html zurueck.",
+   "since": "2026-06-04 01:56",
    "active": true,
    "done": 15,
    "open": 1
