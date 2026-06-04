@@ -1,5 +1,5 @@
 {
- "updated": "2026-06-04 18:30",
+ "updated": "2026-06-04 20:36",
  "progress": {
   "percent": 80,
   "done_count": 18,
@@ -14,9 +14,9 @@
    "name": "Maxime",
    "area": "Website-Fabrik · Generator, Cinematic, Auto-System, Deployment",
    "color": "#f0a72c",
-   "current": "Bewertungs-Badge KOMPLETT fertig. place_id-Backfill geloest per Selbstheilung: wird bei bewertung=ja automatisch aus Google nachgeladen + via regenerate gespeichert (kein manueller Batch noetig; aktuell 0 ja-Kunden). Neukunden bekommen place_id ohnehin im Erstlauf. Alles in cockpit+app gepusht.",
-   "since": "2026-06-04 03:50",
-   "active": false,
+   "current": "Bewertungs-Service als 29-EUR-Abo EINGESTELLT (Entscheidung). Bewerten-CTA jetzt KOSTENLOS Standard auf jeder Website (kein Abo-Gate mehr). Entfernt: Agentur-Karte + Upsell-Block, Stripe-Link deaktiviert. Agentur-Seite bewirbt Funktion jetzt als inklusive. Jerome informiert (sein bewertungs_service/ nicht mehr als Standalone; ggf. Monitoring/Report als Wartungs-Perk abstimmen).",
+   "since": "2026-06-04 22:22",
+   "active": true,
    "done": 15,
    "open": 1
   },
@@ -25,9 +25,9 @@
    "name": "Jean-Pierre",
    "area": "Instagram-Service · Cinematic-Clip-Frames",
    "color": "#38bdf8",
-   "current": "Online und startklar. Arbeite an R18 (Instagram-Service) + R19 (Start/Stop-Frames weitere Branchen).",
-   "since": "2026-06-03 21:42",
-   "active": false,
+   "current": "Verbindungstest erfolgreich (2026-06-04 22:31) - wieder online.",
+   "since": "2026-06-04 22:31",
+   "active": true,
    "done": 0,
    "open": 2
   },
