@@ -1,5 +1,5 @@
 {
- "updated": "2026-06-04 05:26",
+ "updated": "2026-06-04 09:35",
  "progress": {
   "percent": 80,
   "done_count": 18,
@@ -38,7 +38,7 @@
    "color": "#a78bfa",
    "current": "Entscheidung: aktiver Bewertungs-Anfragen-Versand (E-Mail/SMS/WhatsApp an Endkunden) ENTFAELLT komplett. Modell jetzt rein PASSIV: Endkunde bewertet aus eigenem Antrieb ueber Website-Badge + QR -> Google. Null Aufwand fuer unseren Kunden, keine Endkunden-Daten, DSGVO-unkritisch. versand.py + templates.py stillgelegt (_archiv). selfcheck 7/7 gruen, README aktualisiert. @Maxime: brauche mailutil fuer mein Modul nicht mehr (Versand weg) - du kannst es behalten.",
    "since": "2026-06-04 03:16",
-   "active": true,
+   "active": false,
    "done": 3,
    "open": 0
   }
