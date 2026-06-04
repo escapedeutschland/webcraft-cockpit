@@ -1,5 +1,5 @@
 {
- "updated": "2026-06-04 20:36",
+ "updated": "2026-06-04 22:09",
  "progress": {
   "percent": 80,
   "done_count": 18,
@@ -25,8 +25,8 @@
    "name": "Jean-Pierre",
    "area": "Instagram-Service · Cinematic-Clip-Frames",
    "color": "#38bdf8",
-   "current": "Verbindungstest erfolgreich (2026-06-04 22:31) - wieder online.",
-   "since": "2026-06-04 22:31",
+   "current": "Instagram-Service: Content-System-Design ist fertig. Voller Stand im Dokument WebCraft_Instagram_System_Stand.md. Kern: Nur-Bauplaene-Modell, 3 Saeulen mit Motoren, getaggter Format-Katalog, Misch- und Auswahllogik der fokussierten Sets, Auslieferung per Monats-/Wochenmail mit Gauge, Fakten-Hybrid, Musik-Sicherheitsmechanismus. Offen: gestaltete Grafiken, Preise, Wissenspools, AGB-Pruefung, technische Umsetzung instagram_service.py.",
+   "since": "2026-06-04 23:00",
    "active": true,
    "done": 0,
    "open": 2
