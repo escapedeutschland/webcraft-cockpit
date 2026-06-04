@@ -40,6 +40,11 @@ def _view_link(place_id: str) -> str:
     return f"https://search.google.com/local/reviews?placeid={place_id}" if place_id else "#"
 
 
+def _write_link(place_id: str) -> str:
+    """Link zum SCHREIBEN einer Google-Bewertung (oeffnet Googles Bewertungs-Formular)."""
+    return f"https://search.google.com/local/writereview?placeid={place_id}" if place_id else "#"
+
+
 def _stars(rating) -> str:
     try:
         pct = max(0.0, min(100.0, float(rating) / 5.0 * 100.0))
@@ -115,11 +120,13 @@ def _review_cards(reviews: list, max_reviews: int, min_rating) -> str:
 # ── Badge bauen ──────────────────────────────────────────────────────────────
 
 def build_widget(kunde: dict, tokens: dict = None,
-                 max_reviews: int = 3, min_rating=4) -> str:
+                 max_reviews: int = 3, min_rating=4, invite: bool = True) -> str:
     """Design-adaptives Bewertungs-Badge (+ optional Rezensions-Karten) als HTML-Snippet.
 
     Zeigt Rezensionen, wenn kunde['reviews'] gesetzt ist (siehe fetch_reviews).
     min_rating=4 -> nur 4-5-Sterne aus dem gelieferten Satz; None -> alle.
+    invite=True -> interaktiver "Bewerten Sie uns"-Block: klickbare 1-5 Sterne, die zur
+    Google-Bewertungsseite fuehren (Google-konform; echte Bewertung entsteht bei Google).
     """
     tokens = tokens or {}
     accent = tokens.get("accent", "#3b82f6")
@@ -137,6 +144,21 @@ def build_widget(kunde: dict, tokens: dict = None,
     cards = _review_cards(kunde.get("reviews") or [], max_reviews, min_rating)
     foot = (f'<div class="wcrev-foot"><a href="{link}" target="_blank" rel="noopener noreferrer">'
             f'Alle Bewertungen auf Google ansehen ›</a></div>') if cards else ""
+
+    # Interaktiver "Bewerten Sie uns"-Block (klickbare Sterne -> Google-Bewertungsformular)
+    rate_block = ""
+    if invite and place_id:
+        write = _write_link(place_id)
+        star_links = "".join(
+            f'<a href="{write}" target="_blank" rel="noopener noreferrer" '
+            f'aria-label="Mit {n} Sternen bei Google bewerten">{_STAR}</a>'
+            for n in (5, 4, 3, 2, 1)  # row-reverse: Fuellung bis zum gehoverten Stern
+        )
+        rate_block = (
+            '<div class="wcrev-rate"><span class="wcrev-rate-label">Waren Sie schon da? '
+            'Jetzt bewerten</span>'
+            f'<span class="rate">{star_links}</span></div>'
+        )
 
     gold_defs = ('<svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>'
                  '<linearGradient id="wcrevgold" x1="0" y1="0" x2="0" y2="1">'
@@ -179,6 +201,16 @@ def build_widget(kunde: dict, tokens: dict = None,
         ".rev-txt{font-size:13px;line-height:1.55;color:#4b5563}"
         ".wcrev-foot{margin-top:11px;text-align:right}"
         f".wcrev-foot a{{font-size:12px;font-weight:600;text-decoration:none;color:var(--accent,{accent})}}"
+        # Interaktiver Bewerten-Block
+        ".wcrev-rate{margin-top:14px;padding-top:14px;border-top:1px dashed rgba(17,24,39,.12);"
+        "display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}"
+        f".wcrev-rate-label{{font-size:13px;font-weight:600;color:var(--ink,{ink})}}"
+        ".rate{display:inline-flex;flex-direction:row-reverse}"
+        ".rate a{color:#dfe3e8;line-height:0;padding:1px;text-decoration:none}"
+        ".rate a .st{width:26px;height:26px;display:block;transition:transform .1s}"
+        ".rate a .st path{fill:currentColor}"
+        ".rate a:hover .st{transform:scale(1.12)}"
+        ".rate a:hover,.rate a:hover ~ a{color:#f3b71e}"
     )
 
     badge = (
@@ -192,7 +224,7 @@ def build_widget(kunde: dict, tokens: dict = None,
     )
 
     return (f"<style>{css}</style>{gold_defs}"
-            f'<div class="wcrev-wrap">{badge}{cards}{foot}</div>')
+            f'<div class="wcrev-wrap">{badge}{cards}{foot}{rate_block}</div>')
 
 
 if __name__ == "__main__":
