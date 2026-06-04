@@ -1,5 +1,5 @@
 {
- "updated": "2026-06-04 22:09",
+ "updated": "2026-06-04 23:39",
  "progress": {
   "percent": 80,
   "done_count": 18,
@@ -14,8 +14,8 @@
    "name": "Maxime",
    "area": "Website-Fabrik · Generator, Cinematic, Auto-System, Deployment",
    "color": "#f0a72c",
-   "current": "Bewertungs-Service als 29-EUR-Abo EINGESTELLT (Entscheidung). Bewerten-CTA jetzt KOSTENLOS Standard auf jeder Website (kein Abo-Gate mehr). Entfernt: Agentur-Karte + Upsell-Block, Stripe-Link deaktiviert. Agentur-Seite bewirbt Funktion jetzt als inklusive. Jerome informiert (sein bewertungs_service/ nicht mehr als Standalone; ggf. Monitoring/Report als Wartungs-Perk abstimmen).",
-   "since": "2026-06-04 22:22",
+   "current": "Cinematic-Branche SCHNEIDER live: Clip in 241/151 Frames zerlegt (ffmpeg) + nach webcraft-assets hochgeladen, CINE_BRANCHES-Eintrag mit 3 Text-Stopps (Frame1/Jackenknopf 0.41/Hose 0.90). NEU: helles Hero-Theme (dunkle Schrift) fuer helle Clips. Demo: /webcraft-sites/demo-schneider/. KFZ unberuehrt.",
+   "since": "2026-06-05 00:38",
    "active": true,
    "done": 15,
    "open": 1
