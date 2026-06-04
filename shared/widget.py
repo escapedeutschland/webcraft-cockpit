@@ -120,13 +120,16 @@ def _review_cards(reviews: list, max_reviews: int, min_rating) -> str:
 # ── Badge bauen ──────────────────────────────────────────────────────────────
 
 def build_widget(kunde: dict, tokens: dict = None,
-                 max_reviews: int = 3, min_rating=4, invite: bool = True) -> str:
+                 max_reviews: int = 3, min_rating=4, invite: bool = True,
+                 only_invite: bool = False) -> str:
     """Design-adaptives Bewertungs-Badge (+ optional Rezensions-Karten) als HTML-Snippet.
 
     Zeigt Rezensionen, wenn kunde['reviews'] gesetzt ist (siehe fetch_reviews).
     min_rating=4 -> nur 4-5-Sterne aus dem gelieferten Satz; None -> alle.
     invite=True -> interaktiver "Bewerten Sie uns"-Block: klickbare 1-5 Sterne, die zur
     Google-Bewertungsseite fuehren (Google-konform; echte Bewertung entsteht bei Google).
+    only_invite=True -> NUR der "Jetzt bewerten"-Aufruf (ohne Rating-Badge/Rezensions-Karten);
+    fuer Seiten, die schon einen eigenen Bewertungs-Bereich haben. Leerstring ohne place_id.
     """
     tokens = tokens or {}
     accent = tokens.get("accent", "#3b82f6")
@@ -211,7 +214,15 @@ def build_widget(kunde: dict, tokens: dict = None,
         ".rate a .st path{fill:currentColor}"
         ".rate a:hover .st{transform:scale(1.12)}"
         ".rate a:hover,.rate a:hover ~ a{color:#f3b71e}"
+        # Solo-Variante: nur der Bewerten-Aufruf (kein Rating-Badge darueber)
+        ".wcrev-rate--solo{border-top:0;margin-top:0;padding-top:0;justify-content:center;flex-direction:column;text-align:center;gap:10px}"
     )
+
+    if only_invite:
+        if not rate_block:
+            return ""
+        solo = rate_block.replace('class="wcrev-rate"', 'class="wcrev-rate wcrev-rate--solo"')
+        return f"<style>{css}</style>{gold_defs}<div class=\"wcrev-wrap\">{solo}</div>"
 
     badge = (
         f'<a class="wcrev" href="{link}" target="_blank" rel="noopener noreferrer" '
