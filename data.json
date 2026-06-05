@@ -1,5 +1,5 @@
 {
- "updated": "2026-06-05 21:45",
+ "updated": "2026-06-05 23:01",
  "progress": {
   "percent": 80,
   "done_count": 18,
@@ -14,8 +14,8 @@
    "name": "Maxime",
    "area": "Website-Fabrik · Generator, Cinematic, Auto-System, Deployment",
    "color": "#f0a72c",
-   "current": "Automatik robust+Alarm gebaut: shared/monitor.py (Selbstdiagnose: config/Google-Token/Gmail/Sheets/GitHub + Smoke-Test Website-Fabrik via design_qc, Exit-Code, Heartbeat in Status!E1). Neue Action systemcheck.yml taeglich 07:00 UTC. ALLE 3 Crons (inbox/monthly/systemcheck) haben jetzt Alarm: bei Fehler GitHub-Issue \"Automatik-Alarm: <wf>\" (ueber Actions-Token, unabhaengig von Gmail/Sheets), bei Erfolg auto-close. health-Run in der Cloud gruen getestet. -> stilles Sterben der Automatik ist abgesichert.",
-   "since": "2026-06-05 23:26",
+   "current": "Deliverability vorbereitet: alle 3 Versender (intake/wartung/reply_monitor) laufen ueber mailutil.send -> dort SMTP-Versand (Zoho) eingebaut, schaltet automatisch um sobald SMTP_HOST/USER/PASS im Tresor liegen, sonst Gmail-Fallback (nichts bricht jetzt). Mail-Hygiene in send_preview live: From-Anzeigename, Reply-To, List-Unsubscribe, Text-Teil. Domain webcraft-agentur.de bei Netcup bestellt (manuelle Erstpruefung laeuft), Zoho-Free-Konto+Domain hinzugefuegt, Verifizierungs-TXT=zoho-verification=zb89769835.zmverify.zoho.com liegt vor. BLOCKIERT auf Netcup-Freigabe -> dann DNS (TXT/MX/SPF/DKIM/DMARC) + Postfach maxime@ + App-Passwort in Tresor -> live. Hinweis: zwei mailutil.py (auto_system+shared) beide aktualisiert.",
+   "since": "2026-06-06 00:51",
    "active": true,
    "done": 15,
    "open": 1
