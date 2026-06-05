@@ -1,5 +1,5 @@
 {
- "updated": "2026-06-05 13:29",
+ "updated": "2026-06-05 16:16",
  "progress": {
   "percent": 80,
   "done_count": 18,
@@ -14,8 +14,8 @@
    "name": "Maxime",
    "area": "Website-Fabrik · Generator, Cinematic, Auto-System, Deployment",
    "color": "#f0a72c",
-   "current": "Speisekarte-Kreis geschlossen: Formular hat Option \"Speisekarte/Preise\"; Wunsch landet als Freigabe-Wunsch im Postfach+Cockpit; ich strukturiere Text/Foto -> wartung.set_speisekarte(slug,kategorien) (CLI: wartung.py speisekarte <slug> <json>) baut Seite neu + deployt + synct ins App-Repo; finish(msg_id) bestaetigt Kunde. Kein Erfinden, kein Laufzeit-LLM noetig.",
-   "since": "2026-06-05 15:24",
+   "current": "Imbiss-Gastro-Modus gebaut (groesste Branche): Food-FAQ statt Handwerker-FAQ, \"So einfach geht's\"-Schritte raus, Kontakt-Formular -> \"Komm vorbei\"-Karte (Zeiten/Adresse/Tel/WhatsApp, kein Formular), generische Leistungs-Karten raus (Speisekarte ist Herzstueck), warme Food-Palette (WARM_PALETTES). Gilt via gastro-Flag nur fuer Imbiss/Snackbar; KFZ/Handwerk/Schneider unveraendert. Demo: https://escapedeutschland.github.io/webcraft-sites/demo-imbiss-asia//demo-imbiss-asia/. cinematic.py wird ins app-repo gepusht.",
+   "since": "2026-06-05 15:37",
    "active": true,
    "done": 15,
    "open": 1
