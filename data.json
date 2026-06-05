@@ -1,5 +1,5 @@
 {
- "updated": "2026-06-05 10:18",
+ "updated": "2026-06-05 13:29",
  "progress": {
   "percent": 80,
   "done_count": 18,
@@ -14,8 +14,8 @@
    "name": "Maxime",
    "area": "Website-Fabrik · Generator, Cinematic, Auto-System, Deployment",
    "color": "#f0a72c",
-   "current": "Standard-Hero jetzt in 3 Varianten pro Kunde: Links (Default, links-ausgerichtet) / Zentriert / Karte (Glas-Box ueber dem Bild). Modifier-Klasse auf .hero, CSS in theme_css, Wahl via blocks.pick(name,\"hero\",3). Erster Eindruck variiert jetzt pro Kunde. Getestet+Cloud. Bibliothek: Hero(3) Leistungen(3) Ueber-uns(2) Bewertungen(2) + cinematic Header-Stile(3).",
-   "since": "2026-06-05 12:16",
+   "current": "Speisekarte-Kreis geschlossen: Formular hat Option \"Speisekarte/Preise\"; Wunsch landet als Freigabe-Wunsch im Postfach+Cockpit; ich strukturiere Text/Foto -> wartung.set_speisekarte(slug,kategorien) (CLI: wartung.py speisekarte <slug> <json>) baut Seite neu + deployt + synct ins App-Repo; finish(msg_id) bestaetigt Kunde. Kein Erfinden, kein Laufzeit-LLM noetig.",
+   "since": "2026-06-05 15:24",
    "active": true,
    "done": 15,
    "open": 1
