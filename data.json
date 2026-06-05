@@ -1,5 +1,5 @@
 {
- "updated": "2026-06-05 01:52",
+ "updated": "2026-06-05 06:16",
  "progress": {
   "percent": 80,
   "done_count": 18,
@@ -14,8 +14,8 @@
    "name": "Maxime",
    "area": "Website-Fabrik · Generator, Cinematic, Auto-System, Deployment",
    "color": "#f0a72c",
-   "current": "Cinematic-Branche SCHNEIDER live: Clip in 241/151 Frames zerlegt (ffmpeg) + nach webcraft-assets hochgeladen, CINE_BRANCHES-Eintrag mit 3 Text-Stopps (Frame1/Jackenknopf 0.41/Hose 0.90). NEU: helles Hero-Theme (dunkle Schrift) fuer helle Clips. Demo: /webcraft-sites/demo-schneider/. KFZ unberuehrt.",
-   "since": "2026-06-05 00:38",
+   "current": "Schneider-Hero nutzt jetzt KI-generierten Higgsfield-Atelier-Clip (seedance, goldene Stunde): als stille Frame-Sequenz (241/151) in webcraft-assets/schneider/clip2 -> butterweiches Scrubbing, statisches HTML, ohne Ton. Hero-Texte neu (Atelier/Handwerk/Maßstueck), weisse Schrift links. Alter Anzug-Clip bleibt als clip1 (revert moeglich). Demo aktualisiert.",
+   "since": "2026-06-05 08:15",
    "active": true,
    "done": 15,
    "open": 1
@@ -27,7 +27,7 @@
    "color": "#38bdf8",
    "current": "Instagram-Service: Content-System-Design ist fertig. Voller Stand im Dokument WebCraft_Instagram_System_Stand.md. Kern: Nur-Bauplaene-Modell, 3 Saeulen mit Motoren, getaggter Format-Katalog, Misch- und Auswahllogik der fokussierten Sets, Auslieferung per Monats-/Wochenmail mit Gauge, Fakten-Hybrid, Musik-Sicherheitsmechanismus. Offen: gestaltete Grafiken, Preise, Wissenspools, AGB-Pruefung, technische Umsetzung instagram_service.py.",
    "since": "2026-06-04 23:00",
-   "active": true,
+   "active": false,
    "done": 0,
    "open": 2
   },
