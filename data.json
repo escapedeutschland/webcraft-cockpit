@@ -1,5 +1,5 @@
 {
- "updated": "2026-06-05 20:15",
+ "updated": "2026-06-05 21:45",
  "progress": {
   "percent": 80,
   "done_count": 18,
@@ -14,8 +14,8 @@
    "name": "Maxime",
    "area": "Website-Fabrik · Generator, Cinematic, Auto-System, Deployment",
    "color": "#f0a72c",
-   "current": "Imbiss-Gastro-Modus gebaut (groesste Branche): Food-FAQ statt Handwerker-FAQ, \"So einfach geht's\"-Schritte raus, Kontakt-Formular -> \"Komm vorbei\"-Karte (Zeiten/Adresse/Tel/WhatsApp, kein Formular), generische Leistungs-Karten raus (Speisekarte ist Herzstueck), warme Food-Palette (WARM_PALETTES). Gilt via gastro-Flag nur fuer Imbiss/Snackbar; KFZ/Handwerk/Schneider unveraendert. Demo: https://escapedeutschland.github.io/webcraft-sites/demo-imbiss-asia//demo-imbiss-asia/. cinematic.py wird ins app-repo gepusht.",
-   "since": "2026-06-05 15:37",
+   "current": "Automatik robust+Alarm gebaut: shared/monitor.py (Selbstdiagnose: config/Google-Token/Gmail/Sheets/GitHub + Smoke-Test Website-Fabrik via design_qc, Exit-Code, Heartbeat in Status!E1). Neue Action systemcheck.yml taeglich 07:00 UTC. ALLE 3 Crons (inbox/monthly/systemcheck) haben jetzt Alarm: bei Fehler GitHub-Issue \"Automatik-Alarm: <wf>\" (ueber Actions-Token, unabhaengig von Gmail/Sheets), bei Erfolg auto-close. health-Run in der Cloud gruen getestet. -> stilles Sterben der Automatik ist abgesichert.",
+   "since": "2026-06-05 23:26",
    "active": true,
    "done": 15,
    "open": 1
