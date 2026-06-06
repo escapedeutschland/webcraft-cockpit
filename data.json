@@ -1,5 +1,5 @@
 {
- "updated": "2026-06-06 17:01",
+ "updated": "2026-06-06 15:08",
  "progress": {
   "percent": 80,
   "done_count": 18,
@@ -14,8 +14,8 @@
    "name": "Maxime",
    "area": "Website-Fabrik · Generator, Cinematic, Auto-System, Deployment",
    "color": "#f0a72c",
-   "current": "Mess-Infrastruktur komplett: (A) Funnel im Live-Cockpit (Karte Gebaut->Gesendet->Demo geoeffnet->Gekauft->Abo + Umsatz, baut alle 20 Min via inbox.yml). (B) Demo-Klick-Tracking gebaut: Vorschau-Link laeuft ueber Apps-Script-Redirect ?go=slug -> loggt Klick in Views-Tab -> redirect zur Demo (datenschutz-sauber, kein Website-Tracker). funnel liest Views-Tab fuer Stufe 3. OFFEN: Maxime muss Apps-Script EINMAL neu deployen + Script-Property SHEET_ID=CRM-Sheet-ID setzen, dann ist Stufe 3 live.",
-   "since": "2026-06-06 16:54",
+   "current": "Cockpit erweitert: Funnel + \"Umsatz & Pipeline pro Team\" - pro Member (Maxime: Website+Wartung 49, JP: Instagram 79, Jerome: Bewertungen kostenlos inkl.) mit Anzahl/MRR + Klick-zum-Aufklappen (Kundenliste). Gesamt-MRR + Einmal-Umsatz oben. Alle Preis-IDs in Stripe vorhanden (Website 450/Care 49/Social 79). Aktuell 0 Abos (vor Start), Instrument scharf. Baut alle 20 Min via inbox.yml ins Live-Cockpit.",
+   "since": "2026-06-06 17:02",
    "active": true,
    "done": 15,
    "open": 1
@@ -331,7 +331,7 @@
  },
  "freigaben": [],
  "funnel": {
-  "built": 7,
+  "built": 0,
   "sent": 0,
   "viewed": null,
   "paid": 0,
