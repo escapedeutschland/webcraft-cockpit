@@ -616,13 +616,15 @@ function render(){
       +`${sub?`<div style="font-size:11px;color:#7dd3fc;margin-top:4px">${sub}</div>`:''}</div>`;
     const viewed=(F.viewed==null)?'—':F.viewed;
     const rev=Number(F.revenue_eur||0).toFixed(2);
+    const _soc=((F.streams&&F.streams.streams)||[]).find(s=>s&&s.key==='social'); const socialN=_soc?(_soc.count||0):0;
     fnl.innerHTML=`<div style="display:flex;gap:10px;flex-wrap:wrap">`
       +st('Gebaut',F.built,'')
       +st('Gesendet',F.sent,pct(F.sent,F.built)+' v. gebaut')
       +st('Demo geöffnet',viewed,(F.viewed==null)?'noch nicht gemessen':pct(F.viewed,F.sent)+' v. gesendet')
       +st('Gekauft 450€',F.paid,pct(F.paid,F.sent)+' v. gesendet')
-      +st('Abo 49€/M',F.care_subs,pct(F.care_subs,F.paid)+' v. Käufern')
-      +`</div><div style="margin-top:10px;font-size:13px;opacity:.85">Umsatz: <b>${rev} €</b> einmalig · <b>${(F.care_subs||0)*49} €</b>/Monat wiederkehrend${F.stripe_error?' <span style="color:#fb7185">(Stripe-Daten unvollständig)</span>':''}</div>`;
+      +st('Wartungs-Abo 49€',F.care_subs,pct(F.care_subs,F.paid)+' v. Käufern')
+      +st('Instagram-Abo 79€',socialN,pct(socialN,F.paid)+' v. Käufern')
+      +`</div><div style="margin-top:10px;font-size:13px;opacity:.85">Umsatz: <b>${rev} €</b> einmalig · <b>${(F.care_subs||0)*49 + socialN*79} €</b>/Monat wiederkehrend${F.stripe_error?' <span style="color:#fb7185">(Stripe-Daten unvollständig)</span>':''}</div>`;
   }
 
   // Umsatz gesamtes Team (nach Angebot, gemeinsamer Umsatz)
