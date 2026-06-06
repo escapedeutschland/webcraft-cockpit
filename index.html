@@ -630,7 +630,8 @@ function render(){
   if(sc&&S.streams){
     let html=`<div style="background:linear-gradient(135deg,rgba(52,211,153,.14),rgba(125,211,252,.10));border:1px solid rgba(52,211,153,.3);border-radius:14px;padding:16px 20px;margin-bottom:14px;display:flex;gap:30px;flex-wrap:wrap;align-items:baseline">`
       +`<div><div style="font-size:30px;font-weight:800;color:#34d399">${S.total_mrr||0} €<span style="font-size:14px;opacity:.7">/Monat</span></div><div style="font-size:12px;opacity:.7">wiederkehrend (MRR)</div></div>`
-      +`<div><div style="font-size:30px;font-weight:800">${S.one_time_revenue||0} €</div><div style="font-size:12px;opacity:.7">Einmal-Umsatz gesamt</div></div></div>`
+      +`<div><div style="font-size:30px;font-weight:800">${S.one_time_revenue||0} €</div><div style="font-size:12px;opacity:.7">Einmal-Umsatz gesamt</div></div>`
+      +`<span onclick="demoCha()" style="cursor:pointer;font-size:12px;opacity:.7;margin-left:auto;align-self:center;border:1px solid rgba(255,255,255,.22);border-radius:8px;padding:7px 13px" title="Kassengeräusch testen">🔔 Ton testen</span></div>`
       +`<div style="display:flex;gap:12px;flex-wrap:wrap">`;
     S.streams.forEach(s=>{
       const big=s.recurring?`${s.mrr||0} €/M`:`${s.revenue||0} €`;
@@ -870,9 +871,37 @@ function chime(){ if(!actx)return; const t0=actx.currentTime; [523.25,659.25,783
   o.connect(g); g.connect(master||actx.destination); o.start(s); o.stop(s+0.6); }); }
 function ding(){ if(!audioOn||!actx)return; tone(740,0.6,0.32,'triangle',1320); setTimeout(()=>tone(988,0.5,0.22,'triangle'),90); }
 function blip(){ if(!audioOn||!actx)return; tone(560,0.18,0.20,'sine'); }
+/* Kassengeräusch "Cha-Ching" bei neuem Umsatz (Shopify-Style) */
+function chaching(){ if(!audioOn||!actx)return;
+  tone(880,0.11,0.30,'square');                         // "cha"
+  setTimeout(()=>tone(1318.5,0.45,0.33,'triangle'),110); // "ching" – Glöckchen
+  setTimeout(()=>tone(1760,0.55,0.28,'triangle'),185);
+  setTimeout(()=>tone(2637,0.5,0.18,'sine'),250);        // Sparkle
+}
+function demoCha(){ if(!audioOn){setAudio(true);} setTimeout(chaching,140); celebrate(0,'🔔 Kassen-Ton (Test)'); }
+function celebrate(delta,label){
+  const el=document.createElement('div');
+  el.textContent=label||('🤑 +'+Math.round(delta)+' € Umsatz!');
+  el.style.cssText='position:fixed;top:24px;left:50%;z-index:99999;background:linear-gradient(135deg,#34d399,#10b981);color:#04140e;font-weight:800;font-size:21px;padding:14px 28px;border-radius:14px;box-shadow:0 12px 44px rgba(16,185,129,.55)';
+  document.body.appendChild(el);
+  el.animate([{opacity:0,transform:'translateX(-50%) translateY(-22px) scale(.8)'},
+    {opacity:1,transform:'translateX(-50%) translateY(0) scale(1)',offset:.15},
+    {opacity:1,offset:.8},{opacity:0,transform:'translateX(-50%) translateY(-12px)'}],
+    {duration:2800,easing:'ease'});
+  setTimeout(()=>el.remove(),2900);
+}
+function checkRevenue(){
+  try{
+    const st=(DATA&&DATA.funnel&&DATA.funnel.streams)||{};
+    const money=(st.total_mrr||0)+(st.one_time_revenue||0);
+    const prev=parseFloat(localStorage.getItem('wc_rev'));
+    if(!isNaN(prev) && money>prev){ chaching(); celebrate(money-prev); }
+    localStorage.setItem('wc_rev', money);
+  }catch(e){}
+}
 document.getElementById('soundBtn').onclick=()=>setAudio(!audioOn);
 
-async function load(){try{const r=await fetch('data.json?t='+Date.now());DATA=await r.json();render();}
+async function load(){try{const r=await fetch('data.json?t='+Date.now());DATA=await r.json();render();checkRevenue();}
   catch(e){document.getElementById('updated').textContent='Daten konnten nicht geladen werden';}}
 load(); setInterval(load,20000);
 </script>
