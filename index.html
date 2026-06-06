@@ -229,6 +229,9 @@
   <div class="sec-head"><h2>Umsatz (gesamtes Team)</h2><span class="ln"></span></div>
   <div id="streams"></div>
 
+  <div class="sec-head"><h2>Wettbewerbs-Radar</h2><span class="ln"></span></div>
+  <div id="radar"></div>
+
   <div class="sec-head"><h2>Das Team</h2><span class="ln"></span></div>
   <div class="members" id="members"></div>
 
@@ -556,6 +559,16 @@ tick();
 /* ============ DATA / UI ============ */
 const KIND_LABEL={feature:'Feature',automatisierung:'Automatisierung',empfehlung:'Empfehlung'};
 function esc(s){return (s||'').replace(/[&<>]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;'}[c]));}
+function mdLite(s){ s=esc(s||'');
+  s=s.replace(/^### (.*)$/gm,'<h4 style="margin:12px 0 4px">$1</h4>')
+     .replace(/^## (.*)$/gm,'<h3 style="margin:16px 0 6px;color:#7dd3fc;font-size:1rem">$1</h3>')
+     .replace(/^# (.*)$/gm,'<div style="font-weight:800;font-size:1.1rem;margin:0 0 8px">$1</div>')
+     .replace(/\*\*(.+?)\*\*/g,'<b>$1</b>')
+     .replace(/^_(.*)_$/gm,'<div style="opacity:.55;font-size:12px;margin-top:8px">$1</div>')
+     .replace(/^\d+\.\s(.*)$/gm,'<div style="margin:3px 0">• $1</div>')
+     .replace(/^- (.*)$/gm,'<div style="margin:2px 0;opacity:.92">– $1</div>');
+  return s.split(/\n{2,}/).map(b=>b.includes('<')?b:('<p style="margin:6px 0">'+b.replace(/\n/g,'<br>')+'</p>')).join('');
+}
 function escAttr(s){return esc(s).replace(/"/g,'&quot;');}
 // Aus einem (evtl. langen) Status einen knappen, praktischen Fokus + Kurztext machen
 function tidyCurrent(s){
@@ -647,6 +660,21 @@ function render(){
         <div style="font-size:11px;opacity:.4;margin-top:6px">▾ Kunden</div></div>`;
     });
     html+='</div>'; sc.innerHTML=html;
+  }
+
+  // Wettbewerbs-Radar
+  const R=(DATA.radar)||{}; const rc=document.getElementById('radar');
+  if(rc){
+    if(R.text){
+      rc.innerHTML=`<div style="background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:14px;padding:18px 22px">
+        <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px;margin-bottom:6px">
+          <span style="font-size:12px;opacity:.6">Stand: ${esc(R.updated||'—')}</span>
+          <span style="font-size:12px;opacity:.55">Frische Analyse: sag Claude „Radar bitte"</span></div>
+        <div onclick="var d=this.nextElementSibling;d.style.display=d.style.display==='none'?'block':'none'" style="cursor:pointer;color:#7dd3fc;font-size:13px;font-weight:700">▾ Radar anzeigen / ausblenden</div>
+        <div style="display:none;margin-top:10px;font-size:14px;line-height:1.55">${mdLite(R.text)}</div></div>`;
+    } else {
+      rc.innerHTML=`<div style="background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:14px;padding:18px 22px;font-size:13px;opacity:.7">Noch kein Radar erstellt. Sag Claude „Radar bitte" für eine frische Analyse.</div>`;
+    }
   }
 
   memberActivity={maxime:0,'jean-pierre':0,jerome:0};
