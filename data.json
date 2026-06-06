@@ -1,5 +1,5 @@
 {
- "updated": "2026-06-06 17:19",
+ "updated": "2026-06-06 17:22",
  "progress": {
   "percent": 80,
   "done_count": 18,
@@ -14,8 +14,8 @@
    "name": "Maxime",
    "area": "Website-Fabrik · Generator, Cinematic, Auto-System, Deployment",
    "color": "#f0a72c",
-   "current": "Cockpit-Umsatz umgestellt: EIN gemeinsamer Team-Umsatz (kein Pro-Member mehr). Grosse MRR+Einmal-Umsatz-Kachel oben, darunter 3 Angebots-Karten: Website (einmalig), Wartungs-Abo 49/M, Instagram-Service 79/M - je mit Anzahl + Klick-Aufklappen (Kunden). Bewertungs-Strom entfernt (kostenlos inkl.). Live im Cockpit.",
-   "since": "2026-06-06 17:13",
+   "current": "Cockpit: Cha-Ching gebaut - bei steigendem Team-Umsatz (MRR+Einmal) erklingt Kassengeraeusch (WebAudio) + gruenes Feier-Banner, Shopify-Style. Vergleich via localStorage wc_rev, geprueft bei jedem 20s-Datenload. Respektiert Sound-Schalter. \"Ton testen\"-Button in der Umsatz-Uebersicht zum Ausprobieren.",
+   "since": "2026-06-06 17:19",
    "active": true,
    "done": 15,
    "open": 1
