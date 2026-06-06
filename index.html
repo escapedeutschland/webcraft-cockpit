@@ -223,6 +223,9 @@
   <div class="sec-head"><h2>Freigaben &amp; offene Anfragen</h2><span class="ln"></span></div>
   <div class="frg" id="frg"></div>
 
+  <div class="sec-head"><h2>Verkaufstrichter</h2><span class="ln"></span></div>
+  <div id="funnel"></div>
+
   <div class="sec-head"><h2>Das Team</h2><span class="ln"></span></div>
   <div class="members" id="members"></div>
 
@@ -599,6 +602,25 @@ function render(){
       +`<div class="frg-art">${esc(f.art)} · ${esc(f.kunde_mail)} ${age?'· '+age:''}</div></div></div>`;
   });
   fc.innerHTML=fh;
+
+  // Verkaufstrichter
+  const F=DATA.funnel||{}; const fnl=document.getElementById('funnel');
+  if(fnl){
+    const pct=(a,b)=>(b&&a!=null)?Math.round(100*a/b)+'%':'—';
+    const st=(label,val,sub)=>`<div style="flex:1;min-width:118px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:12px;padding:14px 16px;text-align:center">`
+      +`<div style="font-size:26px;font-weight:800">${val==null?'—':val}</div>`
+      +`<div style="font-size:12px;opacity:.7;margin-top:2px">${label}</div>`
+      +`${sub?`<div style="font-size:11px;color:#7dd3fc;margin-top:4px">${sub}</div>`:''}</div>`;
+    const viewed=(F.viewed==null)?'—':F.viewed;
+    const rev=Number(F.revenue_eur||0).toFixed(2);
+    fnl.innerHTML=`<div style="display:flex;gap:10px;flex-wrap:wrap">`
+      +st('Gebaut',F.built,'')
+      +st('Gesendet',F.sent,pct(F.sent,F.built)+' v. gebaut')
+      +st('Demo geöffnet',viewed,(F.viewed==null)?'noch nicht gemessen':pct(F.viewed,F.sent)+' v. gesendet')
+      +st('Gekauft 450€',F.paid,pct(F.paid,F.sent)+' v. gesendet')
+      +st('Abo 49€/M',F.care_subs,pct(F.care_subs,F.paid)+' v. Käufern')
+      +`</div><div style="margin-top:10px;font-size:13px;opacity:.85">Umsatz: <b>${rev} €</b> einmalig · <b>${(F.care_subs||0)*49} €</b>/Monat wiederkehrend${F.stripe_error?' <span style="color:#fb7185">(Stripe-Daten unvollständig)</span>':''}</div>`;
+  }
 
   memberActivity={maxime:0,'jean-pierre':0,jerome:0};
   const mc=document.getElementById('members'); mc.innerHTML='';
