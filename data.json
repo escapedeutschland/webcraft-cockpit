@@ -1,5 +1,5 @@
 {
- "updated": "2026-06-05 23:01",
+ "updated": "2026-06-06 01:24",
  "progress": {
   "percent": 80,
   "done_count": 18,
@@ -14,8 +14,8 @@
    "name": "Maxime",
    "area": "Website-Fabrik · Generator, Cinematic, Auto-System, Deployment",
    "color": "#f0a72c",
-   "current": "Deliverability vorbereitet: alle 3 Versender (intake/wartung/reply_monitor) laufen ueber mailutil.send -> dort SMTP-Versand (Zoho) eingebaut, schaltet automatisch um sobald SMTP_HOST/USER/PASS im Tresor liegen, sonst Gmail-Fallback (nichts bricht jetzt). Mail-Hygiene in send_preview live: From-Anzeigename, Reply-To, List-Unsubscribe, Text-Teil. Domain webcraft-agentur.de bei Netcup bestellt (manuelle Erstpruefung laeuft), Zoho-Free-Konto+Domain hinzugefuegt, Verifizierungs-TXT=zoho-verification=zb89769835.zmverify.zoho.com liegt vor. BLOCKIERT auf Netcup-Freigabe -> dann DNS (TXT/MX/SPF/DKIM/DMARC) + Postfach maxime@ + App-Passwort in Tresor -> live. Hinweis: zwei mailutil.py (auto_system+shared) beide aktualisiert.",
-   "since": "2026-06-06 00:51",
+   "current": "Wartung erweitert+getestet: (1) Oeffnungszeiten laufen jetzt AUTO wenn klar parsebar (>=3 Tage erkannt), sonst Freigabe. (2) Fair-Use-Tracker: zaehlt Wuensche pro Kunde (wartung_usage.json), Maxime-Benachrichtigung zeigt \"N. Wunsch in 30T\", ab Richtwert WARTUNG_FAIRUSE_LIMIT (default 10/30T) ein ⚠️-Hinweis - KEIN Auto-Block (echte Kunden nicht veraergern). Konfigurierbar via config. Vorher Bugfix _parse_hours (Strings statt Paare). Alles mit sicherem Test gruen.",
+   "since": "2026-06-06 03:14",
    "active": true,
    "done": 15,
    "open": 1
