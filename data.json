@@ -1,5 +1,5 @@
 {
- "updated": "2026-06-06 01:24",
+ "updated": "2026-06-06 05:37",
  "progress": {
   "percent": 80,
   "done_count": 18,
@@ -14,8 +14,8 @@
    "name": "Maxime",
    "area": "Website-Fabrik · Generator, Cinematic, Auto-System, Deployment",
    "color": "#f0a72c",
-   "current": "Wartung erweitert+getestet: (1) Oeffnungszeiten laufen jetzt AUTO wenn klar parsebar (>=3 Tage erkannt), sonst Freigabe. (2) Fair-Use-Tracker: zaehlt Wuensche pro Kunde (wartung_usage.json), Maxime-Benachrichtigung zeigt \"N. Wunsch in 30T\", ab Richtwert WARTUNG_FAIRUSE_LIMIT (default 10/30T) ein ⚠️-Hinweis - KEIN Auto-Block (echte Kunden nicht veraergern). Konfigurierbar via config. Vorher Bugfix _parse_hours (Strings statt Paare). Alles mit sicherem Test gruen.",
-   "since": "2026-06-06 03:14",
+   "current": "Harte Wartungs-Monatsgrenze gebaut+getestet+beworben: KLEIN (Telefon/Adresse/E-Mail/Oeffnungszeiten)=unbegrenzt automatisch; GROSS (Text/Foto/Speisekarte/Sonstiges)=max WARTUNG_LIMIT_BIG (5)/Kalendermonat, Reset am 1. Ueberschreitung -> freundliche Limit-Mail an Kunde, nicht bearbeitet, kein Maxime-Aufwand. Zaehler wartung_usage.json (pro Art+Monat). Transparent gemacht: Willkommens-Mail + Agentur-Pflegekarte (49EUR) zeigen \"Kontaktdaten/Oeffnungszeiten unbegrenzt + bis 5 inhaltliche/Monat\". Agentur neu deployt. Zahl in config (WARTUNG_LIMIT_BIG) + agentur/index.html (hardcoded 5) bei Aenderung beide anpassen.",
+   "since": "2026-06-06 03:35",
    "active": true,
    "done": 15,
    "open": 1
