@@ -1,5 +1,5 @@
 {
- "updated": "2026-06-06 13:54",
+ "updated": "2026-06-06 16:50",
  "progress": {
   "percent": 80,
   "done_count": 18,
@@ -14,9 +14,9 @@
    "name": "Maxime",
    "area": "Website-Fabrik · Generator, Cinematic, Auto-System, Deployment",
    "color": "#f0a72c",
-   "current": "Harte Wartungs-Monatsgrenze gebaut+getestet+beworben: KLEIN (Telefon/Adresse/E-Mail/Oeffnungszeiten)=unbegrenzt automatisch; GROSS (Text/Foto/Speisekarte/Sonstiges)=max WARTUNG_LIMIT_BIG (5)/Kalendermonat, Reset am 1. Ueberschreitung -> freundliche Limit-Mail an Kunde, nicht bearbeitet, kein Maxime-Aufwand. Zaehler wartung_usage.json (pro Art+Monat). Transparent gemacht: Willkommens-Mail + Agentur-Pflegekarte (49EUR) zeigen \"Kontaktdaten/Oeffnungszeiten unbegrenzt + bis 5 inhaltliche/Monat\". Agentur neu deployt. Zahl in config (WARTUNG_LIMIT_BIG) + agentur/index.html (hardcoded 5) bei Aenderung beide anpassen.",
-   "since": "2026-06-06 03:35",
-   "active": false,
+   "current": "Funnel-Messung Phase 1 gebaut (funnel.py, in Cloud): gebaut/gesendet aus Build-Log, gekauft/Umsatz/Abo aus Stripe, plus CRM-Status. Groesste Luecke = Stufe \"Demo geoeffnet?\" -> Phase 2: Klick-Tracking via Redirect-Link im Vorschau-Mail (Apps-Script), datenschutz-sauber ohne Website-Tracker. Strategie-Kontext: Website ist kein Burggraben mehr (KI-Commoditisierung) -> Fokus Messen + Imbiss-Vertikale + Recurring-Buendel + Vertrauen.",
+   "since": "2026-06-06 16:46",
+   "active": true,
    "done": 15,
    "open": 1
   },
@@ -325,9 +325,27 @@
   }
  ],
  "hosting": {
-  "customers": 1,
+  "customers": 3,
   "threshold": 40,
   "warn": false
  },
- "freigaben": []
+ "freigaben": [],
+ "funnel": {
+  "built": 7,
+  "sent": 0,
+  "viewed": null,
+  "paid": 0,
+  "revenue_eur": 0.0,
+  "care_subs": 0,
+  "crm": {
+   "kontaktiert": 0,
+   "kein_interesse": 0,
+   "vorschau_erstellt": 3,
+   "vorschau_gesendet": 0,
+   "gekauft": 0,
+   "abo": 0,
+   "gesamt": 3
+  },
+  "stripe_error": false
+ }
 }
