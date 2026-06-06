@@ -871,12 +871,36 @@ function chime(){ if(!actx)return; const t0=actx.currentTime; [523.25,659.25,783
   o.connect(g); g.connect(master||actx.destination); o.start(s); o.stop(s+0.6); }); }
 function ding(){ if(!audioOn||!actx)return; tone(740,0.6,0.32,'triangle',1320); setTimeout(()=>tone(988,0.5,0.22,'triangle'),90); }
 function blip(){ if(!audioOn||!actx)return; tone(560,0.18,0.20,'sine'); }
-/* Kassengeräusch "Cha-Ching" bei neuem Umsatz (Shopify-Style) */
+/* Echtes Kassengeräusch "Cha-Ching": Geräusch-Klick (Mechanik) + metallische Glocken (unharmonische Obertöne) */
+function noiseBurst(dur,vol,freq,when){
+  if(!actx)return; const t=actx.currentTime+(when||0);
+  const n=Math.max(1,Math.floor(actx.sampleRate*dur));
+  const buf=actx.createBuffer(1,n,actx.sampleRate); const d=buf.getChannelData(0);
+  for(let i=0;i<n;i++){ d[i]=(Math.random()*2-1)*Math.pow(1-i/n,2.2); } // perkussiv abklingend
+  const src=actx.createBufferSource(); src.buffer=buf;
+  const bp=actx.createBiquadFilter(); bp.type='bandpass'; bp.frequency.value=freq||3000; bp.Q.value=0.7;
+  const g=actx.createGain(); g.gain.value=vol;
+  src.connect(bp); bp.connect(g); g.connect(master||actx.destination);
+  src.start(t); src.stop(t+dur+0.03);
+}
+function bell(freq,dur,vol,when){
+  if(!actx)return; const t=actx.currentTime+(when||0);
+  // unharmonische Teiltöne wie bei echter Glocke/Kasse -> metallisch statt "piep"
+  const partials=[[1,1.0],[2.0,0.5],[2.76,0.45],[3.76,0.3],[5.42,0.2],[8.2,0.1]];
+  partials.forEach(([r,a])=>{
+    const o=actx.createOscillator(); o.type='sine'; o.frequency.value=freq*r;
+    const g=actx.createGain();
+    g.gain.setValueAtTime(0.0001,t);
+    g.gain.exponentialRampToValueAtTime(Math.max(0.0002,vol*a),t+0.004); // scharfer Anschlag
+    g.gain.exponentialRampToValueAtTime(0.0001,t+dur*(0.45+0.55/r));      // hohe Teiltöne klingen schneller ab
+    o.connect(g); g.connect(master||actx.destination);
+    o.start(t); o.stop(t+dur+0.05);
+  });
+}
 function chaching(){ if(!audioOn||!actx)return;
-  tone(880,0.11,0.30,'square');                         // "cha"
-  setTimeout(()=>tone(1318.5,0.45,0.33,'triangle'),110); // "ching" – Glöckchen
-  setTimeout(()=>tone(1760,0.55,0.28,'triangle'),185);
-  setTimeout(()=>tone(2637,0.5,0.18,'sine'),250);        // Sparkle
+  noiseBurst(0.055,0.38,2600,0);     // "ka" – Schubladen-/Mechanik-Klick
+  bell(1050,0.95,0.32,0.05);         // "ching" 1
+  bell(1480,1.15,0.28,0.14);         // "ching" 2 (höher, leicht später) -> klassisches Doppel-Klingeln
 }
 function demoCha(){ if(!audioOn){setAudio(true);} setTimeout(chaching,140); celebrate(0,'🔔 Kassen-Ton (Test)'); }
 function celebrate(delta,label){
