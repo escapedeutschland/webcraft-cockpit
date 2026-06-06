@@ -1,5 +1,5 @@
 {
- "updated": "2026-06-06 22:45",
+ "updated": "2026-06-06 22:58",
  "progress": {
   "percent": 80,
   "done_count": 18,
@@ -14,8 +14,8 @@
    "name": "Maxime",
    "area": "Website-Fabrik · Generator, Cinematic, Auto-System, Deployment",
    "color": "#f0a72c",
-   "current": "Fabrik-Stresstest (alle Branchen + Sonderfaelle, gratis ohne Deploy): 1 echter Bug gefunden+gefixt -> Cinematic baute bei Leads OHNE Telefon einen leeren tel:-Link -> design_qc blockierte Build (betraf KFZ/Imbiss/Schneider-Leads ohne Nummer). Jetzt Fallback tel_href=#kontakt, Telefon-Zeile+Anrufen-Button nur wenn Nummer vorhanden. Re-Test: alle Faelle gruen, keine Regression. In Cloud.",
-   "since": "2026-06-07 00:33",
+   "current": "Testing-Pipeline durch: (1) Fabrik-Stresstest 10 Branchen+Sonderfaelle -> tel-Bug gefixt. (2) reply_monitor (Auslieferung+Upsell) Standard+Cinematic getestet, ZIP/Mail/Upsells korrekt, keine Bugs. (3) Crons inbox+monthly+health alle GRUEN end-to-end. Maschinerie getestet+gehaertet. Offen bleibt nur: E-Mail-Domain (wartet auf Netcup-Zahlungsverbuchung, realistisch Montag) + Premium-Clips (JP).",
+   "since": "2026-06-07 00:46",
    "active": true,
    "done": 15,
    "open": 1
