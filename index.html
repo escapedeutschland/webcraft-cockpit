@@ -226,7 +226,7 @@
   <div class="sec-head"><h2>Verkaufstrichter</h2><span class="ln"></span></div>
   <div id="funnel"></div>
 
-  <div class="sec-head"><h2>Umsatz &amp; Pipeline pro Team</h2><span class="ln"></span></div>
+  <div class="sec-head"><h2>Umsatz (gesamtes Team)</h2><span class="ln"></span></div>
   <div id="streams"></div>
 
   <div class="sec-head"><h2>Das Team</h2><span class="ln"></span></div>
@@ -625,27 +625,23 @@ function render(){
       +`</div><div style="margin-top:10px;font-size:13px;opacity:.85">Umsatz: <b>${rev} €</b> einmalig · <b>${(F.care_subs||0)*49} €</b>/Monat wiederkehrend${F.stripe_error?' <span style="color:#fb7185">(Stripe-Daten unvollständig)</span>':''}</div>`;
   }
 
-  // Umsatz & Pipeline pro Team (Streams)
+  // Umsatz gesamtes Team (nach Angebot, gemeinsamer Umsatz)
   const S=(DATA.funnel&&DATA.funnel.streams)||{}; const sc=document.getElementById('streams');
   if(sc&&S.streams){
-    const NM={maxime:'Maxime',['jean-pierre']:'Jean-Pierre',jerome:'Jerome'};
-    const AREA={maxime:'Website-Fabrik',['jean-pierre']:'Instagram',jerome:'Bewertungen'};
-    const byM={}; S.streams.forEach(s=>{(byM[s.member]=byM[s.member]||[]).push(s);});
-    let html=`<div style="margin-bottom:12px;font-size:14px;opacity:.85">Wiederkehrend gesamt: <b style="color:#34d399">${S.total_mrr||0} €/Monat</b> · Einmal-Umsatz: <b>${S.one_time_revenue||0} €</b></div><div style="display:flex;gap:12px;flex-wrap:wrap">`;
-    ['maxime','jean-pierre','jerome'].forEach(mk=>{
-      const arr=byM[mk]||[]; if(!arr.length)return;
-      const mmrr=arr.reduce((a,s)=>a+(s.mrr||0),0);
-      const rows=arr.map(s=>{
-        const v=s.recurring?`${s.count} Abos · ${s.mrr} €/M`:(s.count==null?(s.note||'—'):`${s.count}× · ${s.revenue||0} €`);
-        return `<div style="font-size:13px;margin:3px 0"><span style="opacity:.7">${esc(s.label)}:</span> <b>${esc(String(v))}</b></div>`;
-      }).join('');
-      const det=arr.filter(s=>s.customers&&s.customers.length).map(s=>`<div style="font-size:12px;opacity:.7;margin-top:6px"><b>${esc(s.label)}</b>: ${esc(s.customers.join(', '))}</div>`).join('')||'<div style="font-size:12px;opacity:.45;margin-top:6px">Noch keine zahlenden Kunden.</div>';
-      html+=`<div onclick="var d=this.querySelector('.det');d.style.display=d.style.display==='none'?'block':'none'" style="cursor:pointer;flex:1;min-width:210px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:12px;padding:14px 16px">
-        <div style="font-weight:700;margin-bottom:2px">${NM[mk]||mk}<span style="float:right;color:#34d399">${mmrr} €/M</span></div>
-        <div style="font-size:11px;opacity:.5;margin-bottom:8px">${AREA[mk]||''}</div>
-        ${rows}
+    let html=`<div style="background:linear-gradient(135deg,rgba(52,211,153,.14),rgba(125,211,252,.10));border:1px solid rgba(52,211,153,.3);border-radius:14px;padding:16px 20px;margin-bottom:14px;display:flex;gap:30px;flex-wrap:wrap;align-items:baseline">`
+      +`<div><div style="font-size:30px;font-weight:800;color:#34d399">${S.total_mrr||0} €<span style="font-size:14px;opacity:.7">/Monat</span></div><div style="font-size:12px;opacity:.7">wiederkehrend (MRR)</div></div>`
+      +`<div><div style="font-size:30px;font-weight:800">${S.one_time_revenue||0} €</div><div style="font-size:12px;opacity:.7">Einmal-Umsatz gesamt</div></div></div>`
+      +`<div style="display:flex;gap:12px;flex-wrap:wrap">`;
+    S.streams.forEach(s=>{
+      const big=s.recurring?`${s.mrr||0} €/M`:`${s.revenue||0} €`;
+      const sub=s.recurring?`${s.count||0} aktive Abos`:`${s.count||0} verkauft`;
+      const det=(s.customers&&s.customers.length)?`<div style="font-size:12px;opacity:.7;margin-top:6px">${esc(s.customers.join(', '))}</div>`:'<div style="font-size:12px;opacity:.45;margin-top:6px">Noch keine Kunden.</div>';
+      html+=`<div onclick="var d=this.querySelector('.det');d.style.display=d.style.display==='none'?'block':'none'" style="cursor:pointer;flex:1;min-width:200px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:12px;padding:16px">
+        <div style="font-size:13px;opacity:.75">${esc(s.label)}</div>
+        <div style="font-size:24px;font-weight:800;margin:4px 0">${big}</div>
+        <div style="font-size:12px;opacity:.7">${sub}</div>
         <div class="det" style="display:none;border-top:1px solid rgba(255,255,255,.08);margin-top:8px;padding-top:6px">${det}</div>
-        <div style="font-size:11px;opacity:.4;margin-top:6px">▾ Details</div></div>`;
+        <div style="font-size:11px;opacity:.4;margin-top:6px">▾ Kunden</div></div>`;
     });
     html+='</div>'; sc.innerHTML=html;
   }
