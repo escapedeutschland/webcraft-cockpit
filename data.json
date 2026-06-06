@@ -1,5 +1,5 @@
 {
- "updated": "2026-06-06 18:00",
+ "updated": "2026-06-06 18:12",
  "progress": {
   "percent": 80,
   "done_count": 18,
@@ -333,7 +333,7 @@
  "funnel": {
   "built": 7,
   "sent": 0,
-  "viewed": 1,
+  "viewed": 0,
   "paid": 0,
   "revenue_eur": 0.0,
   "care_subs": 0,
