@@ -1,5 +1,5 @@
 {
- "updated": "2026-06-06 17:32",
+ "updated": "2026-06-06 18:00",
  "progress": {
   "percent": 80,
   "done_count": 18,
@@ -14,8 +14,8 @@
    "name": "Maxime",
    "area": "Website-Fabrik · Generator, Cinematic, Auto-System, Deployment",
    "color": "#f0a72c",
-   "current": "Cha-Ching nutzt jetzt das vom Team bereitgestellte echte Kassen-MP3 (als data-URI in index.html eingebettet, ueberlebt Rebuilds). Spielt bei steigendem Umsatz + per \"Ton testen\". Respektiert Sound-Schalter.",
-   "since": "2026-06-06 17:27",
+   "current": "Demo-View-Tracking OHNE Apps-Script-Aenderung selbst aktiviert: eigene Weiterleitungsseite /v/?s=slug feuert beim Oeffnen einen View-Ping ueber den bestehenden (autorisierten) Kontakt-Endpoint -> Mail mit Marker WCVIEW#1 -> Gmail-Filter archiviert sie unter Label Views -> funnel._views zaehlt distinct Slugs = Funnel-Stufe 3. Kein logView/Sheets/Autorisierung mehr noetig.",
+   "since": "2026-06-06 17:57",
    "active": true,
    "done": 15,
    "open": 1
@@ -333,7 +333,7 @@
  "funnel": {
   "built": 7,
   "sent": 0,
-  "viewed": null,
+  "viewed": 1,
   "paid": 0,
   "revenue_eur": 0.0,
   "care_subs": 0,
