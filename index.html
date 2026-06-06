@@ -226,6 +226,9 @@
   <div class="sec-head"><h2>Verkaufstrichter</h2><span class="ln"></span></div>
   <div id="funnel"></div>
 
+  <div class="sec-head"><h2>Umsatz &amp; Pipeline pro Team</h2><span class="ln"></span></div>
+  <div id="streams"></div>
+
   <div class="sec-head"><h2>Das Team</h2><span class="ln"></span></div>
   <div class="members" id="members"></div>
 
@@ -620,6 +623,31 @@ function render(){
       +st('Gekauft 450€',F.paid,pct(F.paid,F.sent)+' v. gesendet')
       +st('Abo 49€/M',F.care_subs,pct(F.care_subs,F.paid)+' v. Käufern')
       +`</div><div style="margin-top:10px;font-size:13px;opacity:.85">Umsatz: <b>${rev} €</b> einmalig · <b>${(F.care_subs||0)*49} €</b>/Monat wiederkehrend${F.stripe_error?' <span style="color:#fb7185">(Stripe-Daten unvollständig)</span>':''}</div>`;
+  }
+
+  // Umsatz & Pipeline pro Team (Streams)
+  const S=(DATA.funnel&&DATA.funnel.streams)||{}; const sc=document.getElementById('streams');
+  if(sc&&S.streams){
+    const NM={maxime:'Maxime',['jean-pierre']:'Jean-Pierre',jerome:'Jerome'};
+    const AREA={maxime:'Website-Fabrik',['jean-pierre']:'Instagram',jerome:'Bewertungen'};
+    const byM={}; S.streams.forEach(s=>{(byM[s.member]=byM[s.member]||[]).push(s);});
+    let html=`<div style="margin-bottom:12px;font-size:14px;opacity:.85">Wiederkehrend gesamt: <b style="color:#34d399">${S.total_mrr||0} €/Monat</b> · Einmal-Umsatz: <b>${S.one_time_revenue||0} €</b></div><div style="display:flex;gap:12px;flex-wrap:wrap">`;
+    ['maxime','jean-pierre','jerome'].forEach(mk=>{
+      const arr=byM[mk]||[]; if(!arr.length)return;
+      const mmrr=arr.reduce((a,s)=>a+(s.mrr||0),0);
+      const rows=arr.map(s=>{
+        const v=s.recurring?`${s.count} Abos · ${s.mrr} €/M`:(s.count==null?(s.note||'—'):`${s.count}× · ${s.revenue||0} €`);
+        return `<div style="font-size:13px;margin:3px 0"><span style="opacity:.7">${esc(s.label)}:</span> <b>${esc(String(v))}</b></div>`;
+      }).join('');
+      const det=arr.filter(s=>s.customers&&s.customers.length).map(s=>`<div style="font-size:12px;opacity:.7;margin-top:6px"><b>${esc(s.label)}</b>: ${esc(s.customers.join(', '))}</div>`).join('')||'<div style="font-size:12px;opacity:.45;margin-top:6px">Noch keine zahlenden Kunden.</div>';
+      html+=`<div onclick="var d=this.querySelector('.det');d.style.display=d.style.display==='none'?'block':'none'" style="cursor:pointer;flex:1;min-width:210px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:12px;padding:14px 16px">
+        <div style="font-weight:700;margin-bottom:2px">${NM[mk]||mk}<span style="float:right;color:#34d399">${mmrr} €/M</span></div>
+        <div style="font-size:11px;opacity:.5;margin-bottom:8px">${AREA[mk]||''}</div>
+        ${rows}
+        <div class="det" style="display:none;border-top:1px solid rgba(255,255,255,.08);margin-top:8px;padding-top:6px">${det}</div>
+        <div style="font-size:11px;opacity:.4;margin-top:6px">▾ Details</div></div>`;
+    });
+    html+='</div>'; sc.innerHTML=html;
   }
 
   memberActivity={maxime:0,'jean-pierre':0,jerome:0};
