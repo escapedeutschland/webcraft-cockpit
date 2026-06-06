@@ -1,5 +1,5 @@
 {
- "updated": "2026-06-06 18:36",
+ "updated": "2026-06-06 17:46",
  "progress": {
   "percent": 80,
   "done_count": 18,
@@ -14,8 +14,8 @@
    "name": "Maxime",
    "area": "Website-Fabrik · Generator, Cinematic, Auto-System, Deployment",
    "color": "#f0a72c",
-   "current": "Test-View entfernt -> Funnel startet bei 0. Radar wird massgeschneidert: shared/RADAR_CONTEXT.md (unser Profil: Angebote/Preise 450/49/79, Burggraeben, Risiken, Strategie) gebaut+gepusht; der monatliche Radar-Agent liest das bei jedem Lauf -> Empfehlungen konkret auf uns bezogen. Remote-Scheduler war kurz down -> Wiederholung laeuft (richtet monatlichen Agent ein, der RADAR_CONTEXT liest + frische Branchen-Recherche macht -> shared/WETTBEWERB_RADAR.md).",
-   "since": "2026-06-06 18:12",
+   "current": "Wettbewerbs-Radar-Karte im Cockpit gebaut: zeigt immer den neuesten Radar (shared/WETTBEWERB_RADAR.md), aufklappbar, mit Stand-Datum. Erster Radar (06.06.) drin. \"Frisch auf Klick autonom\" braucht LLM-Backend (Plan B / API-Key); aktuell wird der Radar auf Zuruf (gratis, in Session) oder spaeter per Auto-Job neu erstellt -> erscheint dann in der Karte. Funnel weiter bei 0 (Test-View entfernt).",
+   "since": "2026-06-06 18:36",
    "active": true,
    "done": 15,
    "open": 1
@@ -331,7 +331,7 @@
  },
  "freigaben": [],
  "funnel": {
-  "built": 7,
+  "built": 0,
   "sent": 0,
   "viewed": 0,
   "paid": 0,
