@@ -1,5 +1,5 @@
 {
- "updated": "2026-06-06 16:50",
+ "updated": "2026-06-06 17:01",
  "progress": {
   "percent": 80,
   "done_count": 18,
@@ -14,8 +14,8 @@
    "name": "Maxime",
    "area": "Website-Fabrik · Generator, Cinematic, Auto-System, Deployment",
    "color": "#f0a72c",
-   "current": "Funnel-Messung Phase 1 gebaut (funnel.py, in Cloud): gebaut/gesendet aus Build-Log, gekauft/Umsatz/Abo aus Stripe, plus CRM-Status. Groesste Luecke = Stufe \"Demo geoeffnet?\" -> Phase 2: Klick-Tracking via Redirect-Link im Vorschau-Mail (Apps-Script), datenschutz-sauber ohne Website-Tracker. Strategie-Kontext: Website ist kein Burggraben mehr (KI-Commoditisierung) -> Fokus Messen + Imbiss-Vertikale + Recurring-Buendel + Vertrauen.",
-   "since": "2026-06-06 16:46",
+   "current": "Mess-Infrastruktur komplett: (A) Funnel im Live-Cockpit (Karte Gebaut->Gesendet->Demo geoeffnet->Gekauft->Abo + Umsatz, baut alle 20 Min via inbox.yml). (B) Demo-Klick-Tracking gebaut: Vorschau-Link laeuft ueber Apps-Script-Redirect ?go=slug -> loggt Klick in Views-Tab -> redirect zur Demo (datenschutz-sauber, kein Website-Tracker). funnel liest Views-Tab fuer Stufe 3. OFFEN: Maxime muss Apps-Script EINMAL neu deployen + Script-Property SHEET_ID=CRM-Sheet-ID setzen, dann ist Stufe 3 live.",
+   "since": "2026-06-06 16:54",
    "active": true,
    "done": 15,
    "open": 1
@@ -345,6 +345,46 @@
    "gekauft": 0,
    "abo": 0,
    "gesamt": 3
+  },
+  "streams": {
+   "streams": [
+    {
+     "key": "website",
+     "member": "maxime",
+     "label": "Website (einmalig 450 €)",
+     "count": 0,
+     "revenue": 0.0,
+     "recurring": false
+    },
+    {
+     "key": "care",
+     "member": "maxime",
+     "label": "Wartungs-Abo (49 €/M)",
+     "count": 0,
+     "mrr": 0,
+     "customers": [],
+     "recurring": true
+    },
+    {
+     "key": "social",
+     "member": "jean-pierre",
+     "label": "Instagram-Abo (79 €/M)",
+     "count": 0,
+     "mrr": 0,
+     "customers": [],
+     "recurring": true
+    },
+    {
+     "key": "reviews",
+     "member": "jerome",
+     "label": "Google-Bewertungen",
+     "count": null,
+     "recurring": false,
+     "note": "kostenloses Standard-Feature auf jeder Seite"
+    }
+   ],
+   "total_mrr": 0,
+   "one_time_revenue": 0.0
   },
   "stripe_error": false
  }
