@@ -1,5 +1,5 @@
 {
- "updated": "2026-06-06 18:12",
+ "updated": "2026-06-06 16:35",
  "progress": {
   "percent": 80,
   "done_count": 18,
@@ -14,8 +14,8 @@
    "name": "Maxime",
    "area": "Website-Fabrik · Generator, Cinematic, Auto-System, Deployment",
    "color": "#f0a72c",
-   "current": "Demo-View-Tracking OHNE Apps-Script-Aenderung selbst aktiviert: eigene Weiterleitungsseite /v/?s=slug feuert beim Oeffnen einen View-Ping ueber den bestehenden (autorisierten) Kontakt-Endpoint -> Mail mit Marker WCVIEW#1 -> Gmail-Filter archiviert sie unter Label Views -> funnel._views zaehlt distinct Slugs = Funnel-Stufe 3. Kein logView/Sheets/Autorisierung mehr noetig.",
-   "since": "2026-06-06 17:57",
+   "current": "Test-View entfernt -> Funnel startet bei 0. Radar wird massgeschneidert: shared/RADAR_CONTEXT.md (unser Profil: Angebote/Preise 450/49/79, Burggraeben, Risiken, Strategie) gebaut+gepusht; der monatliche Radar-Agent liest das bei jedem Lauf -> Empfehlungen konkret auf uns bezogen. Remote-Scheduler war kurz down -> Wiederholung laeuft (richtet monatlichen Agent ein, der RADAR_CONTEXT liest + frische Branchen-Recherche macht -> shared/WETTBEWERB_RADAR.md).",
+   "since": "2026-06-06 18:12",
    "active": true,
    "done": 15,
    "open": 1
@@ -331,7 +331,7 @@
  },
  "freigaben": [],
  "funnel": {
-  "built": 7,
+  "built": 0,
   "sent": 0,
   "viewed": 0,
   "paid": 0,
