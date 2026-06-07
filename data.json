@@ -1,5 +1,5 @@
 {
- "updated": "2026-06-07 12:18",
+ "updated": "2026-06-07 14:23",
  "progress": {
   "percent": 80,
   "done_count": 18,
@@ -16,7 +16,7 @@
    "color": "#f0a72c",
    "current": "Branchen-Texte gefixt: blocks.py Ueber-uns jetzt branchengerecht (Gastro=Genuss-Sprache statt Handwerker-Floskeln Fachbetrieb/termingerecht). Vorher: kritischer Freitext-Bug + universeller Anrufen/WhatsApp-Float. Alles live verifiziert an Sansibar.",
    "since": "2026-06-07 06:45",
-   "active": true,
+   "active": false,
    "done": 15,
    "open": 1
   },
