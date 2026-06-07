@@ -1,5 +1,5 @@
 {
- "updated": "2026-06-07 21:54",
+ "updated": "2026-06-07 22:42",
  "progress": {
   "percent": 80,
   "done_count": 18,
@@ -14,8 +14,8 @@
    "name": "Maxime",
    "area": "Website-Fabrik · Generator, Cinematic, Auto-System, Deployment",
    "color": "#f0a72c",
-   "current": "Google-Token dauerhaft geloest: OAuth-App auf Produktion veroeffentlicht (kein 7-Tage-Ablauf mehr), Hauptkonto re-autorisiert, Tresor erneuert+hochgeladen. wartung-inbox wieder gruen. Alle Google-Automatiken (inbox, Monats-Report, Vorschau-Mail, Sheets) laufen wieder.",
-   "since": "2026-06-07 23:47",
+   "current": "Alle 5 Crons getestet (inbox/monthly/billing/weblead/health) -> gruen. Bug-Scan: 1 latenter Bug gefunden+behoben (git-push verschluckte Konflikte bei parallelen Laeufen -> jetzt pull --rebase + 5x Retry, verifiziert push ok). Secrets korrekt gitignored (config/pickle/tresor nicht im Repo). Google-Token dauerhaft (Produktion).",
+   "since": "2026-06-07 23:55",
    "active": true,
    "done": 15,
    "open": 1
