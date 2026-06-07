@@ -1,5 +1,5 @@
 {
- "updated": "2026-06-07 00:05",
+ "updated": "2026-06-07 04:57",
  "progress": {
   "percent": 80,
   "done_count": 18,
@@ -14,8 +14,8 @@
    "name": "Maxime",
    "area": "Website-Fabrik · Generator, Cinematic, Auto-System, Deployment",
    "color": "#f0a72c",
-   "current": "Testing-Pipeline durch: (1) Fabrik-Stresstest 10 Branchen+Sonderfaelle -> tel-Bug gefixt. (2) reply_monitor (Auslieferung+Upsell) Standard+Cinematic getestet, ZIP/Mail/Upsells korrekt, keine Bugs. (3) Crons inbox+monthly+health alle GRUEN end-to-end. Maschinerie getestet+gehaertet. Offen bleibt nur: E-Mail-Domain (wartet auf Netcup-Zahlungsverbuchung, realistisch Montag) + Premium-Clips (JP).",
-   "since": "2026-06-07 00:46",
+   "current": "Branchen-Texte gefixt: blocks.py Ueber-uns jetzt branchengerecht (Gastro=Genuss-Sprache statt Handwerker-Floskeln Fachbetrieb/termingerecht). Vorher: kritischer Freitext-Bug + universeller Anrufen/WhatsApp-Float. Alles live verifiziert an Sansibar.",
+   "since": "2026-06-07 06:45",
    "active": true,
    "done": 15,
    "open": 1
@@ -325,7 +325,7 @@
   }
  ],
  "hosting": {
-  "customers": 3,
+  "customers": 5,
   "threshold": 40,
   "warn": false
  },
@@ -333,7 +333,7 @@
  "funnel": {
   "built": 0,
   "sent": 0,
-  "viewed": 0,
+  "viewed": 2,
   "paid": 0,
   "revenue_eur": 0.0,
   "care_subs": 0,
@@ -341,10 +341,10 @@
    "kontaktiert": 0,
    "kein_interesse": 0,
    "vorschau_erstellt": 3,
-   "vorschau_gesendet": 0,
+   "vorschau_gesendet": 2,
    "gekauft": 0,
    "abo": 0,
-   "gesamt": 3
+   "gesamt": 5
   },
   "streams": {
    "streams": [
