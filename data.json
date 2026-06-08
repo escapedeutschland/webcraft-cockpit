@@ -1,5 +1,5 @@
 {
- "updated": "2026-06-08 09:57",
+ "updated": "2026-06-08 14:06",
  "progress": {
   "percent": 80,
   "done_count": 18,
@@ -14,9 +14,9 @@
    "name": "Maxime",
    "area": "Website-Fabrik · Generator, Cinematic, Auto-System, Deployment",
    "color": "#f0a72c",
-   "current": "Alle 5 Crons getestet (inbox/monthly/billing/weblead/health) -> gruen. Bug-Scan: 1 latenter Bug gefunden+behoben (git-push verschluckte Konflikte bei parallelen Laeufen -> jetzt pull --rebase + 5x Retry, verifiziert push ok). Secrets korrekt gitignored (config/pickle/tresor nicht im Repo). Google-Token dauerhaft (Produktion).",
-   "since": "2026-06-07 23:55",
-   "active": false,
+   "current": "E-Mail-Domain webcraft-agentur.de LIVE: Postfach maxime@webcraft-agentur.de (Zoho), DNS komplett (MX/SPF/DKIM/DMARC alle gruen), Versand auf Zoho-SMTP umgestellt. Manuell + automatisch getestet: Posteingang, SPF/DKIM/DMARC pass, Absender maxime@webcraft-agentur.de. Tresor aktualisiert+hochgeladen.",
+   "since": "2026-06-08 15:45",
+   "active": true,
    "done": 15,
    "open": 1
   },
@@ -331,8 +331,8 @@
  },
  "freigaben": [],
  "funnel": {
-  "built": 0,
-  "sent": 0,
+  "built": 1,
+  "sent": 1,
   "viewed": 2,
   "paid": 0,
   "revenue_eur": 0.0,
