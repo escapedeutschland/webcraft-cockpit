@@ -1,5 +1,5 @@
 {
- "updated": "2026-06-08 21:46",
+ "updated": "2026-06-08 23:09",
  "progress": {
   "percent": 80,
   "done_count": 18,
@@ -14,8 +14,8 @@
    "name": "Maxime",
    "area": "Website-Fabrik · Generator, Cinematic, Auto-System, Deployment",
    "color": "#f0a72c",
-   "current": "Firmen-Logo finalisiert (Logo A Browser+Aufschwung). Brand-Kit live: escapedeutschland.github.io/webcraft-sites/brand/ (SVG+PNG je Variante Verlauf/Navy/Einfarbig/Weiss, Favicon, Schriftzug, animiertes GIF). In Agentur-Website integriert (Header-Logo + Favicon, beide Standorte). Hinweis: animierte Avatare in E-Mail meist statisch -> BIMI als echter Inbox-Logo-Weg (spaeter, braucht DMARC p=quarantine + ggf. VMC).",
-   "since": "2026-06-08 17:49",
+   "current": "Slogan bewusst geparkt (nach vielen Runden kein ueberzeugender gefunden) - Kandidaten in shared/SLOGAN_KANDIDATEN.md gesichert. Logo+Brand-Kit fertig & integriert. Naechster Slogan-Anlauf mit frischem Kopf, anderer Methode.",
+   "since": "2026-06-08 23:59",
    "active": true,
    "done": 15,
    "open": 1
