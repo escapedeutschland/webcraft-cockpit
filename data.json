@@ -1,5 +1,5 @@
 {
- "updated": "2026-06-08 05:03",
+ "updated": "2026-06-08 09:57",
  "progress": {
   "percent": 80,
   "done_count": 18,
@@ -16,7 +16,7 @@
    "color": "#f0a72c",
    "current": "Alle 5 Crons getestet (inbox/monthly/billing/weblead/health) -> gruen. Bug-Scan: 1 latenter Bug gefunden+behoben (git-push verschluckte Konflikte bei parallelen Laeufen -> jetzt pull --rebase + 5x Retry, verifiziert push ok). Secrets korrekt gitignored (config/pickle/tresor nicht im Repo). Google-Token dauerhaft (Produktion).",
    "since": "2026-06-07 23:55",
-   "active": true,
+   "active": false,
    "done": 15,
    "open": 1
   },
