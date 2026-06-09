@@ -1,5 +1,5 @@
 {
- "updated": "2026-06-09 14:02",
+ "updated": "2026-06-09 16:50",
  "progress": {
   "percent": 80,
   "done_count": 18,
@@ -14,8 +14,8 @@
    "name": "Maxime",
    "area": "Website-Fabrik · Generator, Cinematic, Auto-System, Deployment",
    "color": "#f0a72c",
-   "current": "Slogan Mehr Umsatz, digital skalierbar. systemweit ausgerollt (Website-Footer, Automatik+Vorschau-Mails, Brand-Kit, Signatur). Website-Domain webcraft-agentur.de: DNS auf GitHub Pages, HTTPS-Cert in Arbeit. Gravatar eingerichtet. BIMI+www-CNAME als spaetere Punkte notiert.",
-   "since": "2026-06-09 15:04",
+   "current": "Website-Wow geloest: Variante C (cinematic) im Eigen-Motor mit selbst-generiertem atmosphaerischem Visual (nano_banana, Wirtshaus-Ambiente) -> Lighthouse Perf 88, LCP 2.9s, TBT 0, 152KB (WebP+Preload). Schlaegt Baseline. Branchen-Visual + Auto-Befuellung pro Kunde = erfuellt Template-per-Knopfdruck. User: C ist die Richtung, feilt noch vor Generator-Rollout. Dateien in compare/ (build_variantC.py, variantC.html, assets/hero.webp). Draftly = nur Design-Labor, nicht Runtime.",
+   "since": "2026-06-09 18:41",
    "active": true,
    "done": 15,
    "open": 1
@@ -325,26 +325,29 @@
   }
  ],
  "hosting": {
-  "customers": 5,
+  "customers": 0,
   "threshold": 40,
   "warn": false
  },
  "freigaben": [],
  "funnel": {
-  "built": 2,
-  "sent": 2,
+  "built": 0,
+  "sent": 0,
   "viewed": 2,
   "paid": 0,
   "revenue_eur": 0.0,
   "care_subs": 0,
   "crm": {
+   "angerufen": 0,
+   "keine_antwort": 0,
+   "rueckruf": 0,
    "kontaktiert": 0,
    "kein_interesse": 0,
-   "vorschau_erstellt": 3,
-   "vorschau_gesendet": 2,
+   "vorschau_erstellt": 0,
+   "vorschau_gesendet": 0,
    "gekauft": 0,
    "abo": 0,
-   "gesamt": 5
+   "gesamt": 0
   },
   "streams": {
    "streams": [
