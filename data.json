@@ -1,5 +1,5 @@
 {
- "updated": "2026-06-09 16:50",
+ "updated": "2026-06-09 19:10",
  "progress": {
   "percent": 80,
   "done_count": 18,
@@ -14,8 +14,8 @@
    "name": "Maxime",
    "area": "Website-Fabrik · Generator, Cinematic, Auto-System, Deployment",
    "color": "#f0a72c",
-   "current": "Website-Wow geloest: Variante C (cinematic) im Eigen-Motor mit selbst-generiertem atmosphaerischem Visual (nano_banana, Wirtshaus-Ambiente) -> Lighthouse Perf 88, LCP 2.9s, TBT 0, 152KB (WebP+Preload). Schlaegt Baseline. Branchen-Visual + Auto-Befuellung pro Kunde = erfuellt Template-per-Knopfdruck. User: C ist die Richtung, feilt noch vor Generator-Rollout. Dateien in compare/ (build_variantC.py, variantC.html, assets/hero.webp). Draftly = nur Design-Labor, nicht Runtime.",
-   "since": "2026-06-09 18:41",
+   "current": "Durchbruch Bildwelt: echte Google-Fotos des Kunden automatisch ueber Places API v1 (FieldMask places.photos -> media-Endpoint) ziehbar (10 Stk, hi-res, mit Urheber). Eingebaut in Variante C: echtes Foto-Hero + echte Foto-Galerie (Bei uns) + Quellenangabe + Lenis Smooth-Scroll. Loest leer/unprofessionell. Kuratierung noetig (Querformat+Aufloesung fuer Hero, Rest Galerie, Fallback). Rechtlich: Vorschau ok, live nur mit Inhaber-Freigabe. Strategie: Stufe 1 Automatik-Premium (Variante C + echte Fotos + dezente Bewegung), Stufe 2 bespoke Wow-Upsell handgebaut. Dateien compare/.",
+   "since": "2026-06-09 20:36",
    "active": true,
    "done": 15,
    "open": 1
