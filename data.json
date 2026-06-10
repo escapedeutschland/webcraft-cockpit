@@ -1,5 +1,5 @@
 {
- "updated": "2026-06-10 00:06",
+ "updated": "2026-06-10 04:51",
  "progress": {
   "percent": 80,
   "done_count": 18,
@@ -16,7 +16,7 @@
    "color": "#f0a72c",
    "current": "Durchbruch Bildwelt: echte Google-Fotos des Kunden automatisch ueber Places API v1 (FieldMask places.photos -> media-Endpoint) ziehbar (10 Stk, hi-res, mit Urheber). Eingebaut in Variante C: echtes Foto-Hero + echte Foto-Galerie (Bei uns) + Quellenangabe + Lenis Smooth-Scroll. Loest leer/unprofessionell. Kuratierung noetig (Querformat+Aufloesung fuer Hero, Rest Galerie, Fallback). Rechtlich: Vorschau ok, live nur mit Inhaber-Freigabe. Strategie: Stufe 1 Automatik-Premium (Variante C + echte Fotos + dezente Bewegung), Stufe 2 bespoke Wow-Upsell handgebaut. Dateien compare/.",
    "since": "2026-06-09 20:36",
-   "active": true,
+   "active": false,
    "done": 15,
    "open": 1
   },
