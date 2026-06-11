@@ -1,5 +1,5 @@
 {
- "updated": "2026-06-11 14:59",
+ "updated": "2026-06-11 18:18",
  "progress": {
   "percent": 80,
   "done_count": 18,
@@ -14,8 +14,8 @@
    "name": "Maxime",
    "area": "Website-Fabrik · Generator, Cinematic, Auto-System, Deployment",
    "color": "#f0a72c",
-   "current": "Bewertungen jetzt als automatischer Lauf-Balken/Marquee (R->L, nahtlose Schleife, Hover pausiert, Rand-Fade, reduced-motion-Fallback) statt statischer Karten - im Generator deployt (website_generator.py). Standard fuer alle. Erklaert: Freigabe-Schritt fuer Live-Seite (Foto-Recht nach Kauf) + Bespoke-Wow-Upsell-Stufe.",
-   "since": "2026-06-11 15:35",
+   "current": "IG-Service LLM LIVE & GRUEN: echter Claude (claude-sonnet-4-6) generiert Baupläne end-to-end. Live-Test 2 HOCH-Risiko-Fakten (Kuehlschrank, Wallbox) -> beide Render-Check BESTANDEN beim 1. Versuch, faktentreu+vorsichtig (kann/laut Verbraucherzentrale), Sie durchgehend, Quelle in Caption, keine Superlative, Hook<40, 5 Slides Stil A sauber gerendert. Kette komplett: Onboarding->Gate->Claude->RenderCheck->SlideBuilder. Key-Setup erledigt (Anthropic Console, 5USD Guthaben, Key in User-Env; doppeltes sk-ant-Praefix beim setx korrigiert). OFFEN: (1) Mail-Zustellung an Onboarding-Adresse (naechster Baustein), (2) Monatsplan/Mengensteuerung wie viele Posts pro Lauf, (3) GitHub-Secret ANTHROPIC_API_KEY fuer CI, (4) openpyxl in requirements, (5) Tagging-Workflow + echte Pool-Verifikation (JP). Minor: stil-A WARN bei Caps wie VZBV/DC (harmlos).",
+   "since": "2026-06-11 19:42",
    "active": true,
    "done": 15,
    "open": 1
