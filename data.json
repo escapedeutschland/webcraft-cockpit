@@ -1,5 +1,5 @@
 {
- "updated": "2026-06-11 20:38",
+ "updated": "2026-06-11 22:26",
  "progress": {
   "percent": 80,
   "done_count": 18,
@@ -14,8 +14,8 @@
    "name": "Maxime",
    "area": "Website-Fabrik · Generator, Cinematic, Auto-System, Deployment",
    "color": "#f0a72c",
-   "current": "IG MAIL-ZUSTELLUNG LIVE BEWIESEN: echte Test-Mail via Zoho-SMTP an maximechristalle@gmail.com gesendet (3 Posts, 12 Slide-Anhaenge, WebCraft-Branding im Wrapper, Kundenmarke auf den Slides). GESAMTE KETTE LAEUFT END-TO-END: Onboarding->Gate->§12-Generator->Text-Waechter->JP-Template->Geometrie-Waechter+Remediation->Zustell-Mail ins Postfach. Inhalt+Zustellung KOMPLETT. OFFEN nur noch operative Schicht: (1) Mengensteuerung/Fahrplan (wie viele Posts/Monat, Modus-Mix, Festtags/Kundenstimme-Slots, Scheduling wie reply_monitor), (2) weitere Gewerke-Pools = JP-Moat (nur Elektrotechnik verifiziert), (3) CI: openpyxl in requirements + ANTHROPIC_KEY als GitHub-Secret. 15 IG-Module deployt.",
-   "since": "2026-06-11 22:32",
+   "current": "INTERAKTIONS #3 FAKT-MELDUNG->AMPEL->SOFORT-ERSATZ fertig (ig_flag.py + handle_fact_flag): Kunde meldet falschen Fakt -> (1) Fakt gefunden, (2) in Override-Ebene fuer DIESEN Kunden unterdrueckt (Sofort-Schutz), (3) ROTES Signal in Pool-Excel Sp16/17/22/23 (Sp6-Status UNBERUEHRT - dringend pruefen, nicht weg; kein Pool-Vergiften), (4) Sofort-Ersatz nur des Pieces mit gruenem Fakt (Rest unberuehrt). Live getestet: Kuehlschrank gemeldet->Wallbox-Ersatz ok, Review-Queue zeigt [rot] Z2. Ampel rot>gelb>gruen, nur Mensch schaltet zurueck (resolve_flag: zurueckziehen/praeferenz/bestaetigt). review_queue=Monats-Sammelbericht. 18 IG-Module. NAECHSTES: #4 Pensum/Format-Ja-Nein-Abfrage + Token-Link in die Zustell-Mail (ig_delivery erweitern) + Verarbeitung, dann #5 Kundenstimmen-Vorschau-Schleife/Kalender/Stil-Override-Anwendung, Backend-Empfang Formular.",
+   "since": "2026-06-11 23:55",
    "active": true,
    "done": 15,
    "open": 1
