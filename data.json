@@ -1,5 +1,5 @@
 {
- "updated": "2026-06-12 12:33",
+ "updated": "2026-06-12 15:51",
  "progress": {
   "percent": 80,
   "done_count": 18,
@@ -14,9 +14,9 @@
    "name": "Maxime",
    "area": "Website-Fabrik · Generator, Cinematic, Auto-System, Deployment",
    "color": "#f0a72c",
-   "current": "IG BETRIEBS-SETUP-Artefakte erstellt+deployt: run_ig.ps1 (Task-Scheduler-Wrapper, Default --dry, holt Key aus User-Env, loggt), WebCraft_FormReceiver.gs (Apps-Script Web-App: doPost mailt Einreichung an WebCraft-Inbox -> ig_inbox.poll_inbox liest+routet), .github/workflows/ig_runner.yml (Cloud-Cron monatlich 27./woechentlich Mo, dry bis Pool verifiziert), IG_BETRIEB_SETUP.md (Aktivierungs-Anleitung: schtasks-Befehle, Apps-Script-Deploy+URL in Formulare, GitHub-Secret, Go-Live-Checkliste). EMPFEHLUNG: Task Scheduler (§1) fuer Start - alles lokal vorhanden; GitHub-Actions spaeter (braucht Pool im Repo+Kundendaten-Persistenz+Secret+Chromium). VOLLSTAENDIG GEBAUT: Content(11 Modi)+beide Waechter+Interaktions-Schicht(#1-6)+Auslieferung+operative Schicht(Runner/Inbox/Retry)+Setup-Artefakte. OFFEN nur: Mensch aktiviert Setup + JP: fachliche Pool-Verifikation + Pricing/AGB.",
-   "since": "2026-06-12 02:49",
-   "active": false,
+   "current": "E2E-TEST Bug #4 gefixt: Onboarding-Tool speichert Farben als haupt/zwei/drei, Code erwartete primary/secondary/tertiary -> Kundenfarben wurden ignoriert (fiel auf Profil-Default). Fix: Onboarding._norm_farben mappt beide Schreibweisen -> primary/secondary/tertiary; logo string-safe. Verifiziert: Elektro Sonnenschein nutzt jetzt accent #335C54 Gruen + accent2 #F77356 Koralle (statt Profil-C-Gelb). Insgesamt 4 echte Bugs im E2E-Test gefunden+gefixt (gewerk-case, LLM-JSON->tool-use, leere points->schema, farben-keys). Bereits 2 echte Mails verschickt (gelb, vor farben-fix). NAECHSTES: ggf. 1 Mail mit korrekten Farben + Kundenformular-Teil (Pensum/Kundenstimme/Fakt-Meldung).",
+   "since": "2026-06-12 16:43",
+   "active": true,
    "done": 15,
    "open": 1
   },
