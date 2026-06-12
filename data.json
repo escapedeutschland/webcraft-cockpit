@@ -1,5 +1,5 @@
 {
- "updated": "2026-06-12 22:12",
+ "updated": "2026-06-12 23:54",
  "progress": {
   "percent": 80,
   "done_count": 18,
@@ -16,7 +16,7 @@
    "color": "#f0a72c",
    "current": "E2E-TEST Bug #4 gefixt: Onboarding-Tool speichert Farben als haupt/zwei/drei, Code erwartete primary/secondary/tertiary -> Kundenfarben wurden ignoriert (fiel auf Profil-Default). Fix: Onboarding._norm_farben mappt beide Schreibweisen -> primary/secondary/tertiary; logo string-safe. Verifiziert: Elektro Sonnenschein nutzt jetzt accent #335C54 Gruen + accent2 #F77356 Koralle (statt Profil-C-Gelb). Insgesamt 4 echte Bugs im E2E-Test gefunden+gefixt (gewerk-case, LLM-JSON->tool-use, leere points->schema, farben-keys). Bereits 2 echte Mails verschickt (gelb, vor farben-fix). NAECHSTES: ggf. 1 Mail mit korrekten Farben + Kundenformular-Teil (Pensum/Kundenstimme/Fakt-Meldung).",
    "since": "2026-06-12 16:43",
-   "active": true,
+   "active": false,
    "done": 15,
    "open": 1
   },
