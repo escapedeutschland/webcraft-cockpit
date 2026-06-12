@@ -1,5 +1,5 @@
 {
- "updated": "2026-06-11 22:26",
+ "updated": "2026-06-12 00:07",
  "progress": {
   "percent": 80,
   "done_count": 18,
@@ -14,8 +14,8 @@
    "name": "Maxime",
    "area": "Website-Fabrik · Generator, Cinematic, Auto-System, Deployment",
    "color": "#f0a72c",
-   "current": "INTERAKTIONS #3 FAKT-MELDUNG->AMPEL->SOFORT-ERSATZ fertig (ig_flag.py + handle_fact_flag): Kunde meldet falschen Fakt -> (1) Fakt gefunden, (2) in Override-Ebene fuer DIESEN Kunden unterdrueckt (Sofort-Schutz), (3) ROTES Signal in Pool-Excel Sp16/17/22/23 (Sp6-Status UNBERUEHRT - dringend pruefen, nicht weg; kein Pool-Vergiften), (4) Sofort-Ersatz nur des Pieces mit gruenem Fakt (Rest unberuehrt). Live getestet: Kuehlschrank gemeldet->Wallbox-Ersatz ok, Review-Queue zeigt [rot] Z2. Ampel rot>gelb>gruen, nur Mensch schaltet zurueck (resolve_flag: zurueckziehen/praeferenz/bestaetigt). review_queue=Monats-Sammelbericht. 18 IG-Module. NAECHSTES: #4 Pensum/Format-Ja-Nein-Abfrage + Token-Link in die Zustell-Mail (ig_delivery erweitern) + Verarbeitung, dann #5 Kundenstimmen-Vorschau-Schleife/Kalender/Stil-Override-Anwendung, Backend-Empfang Formular.",
-   "since": "2026-06-11 23:55",
+   "current": "OPERATIVE SCHICHT gebaut+deployt: (A) ig_llm Retry/Backoff (3 Versuche, 120s, gegen API-Timeouts - vorher geflaktt). (B) ig_runner.py Auto-Runner: customers()/run_for()/run_all() = pro Kunde Onboarding+Override laden->Monatsplan->produce_plan->Zustell-Mail; pausierte uebersprungen, Hold zurueckgehalten; CLI --run/--dry. (C) ig_inbox.py Empfang: extract_json (JSON aus Mail-Body), route (Schema-Routing onboarding->speichern+Override / kundenformular->process_submission), poll_inbox (Gmail-Abruf reuse mailutil). End-to-end getestet: Onboarding-Eingang->Kunde angelegt->Formular-Eingang(Pensum/Format greift)->Auto-Runner Plan(8)->1 Post generiert->Zustellung dry. CI: openpyxl/requests in requirements geprueft. 23 IG-Module. OFFEN nur noch externes Setup: Cron/Task-Scheduler-Registrierung (schtasks/GitHub-Actions), Form-Hosting(GitHub Pages)+POST-Endpunkt(Apps Script -> WebCraft-Inbox), ANTHROPIC_KEY als GitHub-Secret; + fachliche Pool-Verifikation(JP) + Pricing/AGB.",
+   "since": "2026-06-12 01:49",
    "active": true,
    "done": 15,
    "open": 1
@@ -382,6 +382,6 @@
  },
  "radar": {
   "text": "# WebCraft — Wettbewerbs-Radar (Stand 09.06.2026)\n\n## 1) Markt-Schnappschuss\n\n### Websites (Festpreis, KMU)\n- Festpreis-Modelle sind verbreitet: Landingpages **ab ~399 €**, kleine Sites **ab ~990 €**, typische Starter-Websites **1.500–4.500 €**, WordPress **2.000–30.000 €** (z. B. NUR Marketing Startup-Paket 1.500 €).\n- „**Kein Abo, Festpreis, keine versteckten Kosten**“ wird von vielen beworben (festpreis-webseite.de, meinekleinewebsite.com) → **kein** Alleinstellungsmerkmal mehr.\n\n### Social Media / Instagram-Betreuung (KMU)\n- Einstieg **ab ~360 €/Monat**; übliche KMU-Pakete **500–2.000 €/Monat**; „vernünftig“ oft **1.500 €+**, gute Pakete **2.500–5.000 €/Monat**.\n\n## 2) WebCraft-Position\n- **Website 450 € pauschal** → liegt **deutlich unter** den meisten Agentur-Festpreisen (990–4.500 €+). Starker Preisvorteil.\n- **Instagram-Abo 79 €/Monat** → **~5–10× günstiger** als der Markt (ab 360 €, meist 500–2.000 €). Riesiger Preisabstand.\n- **UNIQUE / Burggraben:** „**Erst sehen, dann zahlen**“ (fertige Vorschau vorab, Zahlung nur bei Gefallen) — in der Suche **kein** Website-Anbieter mit diesem Modell gefunden. Das ist euer echtes Alleinstellungsmerkmal.\n\n## 3) Chancen\n- **Risiko-Umkehr als Hauptbotschaft** (nicht nur Preis): „erst sehen, dann zahlen“ + „in 48 h“ — das kann fast niemand kopieren und nimmt dem Kunden die Kaufangst.\n- **Unterversorgtes Budget-Segment**: KMU/Creator, die sich 500 €+/Monat-Agenturen NICHT leisten, aber 79 € schon → großer adressierbarer Markt.\n- **Bundle Website + Instagram** zu diesem Preis ist selten → starkes Kombi-Angebot.\n\n## 4) Risiken / Bedrohungen\n- **„Zu billig = unseriös“-Wahrnehmung** bei 450 € / 79 €. Gegenmittel: top Demos, professionelles Branding (Logo ✓), klare Qualitätssignale.\n- **KI-Baukästen** (Wix/Squarespace/KI-Builder) sind billig — aber NICHT „done-for-you“ + nicht risikofrei. Abgrenzung: wir bauen + Risiko liegt bei uns.\n- **„Festpreis/kein Abo“** ist Standard-Claim → nicht darauf ausruhen, lieber Risiko-Umkehr + Tempo betonen.\n\n## 5) Empfehlungen\n1. Marketing-Hook = **„erst sehen, dann zahlen“ + 48 h** (Burggraben), Preis als Verstärker, nicht als Hauptargument.\n2. **Qualität sichtbar machen** (Referenz-Demos), damit der niedrige Preis nicht als Billig-Signal wirkt.\n3. **Instagram-Abo** klar als „leistbare, automatisierte Alternative“ zu 500 €+-Agenturen positionieren (nicht mit Full-Service-Agenturen vergleichen).\n4. Beobachten: ob Wettbewerber die Risiko-Umkehr kopieren — dann Tempo/Qualität ausspielen.\n\n*Quellen: Markt-Websuche 09.06.2026 (Festpreis-Website-Anbieter, Social-Media-Agentur-Preislisten). Radar „auf Zuruf“ — nächstes Update bei Bedarf.*\n",
-  "updated": "11.06.2026"
+  "updated": "12.06.2026"
  }
 }
