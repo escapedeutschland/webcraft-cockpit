@@ -1,5 +1,5 @@
 {
- "updated": "2026-06-12 00:07",
+ "updated": "2026-06-12 05:05",
  "progress": {
   "percent": 80,
   "done_count": 18,
@@ -14,8 +14,8 @@
    "name": "Maxime",
    "area": "Website-Fabrik · Generator, Cinematic, Auto-System, Deployment",
    "color": "#f0a72c",
-   "current": "OPERATIVE SCHICHT gebaut+deployt: (A) ig_llm Retry/Backoff (3 Versuche, 120s, gegen API-Timeouts - vorher geflaktt). (B) ig_runner.py Auto-Runner: customers()/run_for()/run_all() = pro Kunde Onboarding+Override laden->Monatsplan->produce_plan->Zustell-Mail; pausierte uebersprungen, Hold zurueckgehalten; CLI --run/--dry. (C) ig_inbox.py Empfang: extract_json (JSON aus Mail-Body), route (Schema-Routing onboarding->speichern+Override / kundenformular->process_submission), poll_inbox (Gmail-Abruf reuse mailutil). End-to-end getestet: Onboarding-Eingang->Kunde angelegt->Formular-Eingang(Pensum/Format greift)->Auto-Runner Plan(8)->1 Post generiert->Zustellung dry. CI: openpyxl/requests in requirements geprueft. 23 IG-Module. OFFEN nur noch externes Setup: Cron/Task-Scheduler-Registrierung (schtasks/GitHub-Actions), Form-Hosting(GitHub Pages)+POST-Endpunkt(Apps Script -> WebCraft-Inbox), ANTHROPIC_KEY als GitHub-Secret; + fachliche Pool-Verifikation(JP) + Pricing/AGB.",
-   "since": "2026-06-12 01:49",
+   "current": "IG BETRIEBS-SETUP-Artefakte erstellt+deployt: run_ig.ps1 (Task-Scheduler-Wrapper, Default --dry, holt Key aus User-Env, loggt), WebCraft_FormReceiver.gs (Apps-Script Web-App: doPost mailt Einreichung an WebCraft-Inbox -> ig_inbox.poll_inbox liest+routet), .github/workflows/ig_runner.yml (Cloud-Cron monatlich 27./woechentlich Mo, dry bis Pool verifiziert), IG_BETRIEB_SETUP.md (Aktivierungs-Anleitung: schtasks-Befehle, Apps-Script-Deploy+URL in Formulare, GitHub-Secret, Go-Live-Checkliste). EMPFEHLUNG: Task Scheduler (§1) fuer Start - alles lokal vorhanden; GitHub-Actions spaeter (braucht Pool im Repo+Kundendaten-Persistenz+Secret+Chromium). VOLLSTAENDIG GEBAUT: Content(11 Modi)+beide Waechter+Interaktions-Schicht(#1-6)+Auslieferung+operative Schicht(Runner/Inbox/Retry)+Setup-Artefakte. OFFEN nur: Mensch aktiviert Setup + JP: fachliche Pool-Verifikation + Pricing/AGB.",
+   "since": "2026-06-12 02:49",
    "active": true,
    "done": 15,
    "open": 1
