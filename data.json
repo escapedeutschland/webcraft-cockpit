@@ -1,5 +1,5 @@
 {
- "updated": "2026-06-14 20:15",
+ "updated": "2026-06-14 21:42",
  "progress": {
   "percent": 80,
   "done_count": 18,
@@ -14,8 +14,8 @@
    "name": "Maxime",
    "area": "Website-Fabrik · Generator, Cinematic, Auto-System, Deployment",
    "color": "#f0a72c",
-   "current": "Farbwaehler im Onboarding-Tool robust neugebaut (Mobil-/WebView-Bug, Android): nativer input type=color RAUS -> Vorschau-Swatch (div) + Hex-Textfeld + antippbare Preset-Kacheln (14 Farben). Reine divs/buttons -> identisch auf jedem Geraet + in Mail-App-WebViews. Lokal gerendert+geprueft, auf Pages (onboarding.html) + app-Repo veroeffentlicht, frische Mail ?v=4 an JP. Ursache war: type=color wird in In-App-Browsern/manchen Android-Browsern schwarz gerendert.",
-   "since": "2026-06-14 22:14",
+   "current": "E2E JP: Auto-Transport END-TO-END bewiesen - JP fuellte Onboarding (Handy), Apps-Script->Mail->ig_inbox.route legte JP automatisch an (JP Elektro, Profil C, du, Farben rot/amber via Schieber). 2 Fixes: (1) extract_json toleriert jetzt Steuerzeichen (JPs Eingaben hatten Zeilenumbrueche -> JSON ungueltig -> fiel auf farben-Subobjekt zurueck). (2) Onboarding-Erfolgsmeldung korrigiert: kein erneutes Ausfuellen noetig, Aenderungen via Mail-Link. AUTO-POLL Task Scheduler eingerichtet (WebCraft IG Poll, alle 3 Min) -> Einreichungen werden automatisch abgeholt. Name-Whitespace normalisiert. NAECHSTES: JPs ersten Fahrplan generieren+an gmx senden.",
+   "since": "2026-06-14 22:39",
    "active": true,
    "done": 15,
    "open": 1
