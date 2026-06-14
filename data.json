@@ -1,5 +1,5 @@
 {
- "updated": "2026-06-14 18:45",
+ "updated": "2026-06-14 20:15",
  "progress": {
   "percent": 80,
   "done_count": 18,
@@ -14,9 +14,9 @@
    "name": "Maxime",
    "area": "Website-Fabrik · Generator, Cinematic, Auto-System, Deployment",
    "color": "#f0a72c",
-   "current": "E2E-TEST Bug #4 gefixt: Onboarding-Tool speichert Farben als haupt/zwei/drei, Code erwartete primary/secondary/tertiary -> Kundenfarben wurden ignoriert (fiel auf Profil-Default). Fix: Onboarding._norm_farben mappt beide Schreibweisen -> primary/secondary/tertiary; logo string-safe. Verifiziert: Elektro Sonnenschein nutzt jetzt accent #335C54 Gruen + accent2 #F77356 Koralle (statt Profil-C-Gelb). Insgesamt 4 echte Bugs im E2E-Test gefunden+gefixt (gewerk-case, LLM-JSON->tool-use, leere points->schema, farben-keys). Bereits 2 echte Mails verschickt (gelb, vor farben-fix). NAECHSTES: ggf. 1 Mail mit korrekten Farben + Kundenformular-Teil (Pensum/Kundenstimme/Fakt-Meldung).",
-   "since": "2026-06-12 16:43",
-   "active": false,
+   "current": "Farbwaehler im Onboarding-Tool robust neugebaut (Mobil-/WebView-Bug, Android): nativer input type=color RAUS -> Vorschau-Swatch (div) + Hex-Textfeld + antippbare Preset-Kacheln (14 Farben). Reine divs/buttons -> identisch auf jedem Geraet + in Mail-App-WebViews. Lokal gerendert+geprueft, auf Pages (onboarding.html) + app-Repo veroeffentlicht, frische Mail ?v=4 an JP. Ursache war: type=color wird in In-App-Browsern/manchen Android-Browsern schwarz gerendert.",
+   "since": "2026-06-14 22:14",
+   "active": true,
    "done": 15,
    "open": 1
   },
