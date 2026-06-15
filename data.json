@@ -1,5 +1,5 @@
 {
- "updated": "2026-06-15 01:41",
+ "updated": "2026-06-15 07:12",
  "progress": {
   "percent": 80,
   "done_count": 18,
@@ -16,7 +16,7 @@
    "color": "#f0a72c",
    "current": "E2E JP KOMPLETT durchgelaufen: (1) JP fuellte Onboarding am Handy -> Apps Script -> Gmail -> AUTO-POLL (Task Scheduler, alle 3 Min) -> ig_inbox.route legte Profil automatisch an. (2) Erster Fahrplan generiert: 12/12 Posts ok, 0 Hold, alle Render-Checks bestanden, 37 Slides. (3) Echte Liefermail VERSENDET an jean-pierrechristalle@gmx.de (von maxime@webcraft-agentur.de). Qualitaet visuell geprueft: Profil C (Anton), Rot/Amber-Akzente, Ursache->Folge, du-Anrede, gerundete Werte ~30 mit Quellenzeile - JP-Niveau. Fix unterwegs: ig_postgen._normalize_points coerced String-Punkte zu Dicts (Anthropic validiert Tool-Input nur best-effort) - deployed. Hinweis: Lauf nutzte TEST-Pool (alle verifiziert); echter Elektro-Pool noch in Pruefung (JP-Blocker). NAECHSTES/Blocker: fachliche Pool-Verifikation (49 Elektro), Pricing/AGB, Scheduler fuer ig_runner (monatlich automatisch).",
    "since": "2026-06-15 00:46",
-   "active": true,
+   "active": false,
    "done": 15,
    "open": 1
   },
